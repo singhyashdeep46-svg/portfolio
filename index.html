@@ -256,14 +256,43 @@ svg.i.o{fill:none;stroke:currentColor;stroke-width:2}
 @media(max-height:620px){.orb-wrap{height:130px}.ok{margin-top:16px}.hero{height:110px}}
 
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ===== v3: glass surfaces + soft-neumorphic controls ===== */
+.hs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -24px;padding:2px 24px}.hs::-webkit-scrollbar{display:none}.hs .chip{flex:none}
+.srch{display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border-radius:18px;color:var(--ink-soft);background:rgba(233,238,214,.7);box-shadow:inset 3px 3px 8px rgba(46,49,46,.14),inset -3px -3px 8px rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.5)}
+.srch svg{font-size:20px}.sin{flex:1;min-width:0;border:0;background:none;font:600 16px var(--body);color:var(--ink);outline:0;height:100%}
+.srch:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+.field{background:rgba(233,238,214,.7);border:1px solid rgba(255,255,255,.5);box-shadow:inset 3px 3px 8px rgba(46,49,46,.14),inset -3px -3px 8px rgba(255,255,255,.85)}
+.seg{display:flex;gap:4px;padding:4px;border-radius:20px;background:rgba(233,238,214,.7);box-shadow:inset 2px 2px 6px rgba(46,49,46,.14),inset -2px -2px 6px rgba(255,255,255,.85)}
+.seg button{flex:1;min-height:44px;border-radius:16px;text-align:center;font-weight:700;font-size:14px;color:var(--ink-soft);padding:0 6px}
+.seg button.on{background:rgba(255,255,255,.92);color:var(--accent);box-shadow:4px 4px 10px rgba(46,49,46,.16),-3px -3px 8px rgba(255,255,255,.95)}
+.seg.dk{background:rgba(255,255,255,.1);box-shadow:inset 2px 2px 6px rgba(0,0,0,.35),inset -1px -1px 4px rgba(255,255,255,.08)}.seg.dk button{color:#e8ccd6}.seg.dk button.on{background:rgba(255,255,255,.2);color:#fff;box-shadow:3px 3px 8px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.3)}
+.srow{display:flex;align-items:center;gap:12px;width:100%;min-height:60px;padding:10px 16px;border-radius:var(--r-card)}
+.srow b{display:block;font-size:16px}.srow small{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:2px}.srow>span{flex:1}
+.sw{flex:none;position:relative;width:56px;height:32px;border-radius:16px;background:rgba(46,49,46,.1);box-shadow:inset 3px 3px 7px rgba(46,49,46,.22),inset -2px -2px 5px rgba(255,255,255,.8);transition:background .2s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:13px;background:linear-gradient(145deg,#fff,#e6eadb);box-shadow:3px 3px 6px rgba(46,49,46,.25),-1px -1px 3px rgba(255,255,255,.9);transition:transform .2s}
+.sw.on{background:rgba(191,69,33,.78)}.sw.on::after{transform:translateX(24px)}
+.prov{display:flex;gap:12px;align-items:center;padding:14px 16px;width:100%}.prov b{font-size:16px}.prov small{display:block;font-size:13px;line-height:18px;font-weight:600;color:var(--ink-soft);margin-top:4px}
+.prov .prow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.prov .tag{font-size:11px;padding:3px 9px}.prov .tag.soft{background:rgba(46,49,46,.62)}
+.prov.sel{border:1.5px solid var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 0 0 4px rgba(191,69,33,.14),0 10px 26px rgba(191,69,33,.16)}
+.pcard{padding:16px;display:flex;flex-direction:column;gap:12px}.pcard h3{font-size:17px}
+.phero{display:flex;gap:16px;align-items:center;padding:16px;background:rgba(255,255,255,.5)}
+.avatar.big{width:68px;height:68px;border-radius:34px;font:600 30px var(--display);flex:none;box-shadow:inset 3px 3px 8px rgba(255,255,255,.7),inset -3px -3px 8px rgba(191,69,33,.18),6px 6px 14px rgba(46,49,46,.14)}
+.avatar{border:0;padding:0;color:var(--accent);font-family:var(--display);font-weight:600}
+.note2{font-size:14px;line-height:21px;font-weight:600;color:var(--ink-soft)}
+.tag.warn{background:#8a2a14;margin-left:6px}.favon{color:var(--accent)}
+.aibtn{gap:10px;height:52px;font-size:16px}.aibtn svg{color:var(--accent);font-size:20px}
+.hrow{display:flex;gap:12px;align-items:center;padding:12px 16px}.hrow b{flex:1;font-size:16px}.hrow small{font-weight:800;font-size:12px;letter-spacing:.06em;color:var(--ink-soft)}
+.state a{color:var(--accent);font-weight:800}
+@media(prefers-reduced-transparency:reduce){.srch,.field,.seg{background:#eef2dc}.seg button.on{background:#fff}}
 </style>
 </head>
 <body>
 <div id="phone">
   <main id="app"></main>
   <div id="cap" role="status" aria-live="polite"></div>
-  <div id="sheet" role="dialog" aria-modal="true" aria-label="AI settings"></div>
-  <input type="file" id="photoin" accept="image/*" hidden>
+  <div id="sheet" role="dialog" aria-modal="true" aria-label="Dialog"></div>
+  <input type="file" id="photoin" accept="image/*" hidden><input type="file" id="scanin" accept="image/*" hidden>
 </div>
 <div class="sr" aria-live="polite" id="live"></div>
 
@@ -289,11 +318,17 @@ const P={
  home:'<path d="M4 11.2 12 4.4l8 6.8V19a1.4 1.4 0 0 1-1.4 1.4H15v-5.4H9v5.4H5.4A1.4 1.4 0 0 1 4 19z"/>',
  gear:'<path d="M10.4 2.8h3.2l.5 2.4c.5.2 1 .5 1.4.8l2.3-.8 1.6 2.8-1.8 1.6c.1.5.1 1 0 1.5l1.8 1.6-1.6 2.8-2.3-.8c-.4.3-.9.6-1.4.8l-.5 2.4h-3.2l-.5-2.4c-.5-.2-1-.5-1.4-.8l-2.3.8-1.6-2.8 1.8-1.6c-.1-.5-.1-1 0-1.5L4.6 8.8l1.6-2.8 2.3.8c.4-.3.9-.6 1.4-.8zM12 9.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6z"/>'
 };
+Object.assign(P,{user:'<circle cx="12" cy="8.2" r="3.7"/><path d="M4.8 20c.6-3.8 3.6-6 7.2-6s6.6 2.2 7.2 6"/>',heart:'<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.4a4.3 4.3 0 0 1 7.5 2.4C19.5 15.4 12 20 12 20z"/>',search:'<circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.6 15.6 20 20"/>',image:'<rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17"/>'});
 const FILLED=new Set(['mic','camera','book','hand','bell','sparkle','star','home','gear']);
 const ic=(n,c='')=>`<svg class="i ${FILLED.has(n)?'f':''} ${c}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
 const fmt=s=>{s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const buzz=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
+const DEF={name:'',diet:'any',spice:'medium',skill:'Easy',serv:2,cuis:[],allergy:'',speak:true,rate:1,lang:'en-IN',haptics:true,autoVoice:true,awake:true};
+let PREF=Object.assign({},DEF),HIST=[],FAVS=[];
+try{Object.assign(PREF,JSON.parse(localStorage.getItem('ska-prefs')||'{}'));HIST=JSON.parse(localStorage.getItem('ska-hist')||'[]');FAVS=JSON.parse(localStorage.getItem('ska-favs')||'[]')}catch(e){}
+const saveLS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const savePrefs=()=>saveLS('ska-prefs',PREF);
+const buzz=n=>{try{PREF.haptics&&navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
 
 /* ---------- recipe photos ----------
    Paste real image links here, or tap "Add photo" on a recipe to pick one from your device. */
@@ -337,19 +372,34 @@ const RECIPES=[
    {t:'Add tomatoes and simmer.',d:'Cover and cook for 15 minutes.',cue:'Tomatoes collapsed into a thick sauce.',timer:['Simmer soup',900,'LOW HEAT']},
    {t:'Blend and add basil.',d:'Blend until smooth and season to taste.',cue:'Smooth, deep red soup.',timer:null}]}
 ];
-const PANTRY_ALL={tomato:'Tomato',onion:'Onion',basil:'Basil',paneer:'Paneer',pasta:'Pasta'};
+const PANTRY_ALL={tomato:'Tomato',onion:'Onion',basil:'Basil',paneer:'Paneer',pasta:'Pasta',garlic:'Garlic',chili:'Chili',egg:'Egg',rice:'Rice',chicken:'Chicken',yogurt:'Yogurt',ginger:'Ginger',lentil:'Lentils',cheese:'Cheese',carrot:'Carrot',soy:'Soy sauce',lime:'Lime',avocado:'Avocado',tortilla:'Tortilla',cucumber:'Cucumber',pepper:'Pepper',olive:'Olives',bacon:'Bacon',potato:'Potato',milk:'Milk',butter:'Butter',spinach:'Spinach',mushroom:'Mushroom',bread:'Bread',chickpea:'Chickpeas'};
+[['pasta','Fusion','veg'],['bhurji','Indian','veg'],['soup','Italian','vegan']].forEach(([id,c,d])=>Object.assign(RECIPES.find(r=>r.id===id),{cuisine:c,diet:d}));
+const mk=(id,title,cuisine,diet,time,level,ing,steps)=>RECIPES.push({id,title,cuisine,diet,time,serv:2,level,tag:cuisine.toUpperCase(),kw:[...title.toLowerCase().split(' ').filter(w=>w.length>3),cuisine.toLowerCase()],ing:ing.split(';').map(x=>x.split(':')),steps:steps.map(([t,d,cue,sec,nm,sub])=>({t,d,cue,timer:sec?[nm,sec,sub||'MEDIUM HEAT']:null}))});
+mk('biryani','Chicken Biryani','Indian','nonveg',50,'Medium','Basmati rice:250 g:rice;Chicken:400 g:chicken;Onion:2 pc:onion;Yogurt:½ cup:yogurt;Garlic:4 cloves:garlic;Ginger:1 inch:ginger',[['Marinate the chicken.','Mix chicken with yogurt, ginger, garlic and spices.','Every piece is evenly coated.'],['Fry the onions until deep brown.','Slice thin and fry on medium heat.','Dark golden and crisp at the edges.',480,'Brown onions'],['Cook the chicken.','Add the marinated chicken, cover and cook.','Oil separates and chicken is tender.',900,'Cook chicken','LOW HEAT'],['Layer rice and steam.','Top with par-boiled rice, seal the lid and steam.','Steam escapes evenly, rice is fluffy.',900,'Steam biryani','LOW HEAT']]);
+mk('dal','Dal Tadka','Indian','vegan',30,'Easy','Yellow lentils:1 cup:lentil;Tomato:2 pc:tomato;Onion:1 pc:onion;Garlic:4 cloves:garlic;Chili flakes:1 tsp:chili',[['Boil the lentils.','Simmer with turmeric and salt until soft.','Lentils mash easily with a spoon.',1200,'Boil lentils','LOW HEAT'],['Fry onion and garlic for the tadka.','Fry in hot oil with chili until golden.','Fragrant, edges turning golden.',240,'Make tadka'],['Pour the tadka over the dal.','Stir in tomato and simmer briefly.','Glossy dal with oil shimmering on top.']]);
+mk('shakshuka','Shakshuka','Middle Eastern','veg',25,'Easy','Eggs:4 pc:egg;Tomatoes:4 pc:tomato;Onion:1 pc:onion;Garlic:3 cloves:garlic;Chili flakes:1 tsp:chili',[['Soften the onion and garlic.','Cook in olive oil on medium heat.','Soft and see-through.',180,'Sauté base'],['Simmer the tomatoes with spices.','Add tomatoes, chili and cumin.','Thick sauce that holds a spoon trail.',600,'Simmer sauce','LOW HEAT'],['Crack in the eggs and cover.','Make small wells and cook covered.','Whites set, yolks still soft.',300,'Poach eggs','LOW HEAT']]);
+mk('carbonara','Spaghetti Carbonara','Italian','nonveg',20,'Medium','Spaghetti:200 g:pasta;Bacon:100 g:bacon;Eggs:2 pc:egg;Parmesan:50 g:cheese;Black pepper:1 tsp:pepper',[['Boil the spaghetti.','Use well-salted water.','Firm to the bite.',540,'Boil spaghetti','ROLLING BOIL'],['Crisp the bacon.','Cook in a dry pan.','Golden and crisp.',240,'Crisp bacon'],['Mix eggs, cheese and pepper.','Whisk in a bowl.','Thick, creamy paste.'],['Toss off the heat.','Combine pasta, bacon and egg mix with a splash of pasta water.','Silky sauce, no scrambled egg.']]);
+mk('friedrice','Chicken Fried Rice','Chinese','nonveg',20,'Easy','Cooked rice:3 cups:rice;Chicken:200 g:chicken;Eggs:2 pc:egg;Carrot:1 pc:carrot;Soy sauce:2 tbsp:soy',[['Cook the chicken.','Stir-fry diced chicken on high heat.','No pink left inside.',300,'Cook chicken','HIGH HEAT'],['Scramble the eggs.','Push chicken aside and scramble.','Soft curds.',90,'Scramble eggs'],['Add rice, carrot and soy.','Toss everything on high heat.','Grains separate and slightly toasted.',240,'Fry rice','HIGH HEAT']]);
+mk('tacos','Chicken Tacos','Mexican','nonveg',25,'Easy','Tortillas:6 pc:tortilla;Chicken:300 g:chicken;Tomatoes:2 pc:tomato;Onion:1 pc:onion;Lime:1 pc:lime;Avocado:1 pc:avocado',[['Season and cook the chicken.','Cook strips with chili and cumin.','Browned and juicy.',420,'Cook chicken','MEDIUM-HIGH HEAT'],['Make the salsa.','Dice tomato and onion, squeeze lime.','Bright and chunky.'],['Warm the tortillas.','Heat each on a dry pan.','Soft with light brown spots.',60,'Warm tortillas'],['Assemble the tacos.','Chicken, salsa and sliced avocado.','Fully loaded and folded.']]);
+mk('greek','Greek Salad','Greek','veg',10,'Easy','Cucumber:1 pc:cucumber;Tomatoes:3 pc:tomato;Onion:½ pc:onion;Feta cheese:100 g:cheese;Olives:½ cup:olive',[['Chop the vegetables.','Large chunks of cucumber, tomato and onion.','Chunky, bite-sized pieces.'],['Add feta and olives.','Place feta on top in a slab.','Colourful and generous.'],['Dress and serve.','Olive oil, lemon, oregano and salt.','Glistening, lightly coated.']]);
+mk('teriyaki','Teriyaki Chicken Bowl','Japanese','nonveg',30,'Easy','Rice:2 cups:rice;Chicken:300 g:chicken;Soy sauce:3 tbsp:soy;Ginger:1 tsp:ginger;Carrot:1 pc:carrot',[['Cook the rice.','Rinse and simmer covered.','Tender, steam holes on top.',900,'Cook rice','LOW HEAT'],['Sear the chicken.','Cook skin-side down.','Deep golden brown.',360,'Sear chicken','MEDIUM-HIGH HEAT'],['Glaze with teriyaki.','Add soy, ginger and honey.','Sticky glaze coats each piece.',120,'Glaze','LOW HEAT'],['Build the bowl.','Rice, chicken, carrot ribbons.','Glossy and steaming.']]);
+try{JSON.parse(localStorage.getItem('ska-ai-recipes')||'[]').forEach(r=>RECIPES.push(r))}catch(e){}
+const DIETOK={veg:['veg','vegan'],egg:['veg','vegan','egg'],vegan:['vegan']};
+const okDiet=r=>!DIETOK[PREF.diet]||DIETOK[PREF.diet].includes(r.diet);
+const allergyHit=r=>{const w=PREF.allergy.toLowerCase().split(/[,;]+/).map(x=>x.trim()).filter(x=>x.length>2);return w.find(a=>r.ing.some(i=>i[0].toLowerCase().includes(a)))||''};
+const suggest=()=>{const L=RECIPES.filter(r=>!r.ai&&okDiet(r)&&!allergyHit(r));return L.find(r=>PREF.cuis.includes(r.cuisine))||L[0]||RECIPES[0]};
 
 /* ---------- state ---------- */
 const S={screen:'home',rid:'pasta',step:0,found:new Set(),
  timers:[],log:[],cmds:0,startedAt:null,adapt:null,applied:false,rating:0,
- handsfree:false,gestures:false,muted:false,stream:null,facing:'user',alert:null};
+ handsfree:false,gestures:false,muted:!PREF.speak,stream:null,facing:'user',alert:null};
 const R=()=>RECIPES.find(r=>r.id===S.rid);
 const haveKey=k=>S.found.has(k)||['garlic','chili'].indexOf(k)<0&&false;
 
 /* ---------- speech out ---------- */
 const TTS='speechSynthesis' in window;
 let voice=null;
-function pickVoice(){if(!TTS)return;const v=speechSynthesis.getVoices();voice=v.find(x=>/en-IN/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang)&&/female|samantha|google/i.test(x.name))||v.find(x=>/^en/i.test(x.lang))||null}
+function pickVoice(){if(!TTS)return;const v=speechSynthesis.getVoices();voice=v.find(x=>x.lang.replace('_','-').toLowerCase()===PREF.lang.toLowerCase())||v.find(x=>/en-IN/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang)&&/female|samantha|google/i.test(x.name))||v.find(x=>/^en/i.test(x.lang))||null}
 if(TTS){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
 let speaking=false;
 function say(text,opts={}){
@@ -357,7 +407,7 @@ function say(text,opts={}){
   if(!TTS||S.muted){return Promise.resolve()}
   return new Promise(res=>{
     try{speechSynthesis.cancel()}catch(e){}
-    const u=new SpeechSynthesisUtterance(text);if(voice)u.voice=voice;u.rate=opts.rate||1;u.pitch=1.02;
+    const u=new SpeechSynthesisUtterance(text);if(voice)u.voice=voice;u.rate=opts.rate||PREF.rate;u.pitch=1.02;
     speaking=true;pauseRec();
     const done=()=>{speaking=false;resumeRec();res()};
     u.onend=done;u.onerror=done;speechSynthesis.speak(u);
@@ -372,7 +422,7 @@ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 let rec=null,recOn=false,recWanted=false,recMode='cmd',recCb=null,wake=false;
 function initRec(){
   if(!SR||rec)return;
-  rec=new SR();rec.lang='en-IN';rec.continuous=true;rec.interimResults=true;rec.maxAlternatives=3;
+  rec=new SR();rec.lang=PREF.lang;rec.continuous=true;rec.interimResults=true;rec.maxAlternatives=3;
   rec.onresult=e=>{
     for(let i=e.resultIndex;i<e.results.length;i++){
       const r=e.results[i],txt=r[0].transcript.trim();
@@ -428,92 +478,104 @@ function handleHeard(raw,alts){
   command(canonical(t)||t);
 }
 
-/* ---------- optional AI brain (free Gemini key, falls back to local rules) ---------- */
-const LLM={model:'gemini-2.5-flash-lite',busy:false,get key(){try{return localStorage.getItem('sk_ai_key')||''}catch(e){return ''}}};
+/* ---------- AI layer: bring your own provider (key stays in this browser) ---------- */
+const PROVIDERS={
+ groq:{name:'Groq',tag:'FREE · FASTEST',rec:1,base:'https://api.groq.com/openai/v1',model:'meta-llama/llama-4-scout-17b-16e-instruct',kind:'oai',url:'console.groq.com/keys',why:'Free tier, very low latency (ideal for voice) and photo input.'},
+ openai:{name:'OpenAI',tag:'BEST ACCURACY',base:'https://api.openai.com/v1',model:'gpt-4o-mini',kind:'oai',url:'platform.openai.com/api-keys',why:'Most reliable recipes and vision. Pay per use, roughly a cent per scan.'},
+ anthropic:{name:'Anthropic Claude',tag:'GREAT VISION',base:'https://api.anthropic.com/v1',model:'claude-haiku-5-5',kind:'ant',url:'console.anthropic.com/settings/keys',why:'Excellent at reading photos and following cooking steps. Pay per use.'},
+ openrouter:{name:'OpenRouter',tag:'ONE KEY · MANY MODELS',base:'https://openrouter.ai/api/v1',model:'openai/gpt-4o-mini',kind:'oai',url:'openrouter.ai/keys',why:'One key for hundreds of models, some free. Change the model name any time.'},
+ custom:{name:'Custom endpoint',tag:'ADVANCED',base:'',model:'',kind:'oai',url:'',why:'Any OpenAI-style API: Together, Mistral, DeepSeek or Ollama on your computer.'}};
+let AI={p:'groq',keys:{},models:{},base:''};try{Object.assign(AI,JSON.parse(localStorage.getItem('ska-ai')||'{}'))}catch(e){}
+if(!PROVIDERS[AI.p])AI.p='groq';
+const saveAI=()=>saveLS('ska-ai',AI);
+const LLM={busy:false,get key(){return AI.keys[AI.p]||''},get model(){return AI.models[AI.p]||PROVIDERS[AI.p].model},get base(){return (AI.p==='custom'?AI.base:PROVIDERS[AI.p].base).replace(/\/$/,'')}};
+const httpErr=r=>Object.assign(new Error('http'),{status:r.status});
+async function llm({sys,text,img,max=500}){
+  if(!LLM.key)throw Object.assign(new Error('nokey'),{status:0});
+  let r,d;
+  if(PROVIDERS[AI.p].kind==='ant'){
+    const c=[];if(img)c.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:img}});c.push({type:'text',text});
+    r=await fetch(LLM.base+'/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':LLM.key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:LLM.model,max_tokens:max,temperature:.2,system:sys,messages:[{role:'user',content:c}]})});
+    if(!r.ok)throw httpErr(r);d=await r.json();return (d.content||[]).map(x=>x.text||'').join('');
+  }
+  const c=[{type:'text',text}];if(img)c.push({type:'image_url',image_url:{url:'data:image/jpeg;base64,'+img}});
+  r=await fetch(LLM.base+'/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+LLM.key},body:JSON.stringify({model:LLM.model,max_tokens:max,temperature:.2,messages:[{role:'system',content:sys},{role:'user',content:img?c:text}]})});
+  if(!r.ok)throw httpErr(r);d=await r.json();return d.choices[0].message.content||'';
+}
+const ask=async o=>{const t=await llm(o),m=String(t).match(/\{[\s\S]*\}/);return JSON.parse(m?m[0]:'{}')};
+const aiErr=e=>e.status===429?'The AI limit is reached for now. Basic commands still work.':(e.status===401||e.status===403)?'The AI provider rejected the key. Check it in Settings.':e.status===404||e.status===400?'The AI model name looks wrong. Check Settings.':'I couldn’t reach the AI. Basic commands still work.';
+const prefCtx=()=>({diet:PREF.diet,spice:PREF.spice,allergies:PREF.allergy,likedCuisines:PREF.cuis,servings:PREF.serv,skill:PREF.skill});
 async function askLLM(text){
-  if(!LLM.key){caption('Add a free Gemini key in Settings to answer open questions.','CHEF AI');return say('Sorry, I didn’t catch that. Try next, repeat, or start timer.')}
+  if(!LLM.key){caption('Add an AI key in Settings to answer open questions.','CHEF AI');return say('Sorry, I didn’t catch that. Try next, repeat, or start timer.')}
   if(LLM.busy)return;LLM.busy=true;caption('Thinking…','CHEF AI');
   const r=R(),st=r.steps[S.step];
-  const sys='You are Chef AI inside a hands-free kitchen app. The user spoke a command or question. Reply with ONE JSON object only: {"action":"next|previous|repeat|start_timer|set_timer|time_left|open_recipe|adapt|swap|scan|home|finish|answer","arg":"string or empty","seconds":0,"reply":"one or two short spoken sentences"}. Use "answer" for cooking questions (substitutions, techniques, doneness) and put the answer in reply. Use "open_recipe" with arg = a recipe id from the list. Use "adapt" with arg = the change requested. Use "swap" with arg = the missing ingredient. Use "set_timer" with seconds. Never invent actions. Keep replies under 30 words, plain speech, no markdown.';
-  const ctx={screen:S.screen,recipe:r.title,currentStep:S.screen==='cook'?{n:S.step+1,of:r.steps.length,text:st.t,detail:st.d}:null,ingredients:r.ing.map(i=>i[0]+' '+i[1]),userHas:[...S.found],recipes:RECIPES.map(x=>x.id+': '+x.title)};
+  const sys='You are Chef AI inside a hands-free kitchen app. The user spoke a command or question. Reply with ONE JSON object only: {"action":"next|previous|repeat|start_timer|set_timer|time_left|open_recipe|recipe|adapt|swap|scan|home|finish|answer","arg":"string or empty","seconds":0,"reply":"one or two short spoken sentences"}. Use "answer" for cooking questions (substitutions, techniques, doneness) and put the answer in reply. Use "open_recipe" with arg = a recipe id from the list. Use "recipe" with arg = the dish or cuisine when the user wants a dish that is not in the list (any cuisine in the world). Use "adapt" with arg = the change requested. Use "swap" with arg = the missing ingredient. Use "set_timer" with seconds. Never invent actions. Respect the cook preferences. Keep replies under 30 words, plain speech, no markdown.';
+  const ctx={screen:S.screen,recipe:r.title,currentStep:S.screen==='cook'?{n:S.step+1,of:r.steps.length,text:st.t,detail:st.d}:null,ingredients:r.ing.map(i=>i[0]+' '+i[1]),userHas:[...S.found],recipes:RECIPES.slice(0,40).map(x=>x.id+': '+x.title),prefs:prefCtx()};
   try{
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${LLM.model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':LLM.key},body:JSON.stringify({systemInstruction:{parts:[{text:sys}]},contents:[{role:'user',parts:[{text:JSON.stringify({context:ctx,heard:text})}]}],generationConfig:{responseMimeType:'application/json',temperature:.2,maxOutputTokens:220}})});
-    if(res.status===429){LLM.busy=false;return say('The free AI limit is reached for now. Basic commands still work.')}
-    if(!res.ok){LLM.busy=false;return say('The AI service said no. Check your key in Settings. Basic commands still work.')}
-    const data=await res.json();let a=JSON.parse((data.candidates[0].content.parts[0].text||'{}').replace(/```json|```/g,''));
-    LLM.busy=false;
+    const a=await ask({sys,text:JSON.stringify({context:ctx,heard:text}),max:260});LLM.busy=false;
     switch(a.action){
-      case 'next':return nextStep();
-      case 'previous':return prevStep();
-      case 'repeat':return readStep();
-      case 'start_timer':return startStepTimer(true);
-      case 'time_left':return tellTime();
+      case 'next':return nextStep();case 'previous':return prevStep();case 'repeat':return readStep();
+      case 'start_timer':return startStepTimer(true);case 'time_left':return tellTime();
       case 'set_timer':if(a.seconds>0&&a.seconds<=21600){addTimer('Timer',Math.round(a.seconds),'VOICE TIMER');return say(a.reply||'Timer set.')}break;
       case 'open_recipe':if(RECIPES.some(x=>x.id===a.arg)){openRecipe(a.arg);return say(a.reply||'Here you go.')}break;
-      case 'adapt':return adaptVoice(a.arg||text);
-      case 'swap':return swapIngredient(a.arg||text);
+      case 'recipe':return aiGenerate(a.arg||text);
+      case 'adapt':return adaptVoice(a.arg||text);case 'swap':return swapIngredient(a.arg||text);
       case 'scan':go('scan');return say(a.reply||'Opening the camera.');
-      case 'home':return go('home');
-      case 'finish':return finish();
+      case 'home':return go('home');case 'finish':return finish();
     }
     say(a.reply||'Sorry, I couldn’t help with that.');
-  }catch(e){LLM.busy=false;say('I couldn’t reach the AI. Basic commands still work.')}
+  }catch(e){LLM.busy=false;say(aiErr(e))}
 }
-/* ---------- AI settings sheet (key stays in this browser only) ---------- */
-const GEM=m=>`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`;
-let keyState={t:'',cls:''};
-let sheetOpener=null;
-function openSettings(){sheetOpener=document.activeElement;const sh=$('#sheet');keyState=LLM.key?{t:'Key saved on this device',cls:'ok'}:{t:'No key yet. Basic voice commands only',cls:''};drawSettings();sh.classList.add('on');setTimeout(()=>{const f=$('#keyin');f&&f.focus()},250)}
-function closeSettings(){const sh=$('#sheet');if(!sh.classList.contains('on'))return;sh.classList.remove('on');setTimeout(()=>{const g=$('.gear');(g||sheetOpener)&&(g||sheetOpener).focus&&(g||sheetOpener).focus()},0)}
-function drawSettings(){
-  $('#sheet').innerHTML=`<div class="sheet-card"><div class="grab"></div>
-   <div class="row"><h2 style="flex:1">Smart features</h2><button class="icon-btn press" data-act="closesheet" aria-label="Close settings">${ic('x')}</button></div>
-   <p class="note">Add a free Gemini API key to unlock open-ended voice, smart ingredient scanning and recipe adapting. The key is stored only in this browser.</p>
-   <div class="feat"><div>${ic('check')}<span>Say anything: “can I use curd instead of cream?”</span></div><div>${ic('check')}<span>Scan ingredients with real vision, not just colour</span></div><div>${ic('check')}<span>Adapt recipes to any request, not a fixed list</span></div><div>${ic('check')}<span>Hand gestures run on-device and need no key</span></div></div>
-   <label class="label" for="keyin" style="padding:0">GEMINI API KEY</label>
-   <input class="field" id="keyin" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your key" value="${esc(LLM.key)}">
-   <div class="state ${keyState.cls}" role="status"><i></i><span>${esc(keyState.t)}</span></div>
-   <button class="btn p press" data-act="savekey">Save &amp; test key</button>
-   <div class="row"><button class="btn s press" data-act="removekey" style="flex:1">Remove</button><button class="btn s press" data-act="closesheet" style="flex:1">Done</button></div>
-   <p class="note" style="font-size:12px">Treat your key like a password. If it was ever shared in a chat or a public file, create a new one at aistudio.google.com and delete the old one.</p></div>`;
-}
-async function saveKey(){
-  const k=($('#keyin').value||'').trim();
-  if(!k){try{localStorage.removeItem('sk_ai_key')}catch(e){};keyState={t:'Key removed',cls:''};drawSettings();render();return}
-  keyState={t:'Testing key…',cls:''};drawSettings();$('#keyin').value=k;
+/* any recipe in the world, or identify a dish from a photo */
+const RSCHEMA='{"title":"","cuisine":"","diet":"veg|vegan|egg|nonveg","time":30,"level":"Easy|Medium|Hard","serv":2,"ing":[["name","amount","key"]],"steps":[{"t":"short instruction","d":"one or two sentences","cue":"what to look for","timer":null}]} where timer is null or ["label",seconds,"HEAT LEVEL"]. 5 to 9 steps, at most 12 ingredients.';
+async function aiGenerate(q,img){
+  if(!LLM.key){caption('Add an AI key in Settings to create any recipe.','CHEF AI');return go('settings')}
+  if(LLM.busy)return;LLM.busy=true;caption(img?'Identifying your dish…':'Writing your recipe…','CHEF AI');
   try{
-    const r=await fetch(GEM(LLM.model),{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':k},body:JSON.stringify({contents:[{role:'user',parts:[{text:'Reply with the single word ok'}]}],generationConfig:{maxOutputTokens:8}})});
-    if(r.ok){try{localStorage.setItem('sk_ai_key',k)}catch(e){};keyState={t:'Key works. Smart features are on',cls:'ok'};drawSettings();render();say('Smart features are on. Ask me anything.')}
-    else{keyState={t:r.status===429?'Key is valid but the free limit is reached. Try later':(r.status===400||r.status===403)?'Google rejected this key. Check it and try again':'Could not verify (error '+r.status+')',cls:'bad'};if(r.status===429){try{localStorage.setItem('sk_ai_key',k)}catch(e){}};drawSettings()}
-  }catch(e){keyState={t:'No connection. Check your internet and try again',cls:'bad'};drawSettings()}
-  const f=$('#keyin');if(f)f.value=k;
+    const sys='You are a world-class chef. Write one authentic recipe. Reply with ONE JSON object only, no markdown: '+RSCHEMA+' For each ingredient "key" must be one of these ids when it fits, else a short lowercase word: '+Object.keys(PANTRY_ALL).join(', ')+'. Respect the cook: '+JSON.stringify(prefCtx())+'.';
+    const a=await ask({sys,text:img?'Identify the dish in this photo and write its recipe. '+(q||''):q,img,max:1500});
+    const r=addAIRecipe(a);LLM.busy=false;
+    if(!r)return say('I couldn’t build that recipe. Try describing the dish differently.');
+    openRecipe(r.id);say(`Here’s ${r.title}. It takes ${r.time} minutes. Say start cooking when you’re ready.`);
+  }catch(e){LLM.busy=false;say(aiErr(e))}
 }
-function removeKey(){try{localStorage.removeItem('sk_ai_key')}catch(e){};keyState={t:'Key removed',cls:''};drawSettings();render()}
-
-/* ---------- Gemini helpers ---------- */
-async function gem(parts,sys,extra){
-  const body={contents:[{role:'user',parts}],generationConfig:Object.assign({responseMimeType:'application/json',temperature:.2,maxOutputTokens:400},extra||{})};
-  if(sys)body.systemInstruction={parts:[{text:sys}]};
-  const r=await fetch(GEM(LLM.model),{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':LLM.key},body:JSON.stringify(body)});
-  if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
-  const d=await r.json();return JSON.parse((d.candidates[0].content.parts[0].text||'{}').replace(/```json|```/g,''));
+function addAIRecipe(a){
+  if(!a||!a.title||!Array.isArray(a.ing)||!Array.isArray(a.steps)||!a.steps.length)return null;
+  const r={id:'ai'+Date.now().toString(36),ai:true,title:String(a.title).slice(0,60),cuisine:String(a.cuisine||'World').slice(0,24),diet:['veg','vegan','egg','nonveg'].includes(a.diet)?a.diet:'nonveg',time:Math.round(a.time)||30,serv:a.serv||2,level:a.level||'Medium',tag:'AI CREATED',kw:String(a.title).toLowerCase().split(' ').filter(w=>w.length>3),
+   ing:a.ing.slice(0,14).map(x=>[String(x[0]),String(x[1]||''),String(x[2]||x[0]).toLowerCase().replace(/[^a-z]/g,'')]),
+   steps:a.steps.slice(0,14).map(t=>({t:String(t.t||''),d:String(t.d||''),cue:String(t.cue||'It looks and smells right.'),timer:Array.isArray(t.timer)&&t.timer[1]>0&&t.timer[1]<=7200?[String(t.timer[0]||'Timer'),Math.round(t.timer[1]),String(t.timer[2]||'MEDIUM HEAT')]:null}))};
+  RECIPES.unshift(r);saveLS('ska-ai-recipes',RECIPES.filter(x=>x.ai).slice(0,20));return r;
 }
-/* real vision scan: sends one still frame to Gemini and maps results onto the pantry ids */
-async function visionScan(){
-  if(!LLM.key||!video||video.readyState<2)return null;
-  const c=document.createElement('canvas'),k=Math.min(1,640/Math.max(video.videoWidth,video.videoHeight));
+/* camera frame (live camera or an uploaded photo) as base64 jpeg */
+function frame(){
+  if(S.upImg)return S.upImg;
+  if(!video||video.readyState<2)return null;
+  const c=document.createElement('canvas'),k=Math.min(1,768/Math.max(video.videoWidth,video.videoHeight));
   c.width=Math.round(video.videoWidth*k);c.height=Math.round(video.videoHeight*k);c.getContext('2d').drawImage(video,0,0,c.width,c.height);
-  const b64=c.toDataURL('image/jpeg',.7).split(',')[1];
-  const sys='You identify food ingredients in a kitchen photo. Reply with ONE JSON object: {"known":[ids],"other":[names]}. "known" may only contain ids from: tomato, onion, basil, paneer, pasta. "other" lists any other clearly visible edible ingredients in plain English, max 6. If nothing edible is visible return empty arrays.';
-  return gem([{inline_data:{mime_type:'image/jpeg',data:b64}},{text:'What ingredients are visible?'}],sys,{maxOutputTokens:200});
+  return c.toDataURL('image/jpeg',.75).split(',')[1];
 }
-/* smart adapt: Gemini returns structured edits for ANY request, applied to the real ingredient list */
+async function visionScan(img){
+  const sys='You identify food ingredients in a kitchen photo. Reply with ONE JSON object: {"known":[ids],"other":[names]}. "known" may only contain ids from: '+Object.keys(PANTRY_ALL).join(', ')+'. "other" lists other clearly visible edible ingredients in plain English, max 8. If nothing edible is visible return empty arrays.';
+  return ask({sys,text:'What ingredients are visible?',img,max:250});
+}
 async function adaptSmart(t){
   const r=R();
   const sys='You adapt recipes by voice. Reply with ONE JSON object: {"edits":[{"i":number,"name":"new ingredient name or empty","amount":"new amount or empty","text":"short human readable change"}],"notes":["short extra tips"],"spoken":"one short sentence"}. "i" is the index of the ingredient in the list. Only edit what the request needs. Max 4 edits and 2 notes. Never change cooking times.';
-  return gem([{text:JSON.stringify({request:t,recipe:r.title,ingredients:r.ing.map((x,i)=>({i,name:x[0],amount:x[1]}))})}],sys,{maxOutputTokens:500});
+  return ask({sys,text:JSON.stringify({request:t,recipe:r.title,ingredients:r.ing.map((x,i)=>({i,name:x[0],amount:x[1]})),prefs:prefCtx()}),max:500});
 }
-
+/* settings actions */
+let keyState={t:'',cls:''};
+function openSettings(){go('settings')}function closeSettings(){}
+async function saveKey(){
+  const g=id=>(($(id)||{}).value||'').trim(),k=g('#keyin'),m=g('#modelin'),bu=g('#basein');
+  if(!k){AI.keys[AI.p]='';saveAI();keyState={t:'Key removed',cls:''};render();return}
+  AI.keys[AI.p]=k;if(m)AI.models[AI.p]=m;else delete AI.models[AI.p];if(AI.p==='custom')AI.base=bu;saveAI();
+  keyState={t:'Testing…',cls:''};render();
+  try{await llm({sys:'Reply with the single word ok',text:'ok',max:8});keyState={t:'Works. Smart features are on',cls:'ok'};say('Smart features are on. Ask me anything.')}
+  catch(e){keyState={t:e.status===429?'Key is valid but the limit is reached. Try later':(e.status===401||e.status===403)?'The provider rejected this key. Check it and try again':(e.status===404||e.status===400)?'Model not found. Check the model name':'Could not verify. Check your internet and these settings',cls:'bad'}}
+  render();
+}
+function removeKey(){AI.keys[AI.p]='';saveAI();keyState={t:'Key removed',cls:''};render()}
 /* ---------- command brain ---------- */
 const has=(t,...w)=>w.some(x=>t.includes(x));
 function command(t){
@@ -523,6 +585,8 @@ function command(t){
   if(has(t,'mute','be quiet','stop talking')){S.muted=true;try{speechSynthesis.cancel()}catch(e){};caption('Voice replies muted. Say “unmute” to hear me again.','CHEF AI');return}
   if(has(t,'unmute','talk to me')){S.muted=false;return say('I’m back. I’ll talk you through each step.')}
   if(has(t,'go home','home screen','main menu','go back home'))return go('home');
+  if(has(t,'settings','preferences'))return go('settings');
+  if(has(t,'my profile','profile page'))return go('profile');
   if(has(t,'active task','timers','what’s running','whats running'))return go('tasks');
   if(has(t,'scan','camera','what ingredients','what i have')){if(S.screen!=='scan'){go('scan');return say('Opening the camera. Hold your ingredients in the frame, then say capture.')}}
   if(S.screen==='scan'){
@@ -567,6 +631,7 @@ const isHave=k=>S.found.size?S.found.has(k)||k==='chili'&&false:!['garlic'].incl
 
 /* ---------- navigation ---------- */
 function go(s){
+  if(s!=='scan')S.upImg=null;
   if(s!==S.screen){if(S.screen==='scan'&&s!=='scan')stopStream(true);}
   S.screen=s;render();
   if(s==='scan')startCamera('environment');
@@ -600,7 +665,8 @@ function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)
 function activeTimers(){return S.timers.filter(t=>!t.fired)}
 
 /* ---------- cooking actions ---------- */
-function startCooking(){S.inCook=true;S.step=0;S.startedAt=Date.now();S.cmds=0;S.timers=[];S.alert=null;startRec();S.handsfree=true;go('cook');setTimeout(readStep,350)}
+function startCooking(){S.inCook=true;S.step=0;S.startedAt=Date.now();S.cmds=0;S.timers=[];S.alert=null;if(PREF.autoVoice)startRec();S.handsfree=PREF.autoVoice;keepAwake(true);go('cook');setTimeout(readStep,350)}
+let wl=null;async function keepAwake(on){try{if(on&&PREF.awake&&navigator.wakeLock)wl=await navigator.wakeLock.request('screen');else if(wl){await wl.release();wl=null}}catch(e){}}
 function readStep(){const s=R().steps[S.step];return say(`Step ${S.step+1} of ${R().steps.length}. ${s.t} ${s.d}`)}
 function nextStep(){
   const r=R();if(S.step>=r.steps.length-1){return finish()}
@@ -617,12 +683,13 @@ function swapIngredient(t){
   say(`No problem. Instead of ${k}, use ${map[k]}.`);
 }
 function finish(){
-  S.inCook=false;
+  S.inCook=false;keepAwake(false);
   const mins=Math.max(1,Math.round((Date.now()-(S.startedAt||Date.now()))/60000));S.took=mins;
+  HIST.unshift({id:S.rid,title:R().title,mins,at:Date.now(),rating:0});HIST=HIST.slice(0,50);saveLS('ska-hist',HIST);
   stopStream();S.gestures=false;S.timers.forEach(t=>t.fired=true);S.alert=null;S.rating=0;go('done');
   say(`Dinner is ready! ${R().title}, cooked hands-free in ${mins} minutes. Say rate it five stars to save feedback.`);
 }
-function rate(n){S.rating=n;if(S.screen==='done')render();say(`Saved ${n} star${n>1?'s':''}. Enjoy your meal!`)}
+function rate(n){S.rating=n;if(HIST[0]&&HIST[0].id===S.rid){HIST[0].rating=n;saveLS('ska-hist',HIST)}if(S.screen==='done')render();say(`Saved ${n} star${n>1?'s':''}. Enjoy your meal!`)}
 
 /* ---------- adapt ---------- */
 async function adaptVoice(t){
@@ -729,13 +796,19 @@ function drawBoxes(f){
   window._cur=f;
 }
 async function capture(){
-  if(LLM.key&&video){
+  const img=frame();
+  if(S.scanMode==='dish'){
+    if(!LLM.key){caption('Dish recognition needs an AI key. Add one in Settings.','CHEF AI');return go('settings')}
+    if(!img)return say('The camera isn’t ready yet.');
+    return aiGenerate('',img);
+  }
+  if(LLM.key&&img){
     caption('Looking at your ingredients…','CHEF AI');
-    try{const v=await visionScan();if(v){const known=(v.known||[]).filter(k=>PANTRY_ALL[k]);known.forEach(k=>S.found.add(k));buzz(40);scanVotes={};go('results');
-      const other=(v.other||[]).slice(0,4);
+    try{const v=await visionScan(img);if(v){const known=(v.known||[]).filter(k=>PANTRY_ALL[k]);(v.other||[]).slice(0,6).forEach(n=>{const k=String(n).toLowerCase().replace(/[^a-z]/g,'');if(k&&!PANTRY_ALL[k]){PANTRY_ALL[k]=String(n).replace(/^./,c=>c.toUpperCase());known.push(k)}});known.forEach(k=>S.found.add(k));buzz(40);scanVotes={};go('results');
+      const other=[];
       if(!known.length&&!other.length)return say('I couldn’t spot any ingredients. Try better light, or tap items on the next screen.');
       return say(`I can see ${[...known.map(k=>PANTRY_ALL[k]),...other].join(', ')}. ${known.length?'Here’s what you can cook now.':'None of these match my recipes yet, so you can add items by hand.'}`)}}
-    catch(e){/* fall through to colour scan */}
+    catch(e){caption(aiErr(e),'CHEF AI')}
   }
   let keys=Object.keys(scanVotes).filter(k=>scanVotes[k]>=2);
   if(!keys.length&&window._cur)keys=window._cur.map(o=>o.k);
@@ -863,35 +936,42 @@ const app=$('#app');
 function status(dark){return `<div class="status"><span>${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit',hour12:false})}</span><span><b>5G</b><i></i></span></div>`}
 function hfBar(hint,live){return `<div class="bar" id="hfbar" role="button" tabindex="0" data-act="hf" aria-label="Toggle hands-free voice"><div class="orb">${ic('mic')}</div><p id="hint">${esc(hint)}</p><div class="wave ${live?'live':''}">${'<span></span>'.repeat(5)}</div></div>`}
 function backBtn(go2,label='Back'){return `<button class="icon-btn press" data-go="${go2}" aria-label="${label}">${ic('back')}</button>`}
-function recipeCard(r){const have=r.ing.filter(i=>isHave(i[2])).length;return `<button class="card recipe press" data-recipe="${r.id}"><div class="ph ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}</div><div style="flex:1;min-width:0"><b>${esc(r.title)}</b><small>${r.time} MIN · ${r.level.toUpperCase()}</small><span class="tag">${S.found.size?Math.round(have/r.ing.length*100)+'% MATCH':r.tag}</span></div></button>`}
+function recipeCard(r){const have=r.ing.filter(i=>isHave(i[2])).length;return `<button class="card recipe press" data-recipe="${r.id}"><div class="ph ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}</div><div style="flex:1;min-width:0"><b>${esc(r.title)}</b><small>${r.time} MIN · ${r.level.toUpperCase()}</small><span class="tag">${S.found.size?Math.round(have/r.ing.length*100)+'% MATCH':esc(r.tag)}</span>${allergyHit(r)?'<span class="tag warn">CONTAINS '+esc(allergyHit(r).toUpperCase())+'</span>':''}</div></button>`}
 
 const VIEWS={
 home(){
   const a=activeTimers().sort((x,y)=>x.end-y.end)[0];
   return `${status()}<div class="body">
-   <div class="greet"><div><div class="eyebrow" style="color:var(--accent)">HANDS-FREE KITCHEN</div><h1>What are we cooking?</h1></div><div class="actions"><button class="icon-btn gear press ${LLM.key?'on':''}" data-act="settings" aria-label="Smart features settings">${ic('gear')}</button></div></div>
+   <div class="greet"><div><div class="eyebrow" style="color:var(--accent)">${PREF.name?'HELLO, '+esc(PREF.name.toUpperCase()):'HANDS-FREE KITCHEN'}</div><h1>What are we cooking?</h1></div><div class="actions"><button class="avatar press" data-go="profile" aria-label="Your profile">${esc((PREF.name||'C')[0].toUpperCase())}</button><button class="icon-btn gear press ${LLM.key?'on':''}" data-act="settings" aria-label="Settings">${ic('gear')}</button></div></div>
    ${a?`<button class="pill-timer press" data-go="tasks">${ic('timer')}<span style="flex:1" data-bind="homet">${esc(a.name)} · ${fmt((a.end-Date.now())/1000)} left</span>${ic('chev')}</button>`:''}
    <button class="voice-card press" data-act="talk" aria-label="Tell me what you’re craving"><div style="flex:1;min-width:0"><div class="eyebrow">VOICE FIRST</div><h3>Tell me what you’re craving</h3><small>Try: “Show me a quick pasta”</small></div><div class="mic-ring ${recOn&&S.listenOnce?'live':''}" id="homering"><div class="mic-orb">${ic('mic')}</div></div></button>
    <div class="quick"><button class="card press" data-go="scan"><div class="qi">${ic('camera')}</div><div><b>Scan ingredients</b><span>CAMERA</span></div></button><button class="card press" data-go="results"><div class="qi">${ic('book')}</div><div><b>Browse recipes</b><span>VOICE + TOUCH</span></div></button></div>
-   <div class="label">SUGGESTED TONIGHT</div>${recipeCard(RECIPES[0])}
+   <div class="label">SUGGESTED TONIGHT</div>${recipeCard(suggest())}
   </div><div class="bottom">${hfBar(S.handsfree?'Listening… say “Hey Chef”':'Say “Hey Chef” to start',S.handsfree&&recOn)}</div>`},
 scan(){return `${status()}<div class="body" style="padding-bottom:8px;gap:12px">
    <div class="top"><button class="icon-btn press" data-go="home" aria-label="Close" style="background:rgba(255,255,255,.14);border:0;color:#fff">${ic('x')}</button><h2 style="flex:1;font-size:22px">Scan ingredients</h2><span class="tag">SCAN</span></div>
    <div class="cam" id="camwrap"><video id="camv" playsinline muted></video><div class="boxes" id="boxes"></div><div class="status-pill" id="spill">Starting camera…</div></div>
-   <div class="center"><div style="font-weight:600;font-size:16px">Hold ingredients in frame</div><div class="eyebrow" style="color:var(--accent-soft);margin-top:4px">SAY “CAPTURE” · OR SHOW AN OPEN PALM</div></div>
-   <div class="ctrls"><button class="cbtn press ${recOn?'act':''}" data-act="talk" aria-label="Voice"><i>${ic('mic')}</i>VOICE</button><button class="shutter press" data-act="capture" aria-label="Capture ingredients"><i></i></button><button class="cbtn press ${S.scanGesture?'act':''}" data-act="scangesture" aria-label="Gesture capture"><i>${ic('hand')}</i>GESTURE</button></div>
+   <div class="seg dk" role="group" aria-label="Scan mode"><button class="press ${S.scanMode!=='dish'?'on':''}" data-scanmode="ing">Ingredients</button><button class="press ${S.scanMode==='dish'?'on':''}" data-scanmode="dish">Identify dish</button></div><div class="center"><div style="font-weight:600;font-size:16px">${S.scanMode==='dish'?'Point at a finished dish':'Hold ingredients in frame'}</div><div class="eyebrow" style="color:var(--accent-soft);margin-top:4px">${LLM.key?'AI VISION ON · SAY “CAPTURE”':'BASIC COLOUR SCAN · ADD AI KEY FOR ACCURACY'}</div></div>
+   <div class="ctrls"><button class="cbtn press ${recOn?'act':''}" data-act="talk" aria-label="Voice"><i>${ic('mic')}</i>VOICE</button><button class="cbtn press" data-act="scanup" aria-label="Use a photo"><i>${ic('image')}</i>PHOTO</button><button class="shutter press" data-act="capture" aria-label="Capture ingredients"><i></i></button><button class="cbtn press ${S.scanGesture?'act':''}" data-act="scangesture" aria-label="Gesture capture"><i>${ic('hand')}</i>GESTURE</button></div>
    </div><div style="height:max(16px,env(safe-area-inset-bottom));flex:none"></div>`},
 results(){
-  const list=S.found.size?RECIPES.slice().sort((a,b)=>b.ing.filter(i=>isHave(i[2])).length/b.ing.length-a.ing.filter(i=>isHave(i[2])).length/a.ing.length):RECIPES;
+  const q=(S.q||'').toLowerCase().trim(),cf=S.cf||'All',cuis=['All',...new Set(RECIPES.map(r=>r.cuisine).filter(Boolean))];
+  const base=RECIPES.filter(r=>(cf==='All'||r.cuisine===cf)&&(!q||(r.title+' '+r.cuisine+' '+r.ing.map(i=>i[0]).join(' ')).toLowerCase().includes(q)));
+  const shown=S.showAll?base:base.filter(okDiet),hidden=base.length-shown.length,hv=r=>r.ing.filter(i=>isHave(i[2])).length/r.ing.length;
+  const list=S.found.size?shown.slice().sort((a,b)=>hv(b)-hv(a)):shown;
   return `${status()}<div class="body"><div class="hdr"><h2>${S.found.size?'Your ingredients':'Recipes'}</h2></div>
+   <label class="srch">${ic('search')}<input id="qin" class="sin" type="search" placeholder="Search dishes, cuisines, ingredients" value="${esc(S.q||'')}" aria-label="Search recipes"></label>
+   <div class="chips hs" role="group" aria-label="Cuisine">${cuis.map(c=>`<button class="chip press ${c===cf?'on':''}" data-cf="${esc(c)}" aria-pressed="${c===cf}">${esc(c)}</button>`).join('')}</div>
+   <button class="btn s press aibtn" data-act="aigen">${ic('sparkle')}<span>Create any recipe with AI</span></button>
    ${S.found.size?`<div class="label">${S.found.size} INGREDIENT${S.found.size>1?'S':''} DETECTED</div><div class="chips">${[...S.found].map(k=>`<button class="chip on press" data-rm="${k}" aria-label="Remove ${PANTRY_ALL[k]}">${PANTRY_ALL[k]} ${ic('x')}</button>`).join('')}</div>`:''}
-   <div class="label" style="margin-top:4px">ADD MISSING ONES</div><div class="chips">${Object.keys(PANTRY_ALL).filter(k=>!S.found.has(k)).map(k=>`<button class="chip press" data-add="${k}">+ ${PANTRY_ALL[k]}</button>`).join('')||'<span class="chip">All added</span>'}</div>
-   <div class="label">${S.found.size?'READY TO COOK NOW':'ALL RECIPES'}</div>${list.map(recipeCard).join('')}
+   <div class="label">ADD INGREDIENTS YOU HAVE</div><div class="chips hs">${Object.keys(PANTRY_ALL).filter(k=>!S.found.has(k)).map(k=>`<button class="chip press" data-add="${k}">+ ${PANTRY_ALL[k]}</button>`).join('')||'<span class="chip">All added</span>'}</div>
+   <div class="label">${S.found.size?'READY TO COOK NOW':'ALL RECIPES'} · ${list.length}</div>${list.map(recipeCard).join('')||'<div class="card" style="padding:20px;text-align:center;font-weight:600">No match. Try “Create any recipe with AI”.</div>'}
+   ${hidden?`<button class="chip press" data-act="showall">${hidden} hidden by your diet · Show</button>`:''}
   </div><div class="bottom">${hfBar('Say “Show me the pasta”',S.handsfree&&recOn)}</div>`},
 detail(){const r=R(),miss=r.ing.filter(i=>!isHave(i[2])).length;
-  return `${status()}<div class="body"><div class="hdr">${backBtn(S.from||'results')}<h2>Recipe</h2></div>
+  return `${status()}<div class="body"><div class="hdr">${backBtn(S.from||'results')}<h2>Recipe</h2><button class="icon-btn press ${FAVS.includes(r.id)?'favon':''}" data-fav="${r.id}" aria-pressed="${FAVS.includes(r.id)}" aria-label="Save recipe">${ic('heart',FAVS.includes(r.id)?'f':'')}</button></div>
    <div class="hero ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}<button class="addphoto press" data-act="photo" aria-label="${photoOf(r.id)?'Change':'Add'} photo of ${esc(r.title)}">${ic('camera')}<span>${photoOf(r.id)?'Change photo':'Add photo'}</span></button></div><h1 class="rtitle">${esc(r.title)}</h1>
-   <div class="chips"><span class="chip">${r.time} MIN</span><span class="chip">${r.serv} SERVINGS</span><span class="chip">${r.level.toUpperCase()}</span></div>
+   <div class="chips"><span class="chip">${r.time} MIN</span><span class="chip">${r.serv} SERVINGS</span><span class="chip">${r.level.toUpperCase()}</span>${r.cuisine?`<span class="chip">${esc(r.cuisine.toUpperCase())}</span>`:''}${allergyHit(r)?`<span class="chip" style="color:#8a2a14">CONTAINS ${esc(allergyHit(r).toUpperCase())}</span>`:''}</div>
    <div class="label">INGREDIENTS · ${r.ing.length-miss} OF ${r.ing.length} IN YOUR KITCHEN</div>
    <ul class="card ing">${r.ing.map(i=>{const h=isHave(i[2]);return `<li class="${h?'':'miss'}">${h?ic('check'):ic('circle')}<span>${esc(i[0])}</span><em>${h?esc(i[1]):'MISSING'}</em></li>`}).join('')}</ul>
   </div><div class="bottom"><button class="btn s press" data-act="adapt">Adapt with voice</button><button class="btn p press" data-act="cook">Start hands-free cooking</button></div>`},
@@ -919,6 +999,39 @@ tasks(){const all=S.timers.slice().sort((a,b)=>(a.fired-b.fired)||(a.end-b.end))
    <div class="label">RUNNING · ${activeTimers().length} TASK${activeTimers().length===1?'':'S'}</div>
    ${all.map(t=>{const left=(t.end-Date.now())/1000,p=t.fired?100:100-(left/t.total*100);return `<div class="card task ${t.fired?'done':''}" data-tid="${t.id}"><div class="st">${t.fired?ic('check'):ic('timer')}</div><div class="tx"><b>${esc(t.name)}</b><div class="tr"><div style="width:${p}%"></div></div><small>${t.step?'STEP '+t.step+' · ':''}${t.fired?'COMPLETED':esc(t.sub||'RUNNING')}</small></div><div class="tm" data-bind="tm">${t.fired?'DONE':fmt(left)}</div>${t.fired?'':`<button class="x press" data-canceltid="${t.id}" aria-label="Cancel ${esc(t.name)}">${ic('x')}</button>`}</div>`}).join('')||`<div class="card" style="padding:24px;text-align:center;font-weight:600;color:var(--ink-soft)">No timers yet. Say “Start timer” while cooking.</div>`}
   </div><div class="bottom">${hfBar('Ask “How much time is left?”',recOn)}${S.inCook?`<div class="row"><button class="btn s press" data-go="cook" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="finish" style="flex:1">Finish cooking</button></div>`:''}</div>`},
+profile(){
+  const rated=HIST.filter(h=>h.rating),avg=rated.length?(rated.reduce((x,h)=>x+h.rating,0)/rated.length).toFixed(1):'–',favs=FAVS.map(id=>RECIPES.find(r=>r.id===id)).filter(Boolean);
+  const opt=(k,arr)=>`<div class="seg" role="group">${arr.map(([v,l])=>`<button class="press ${String(PREF[k])===String(v)?'on':''}" data-pref="${k}" data-v="${v}" aria-pressed="${String(PREF[k])===String(v)}">${l}</button>`).join('')}</div>`;
+  const CU=['Indian','Italian','Chinese','Mexican','Japanese','Greek','Middle Eastern','Thai','French','American'];
+  return `${status()}<div class="body"><div class="hdr"><h2>Profile</h2><button class="icon-btn gear press ${LLM.key?'on':''}" data-go="settings" aria-label="Settings">${ic('gear')}</button></div>
+   <div class="card phero"><div class="avatar big">${esc((PREF.name||'C')[0].toUpperCase())}</div><div style="flex:1;min-width:0"><label class="eyebrow" for="namein" style="color:var(--ink-soft)">YOUR NAME</label><input id="namein" class="field" placeholder="Add your name" value="${esc(PREF.name)}" maxlength="24" autocomplete="given-name" style="margin-top:6px"></div></div>
+   <div class="stats"><div class="card"><b>${HIST.length}</b><small>COOKED</small></div><div class="card"><b>${favs.length}</b><small>SAVED</small></div><div class="card"><b>${avg}</b><small>AVG RATING</small></div></div>
+   <div class="label">FOOD PREFERENCES</div>
+   <div class="card pcard"><h3>Diet</h3>${opt('diet',[['any','Anything'],['veg','Veg'],['egg','Egg'],['vegan','Vegan']])}<h3>Spice level</h3>${opt('spice',[['mild','Mild'],['medium','Medium'],['hot','Hot']])}<h3>Cooking level</h3>${opt('skill',[['Easy','Beginner'],['Medium','Home cook'],['Hard','Confident']])}<h3>Usual servings</h3>${opt('serv',[[1,'1'],[2,'2'],[4,'4'],[6,'6']])}</div>
+   <div class="card pcard"><h3>Cuisines you love</h3><div class="chips">${CU.map(c=>`<button class="chip press ${PREF.cuis.includes(c)?'on':''}" data-cuis="${c}" aria-pressed="${PREF.cuis.includes(c)}">${c}</button>`).join('')}</div>
+    <label for="allergyin" class="eyebrow" style="color:var(--ink-soft)">ALLERGIES OR FOODS TO AVOID</label><input id="allergyin" class="field" placeholder="e.g. peanut, shellfish" value="${esc(PREF.allergy)}" autocomplete="off"></div>
+   <div class="label">SAVED RECIPES</div>${favs.map(recipeCard).join('')||'<div class="card" style="padding:18px;text-align:center;font-weight:600;color:var(--ink-soft)">Tap the heart on any recipe to save it here.</div>'}
+   ${HIST.length?`<div class="label">RECENTLY COOKED</div><div class="card">${HIST.slice(0,5).map(h=>`<div class="hrow"><b>${esc(h.title)}</b><small>${h.mins} MIN${h.rating?' · '+h.rating+'★':''}</small></div>`).join('')}</div>`:''}
+  </div>`},
+settings(){
+  const pr=PROVIDERS[AI.p],ks=keyState.t?keyState:(LLM.key?{t:'Key saved on this device',cls:'ok'}:{t:'No key yet. Basic voice commands only',cls:''});
+  const tog=(k,t,d)=>`<button class="card srow press" role="switch" aria-checked="${!!PREF[k]}" data-tog="${k}"><span><b>${t}</b><small>${d}</small></span><i class="sw ${PREF[k]?'on':''}"></i></button>`;
+  const opt=(k,arr)=>`<div class="seg" role="group">${arr.map(([v,l])=>`<button class="press ${String(PREF[k])===String(v)?'on':''}" data-pref="${k}" data-v="${v}" aria-pressed="${String(PREF[k])===String(v)}">${l}</button>`).join('')}</div>`;
+  return `${status()}<div class="body"><div class="hdr">${backBtn('profile')}<h2>Settings</h2></div>
+   <div class="label">AI PROVIDER</div><p class="note2">Powers open questions, camera recognition and recipe creation. Our pick to start: Groq (free and fast). Choose OpenAI or Claude for the most accurate photo recognition.</p>
+   ${Object.entries(PROVIDERS).map(([k,p])=>`<button class="card prov press ${k===AI.p?'sel':''}" data-prov="${k}" role="radio" aria-checked="${k===AI.p}"><div style="flex:1;min-width:0"><div class="prow"><b>${p.name}</b><span class="tag ${p.rec?'':'soft'}">${p.rec?'RECOMMENDED':p.tag}</span></div><small>${p.why}</small></div></button>`).join('')}
+   <div class="card pcard"><label class="eyebrow" for="keyin" style="color:var(--ink-soft)">${pr.name.toUpperCase()} API KEY</label>
+    <input class="field" id="keyin" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your key" value="${esc(LLM.key)}">
+    ${AI.p==='custom'?`<label class="eyebrow" for="basein" style="color:var(--ink-soft)">BASE URL</label><input class="field" id="basein" placeholder="https://your-host/v1" value="${esc(AI.base)}" autocomplete="off">`:''}
+    <label class="eyebrow" for="modelin" style="color:var(--ink-soft)">MODEL</label><input class="field" id="modelin" placeholder="${esc(pr.model||'model name')}" value="${esc(AI.models[AI.p]||'')}" autocomplete="off" autocapitalize="off">
+    <div class="state ${ks.cls}" role="status"><i></i><span>${esc(ks.t)}</span></div>
+    <button class="btn p press" data-act="savekey">Save &amp; test</button><button class="btn s press" data-act="removekey" style="height:48px">Remove key</button>
+    <p class="note2" style="font-size:12px">${pr.url?'Get a key at '+pr.url+'. ':''}Stored only in this browser. Treat it like a password and never share it.</p></div>
+   <div class="label">VOICE</div>${tog('speak','Spoken replies','Chef AI talks you through each step')}
+   <div class="card pcard"><h3>Speaking speed</h3>${opt('rate',[[0.9,'Slow'],[1,'Normal'],[1.15,'Fast']])}<h3>Language</h3>${opt('lang',[['en-IN','English (IN)'],['en-US','English (US)'],['hi-IN','हिन्दी']])}</div>
+   <div class="label">COOKING</div>${tog('autoVoice','Hands-free on start','Turn the microphone on when cooking begins')}${tog('awake','Keep screen awake','Stops the screen sleeping while you cook')}${tog('haptics','Vibration','Small buzz for steps and timers')}
+   <div class="label">DATA</div><div class="card pcard"><button class="btn s press" data-clear="hist" style="height:48px">Clear cooking history</button><button class="btn s press" data-clear="airec" style="height:48px">Remove AI-created recipes</button><button class="btn s press" data-clear="all" style="height:48px;color:#8a2a14;border-color:#8a2a14">Reset everything</button></div>
+  </div>`},
 done(){return `${status()}<div class="body" style="align-items:stretch">
    <div class="ok">${ic('check')}</div><h1 class="center" style="font-size:34px;margin-top:8px">Dinner is ready!</h1>
    <p class="center" style="font-weight:600;font-size:17px;line-height:23px;color:var(--ink-soft);padding:0 20px">${esc(R().title)} · cooked hands-free in ${S.took||28} min</p>
@@ -928,14 +1041,15 @@ done(){return `${status()}<div class="body" style="align-items:stretch">
 };
 function tabbar(active){
   const n=activeTimers().length;
-  return `<nav class="tabbar" aria-label="Main navigation">${[['home','Home','home'],['scan','Scan','camera'],['results','Recipes','book'],['tasks','Timers','timer']].map(([k,l,i])=>`<button class="tab press ${active===k?'on':''}" data-go="${k}" ${k==='tasks'&&n?`aria-label="Timers, ${n} running"`:''} ${active===k?'aria-current="page"':''}>${ic(i,'o')}<span>${l}</span>${k==='tasks'&&n?`<b class="badge" aria-hidden="true">${n}</b>`:''}</button>`).join('')}</nav>`}
-const TABS=['home','results','tasks'];
+  return `<nav class="tabbar" aria-label="Main navigation">${[['home','Home','home'],['scan','Scan','camera'],['results','Recipes','book'],['tasks','Timers','timer'],['profile','Profile','user']].map(([k,l,i])=>`<button class="tab press ${active===k?'on':''}" data-go="${k}" ${k==='tasks'&&n?`aria-label="Timers, ${n} running"`:''} ${active===k?'aria-current="page"':''}>${ic(i,'o')}<span>${l}</span>${k==='tasks'&&n?`<b class="badge" aria-hidden="true">${n}</b>`:''}</button>`).join('')}</nav>`}
+const TABS=['home','results','tasks','profile','settings'];
 function showTabs(){return TABS.includes(S.screen)&&!(S.screen==='tasks'&&S.inCook)}
 function render(){
-  const v=VIEWS[S.screen]()+(showTabs()?tabbar(S.screen):'');
+  const _b=$('.body'),_st=(_b&&app.firstElementChild&&app.firstElementChild.dataset.screen===S.screen)?_b.scrollTop:0;
+  const v=VIEWS[S.screen]()+(showTabs()?tabbar(S.screen==='settings'?'profile':S.screen):'');
   const dark=S.screen==='scan';
   app.innerHTML=`<section class="screen on ${dark?'dark':''} ${showTabs()?'has-tabs':''}" data-screen="${S.screen}">${v}</section>`;
-  fixStars();
+  fixStars();if(_st){const b2=$('.body');if(b2)b2.scrollTop=_st}
   if(S.stream){const el=S.screen==='scan'?$('#camv'):(S.screen==='cook'&&S.gestures?$('#pipv'):null);
     if(el){el.srcObject=S.stream;el.classList.toggle('rear',S.facing==='environment');el.play().catch(()=>{});video=el}}
   if(S.screen==='cook'&&S.gestures&&!S.stream)startCamera('user',true);
@@ -955,8 +1069,20 @@ function renderTimerBits(force){
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
   if(e.target.id==='sheet'){closeSettings();return}
-  const t=e.target.closest('[data-go],[data-act],[data-recipe],[data-say],[data-add],[data-rm],[data-rate],[data-canceltid]');if(!t)return;
+  const t=e.target.closest('[data-go],[data-act],[data-recipe],[data-say],[data-add],[data-rm],[data-rate],[data-canceltid],[data-fav],[data-prov],[data-tog],[data-pref],[data-cuis],[data-cf],[data-scanmode],[data-clear]');if(!t)return;
   if(t.dataset.go){go(t.dataset.go);return}
+  if(t.dataset.fav){const i=FAVS.indexOf(t.dataset.fav);i<0?FAVS.unshift(t.dataset.fav):FAVS.splice(i,1);saveLS('ska-favs',FAVS);render();return}
+  if(t.dataset.prov){AI.p=t.dataset.prov;keyState={t:'',cls:''};saveAI();render();return}
+  if(t.dataset.tog){const k=t.dataset.tog;PREF[k]=!PREF[k];if(k==='speak'){S.muted=!PREF.speak;if(S.muted)try{speechSynthesis.cancel()}catch(e){}}savePrefs();render();return}
+  if(t.dataset.pref){const k=t.dataset.pref,v=t.dataset.v;PREF[k]=(v!==''&&!isNaN(+v))?+v:v;if(k==='lang'){if(rec)rec.lang=PREF.lang;pickVoice()}savePrefs();render();return}
+  if(t.dataset.cuis){const c=t.dataset.cuis,i=PREF.cuis.indexOf(c);i<0?PREF.cuis.push(c):PREF.cuis.splice(i,1);savePrefs();render();return}
+  if(t.dataset.cf){S.cf=t.dataset.cf;render();return}
+  if(t.dataset.scanmode){S.scanMode=t.dataset.scanmode;render();return}
+  if(t.dataset.clear){const c=t.dataset.clear;
+    if(c==='hist'){HIST=[];saveLS('ska-hist',HIST)}
+    if(c==='airec'){for(let i=RECIPES.length-1;i>=0;i--)if(RECIPES[i].ai)RECIPES.splice(i,1);saveLS('ska-ai-recipes',[]);FAVS=FAVS.filter(id=>RECIPES.some(r=>r.id===id));saveLS('ska-favs',FAVS)}
+    if(c==='all'){if(!confirm('Reset all preferences, keys, history and saved recipes on this device?'))return;['ska-prefs','ska-hist','ska-favs','ska-ai','ska-ai-recipes','ska-photos'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});location.reload();return}
+    caption('Done.','CHEF AI');render();return}
   if(t.dataset.recipe){openRecipe(t.dataset.recipe);say(`${R().title}. ${ingCount(R())}.`);return}
   if(t.dataset.say){S.cmds++;command(t.dataset.say);return}
   if(t.dataset.add){S.found.add(t.dataset.add);render();return}
@@ -971,6 +1097,9 @@ document.addEventListener('click',e=>{
     if(S.screen==='adapt')render();
     say(S.screen==='adapt'?'I’m listening. How should I change the recipe?':S.screen==='scan'?'Listening. Say capture when you’re ready.':'I’m listening. What are you craving?');return}
   if(a==='settings')return openSettings();
+  if(a==='aigen'){const q=(($('#qin')||{}).value||'').trim();if(!q){$('#qin').focus();caption('Type a dish or cuisine in the search box, then tap again.','CHEF AI');return}S.q=q;return aiGenerate(q)}
+  if(a==='showall'){S.showAll=true;render();return}
+  if(a==='scanup'){$('#scanin').click();return}
   if(a==='closesheet')return closeSettings();
   if(a==='savekey')return saveKey();
   if(a==='removekey')return removeKey();
@@ -987,13 +1116,20 @@ document.addEventListener('click',e=>{
   if(a==='gest')return toggleGestures();
   if(a==='steptimer'){const st=R().steps[S.step];if(st.timer&&!S.timers.find(x=>x.name===st.timer[0]&&!x.fired))startStepTimer(false);return go('tasks')}
   if(a==='finish')return finish();
-  if(a==='exitcook'){S.inCook=false;stopStream();S.gestures=false;go('detail');return}
+  if(a==='exitcook'){S.inCook=false;keepAwake(false);stopStream();S.gestures=false;go('detail');return}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();
   if(e.key==='Tab'&&$('#sheet').classList.contains('on')){const f=$$('#sheet button,#sheet input'),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}if(e.key==='Enter'&&e.target.id==='keyin'){saveKey();return}if((e.key==='Enter'||e.key===' ')&&e.target.matches('#hfbar')){e.preventDefault();e.target.click()}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&S.stream){/* keep timers, stop camera */stopStream()}});
 
-document.addEventListener('change',e=>{if(e.target.id==='photoin'&&e.target.files[0])savePhoto(S.photoFor||S.rid,e.target.files[0])});
+document.addEventListener('change',e=>{
+  const id=e.target.id;
+  if(id==='namein'){PREF.name=e.target.value.trim();savePrefs();render()}
+  if(id==='allergyin'){PREF.allergy=e.target.value.trim();savePrefs();render()}
+  if(id==='qin'){S.q=e.target.value;S.showAll=false;render();const q=$('#qin');if(q&&S.q){q.focus();q.setSelectionRange(S.q.length,S.q.length)}}
+  if(id==='scanin'&&e.target.files[0]){const f=e.target.files[0],im=new Image(),u=URL.createObjectURL(f);
+    im.onload=()=>{const k=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);S.upImg=c.toDataURL('image/jpeg',.8).split(',')[1];e.target.value='';Promise.resolve(capture()).finally(()=>{S.upImg=null})};
+    im.onerror=()=>{URL.revokeObjectURL(u);caption('That file couldn’t be read as a photo.','CHEF AI')};im.src=u}if(e.target.id==='photoin'&&e.target.files[0])savePhoto(S.photoFor||S.rid,e.target.files[0])});
 /* ---------- boot ---------- */
 render();
 setTimeout(()=>{if(S.screen==='home')caption('Tap the mic and say “Show me a quick pasta”.','CHEF AI')},600);
