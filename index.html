@@ -203,6 +203,58 @@ svg.i{stroke-width:2}
 }
 @media(prefers-contrast:more){.card,.chip,.icon-btn{border-color:var(--ink)}}
 
+
+/* ===== v2: tab bar, sheet, spacing polish ===== */
+.body{gap:14px;padding:8px 24px 20px}
+.bottom{gap:12px;padding-top:8px}
+.has-tabs .bottom{padding-bottom:10px}
+.label{padding-top:6px;margin-bottom:-4px}
+.greet .actions{display:flex;gap:10px;align-items:center}
+.hdr{margin-bottom:2px}
+.tabbar{flex:none;display:flex;gap:4px;margin:4px 16px max(14px,env(safe-area-inset-bottom));padding:6px;border-radius:32px;
+  background:rgba(255,255,255,.66);-webkit-backdrop-filter:blur(28px) saturate(180%);backdrop-filter:blur(28px) saturate(180%);
+  border:1px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 10px 30px rgba(46,49,46,.14)}
+.tab{position:relative;flex:1;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:26px;
+  font-weight:700;font-size:11px;letter-spacing:.02em;color:var(--ink-soft);text-align:center}
+.tab svg{font-size:22px}
+.tab.on{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(191,69,33,.32),inset 0 1px 0 rgba(255,255,255,.35)}
+.tab .badge{position:absolute;top:6px;left:calc(50% + 6px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.tab.on .badge{background:#fff;color:var(--accent);border-color:var(--accent)}
+#sheet{position:absolute;inset:0;z-index:40;display:none;align-items:flex-end;background:rgba(30,32,30,.42);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#sheet.on{display:flex;animation:in .2s}
+.sheet-card{width:100%;max-height:92%;overflow-y:auto;padding:12px 24px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px;
+  border-radius:28px 28px 0 0;background:rgba(249,251,239,.94);-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);border:1px solid rgba(255,255,255,.8);box-shadow:0 -12px 40px rgba(30,32,30,.25)}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--line);align-self:center;margin-bottom:4px}
+.sheet-card h2{font-size:24px}
+.sheet-card p.note{font-size:14px;line-height:21px;color:var(--ink-soft);font-weight:600}
+.field{width:100%;height:52px;border-radius:16px;border:1.5px solid var(--line);background:rgba(255,255,255,.8);padding:0 16px;font:600 16px var(--body);color:var(--ink)}
+.field:focus{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.state{display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:16px;font-weight:700;font-size:14px;background:rgba(232,204,214,.58)}
+.state i{width:10px;height:10px;border-radius:5px;background:var(--ink-soft);flex:none}
+.state.ok i{background:var(--success)}.state.bad i{background:var(--accent)}
+.feat{display:flex;flex-direction:column;gap:8px;font-weight:600;font-size:14px;line-height:20px}
+.feat div{display:flex;gap:10px;align-items:flex-start}.feat svg{color:var(--success);margin-top:2px;font-size:16px}
+.gear{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:20px;position:relative}
+.gear.on::after{content:"";position:absolute;top:9px;right:9px;width:9px;height:9px;border-radius:5px;background:var(--success);border:2px solid #fff;box-sizing:content-box}
+
+
+/* ===== v2.1: UX audit fixes (touch targets, type floor, icon consistency, a11y) ===== */
+.chip{min-height:44px;justify-content:center}
+.stars button{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+.tab{font-size:12px}
+.tab .badge{font-size:12px;min-width:20px;height:20px}
+.stats small,.gfb small,#cap small,.task small{font-size:12px}
+svg.i.o{fill:none;stroke:currentColor;stroke-width:2}
+.press{touch-action:manipulation}
+.tab:focus-visible,.gear:focus-visible{outline-offset:-3px}
+@media(prefers-reduced-transparency:reduce){
+  .tabbar,.sheet-card{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
+  #sheet{-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media(max-height:520px){.bar{height:52px}.bar .orb{width:40px;height:40px}.tab{min-height:44px}.status{height:28px}.tabbar{margin-bottom:8px}}
+.sheet-card>*{flex-shrink:0}
+@media(max-height:620px){.orb-wrap{height:130px}.ok{margin-top:16px}.hero{height:110px}}
+
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
@@ -210,6 +262,7 @@ svg.i{stroke-width:2}
 <div id="phone">
   <main id="app"></main>
   <div id="cap" role="status" aria-live="polite"></div>
+  <div id="sheet" role="dialog" aria-modal="true" aria-label="AI settings"></div>
   <input type="file" id="photoin" accept="image/*" hidden>
 </div>
 <div class="sr" aria-live="polite" id="live"></div>
@@ -232,9 +285,11 @@ const P={
  sparkle:'<path d="M10 4.2l1.7 4.5 4.5 1.7-4.5 1.7L10 16.6l-1.7-4.5L3.8 10.4l4.5-1.7zM18 13.4l.9 2.2 2.2.9-2.2.9-.9 2.2-.9-2.2-2.2-.9 2.2-.9z"/>',
  vol:'<path d="M4 9.5v5h3.8l5 3.8V5.7l-5 3.8zM16.2 9a4.2 4.2 0 0 1 0 6"/>',volx:'<path d="M4 9.5v5h3.8l5 3.8V5.7l-5 3.8zM16.5 9.5l4 5M20.5 9.5l-4 5"/>',
  star:'<path d="M12 3.2l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8z"/>',
- flip:'<path d="M4 7h13l-3-3M20 17H7l3 3"/>'
+ flip:'<path d="M4 7h13l-3-3M20 17H7l3 3"/>',
+ home:'<path d="M4 11.2 12 4.4l8 6.8V19a1.4 1.4 0 0 1-1.4 1.4H15v-5.4H9v5.4H5.4A1.4 1.4 0 0 1 4 19z"/>',
+ gear:'<path d="M10.4 2.8h3.2l.5 2.4c.5.2 1 .5 1.4.8l2.3-.8 1.6 2.8-1.8 1.6c.1.5.1 1 0 1.5l1.8 1.6-1.6 2.8-2.3-.8c-.4.3-.9.6-1.4.8l-.5 2.4h-3.2l-.5-2.4c-.5-.2-1-.5-1.4-.8l-2.3.8-1.6-2.8 1.8-1.6c-.1-.5-.1-1 0-1.5L4.6 8.8l1.6-2.8 2.3.8c.4-.3.9-.6 1.4-.8zM12 9.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6z"/>'
 };
-const FILLED=new Set(['mic','camera','book','hand','bell','sparkle','star']);
+const FILLED=new Set(['mic','camera','book','hand','bell','sparkle','star','home','gear']);
 const ic=(n,c='')=>`<svg class="i ${FILLED.has(n)?'f':''} ${c}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
 const fmt=s=>{s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -376,7 +431,7 @@ function handleHeard(raw,alts){
 /* ---------- optional AI brain (free Gemini key, falls back to local rules) ---------- */
 const LLM={model:'gemini-2.5-flash-lite',busy:false,get key(){try{return localStorage.getItem('sk_ai_key')||''}catch(e){return ''}}};
 async function askLLM(text){
-  if(!LLM.key){return say('Sorry, I didn’t catch that. Try next, repeat, or start timer. For open questions, add a free Gemini key with the AI button.')}
+  if(!LLM.key){caption('Add a free Gemini key in Settings to answer open questions.','CHEF AI');return say('Sorry, I didn’t catch that. Try next, repeat, or start timer.')}
   if(LLM.busy)return;LLM.busy=true;caption('Thinking…','CHEF AI');
   const r=R(),st=r.steps[S.step];
   const sys='You are Chef AI inside a hands-free kitchen app. The user spoke a command or question. Reply with ONE JSON object only: {"action":"next|previous|repeat|start_timer|set_timer|time_left|open_recipe|adapt|swap|scan|home|finish|answer","arg":"string or empty","seconds":0,"reply":"one or two short spoken sentences"}. Use "answer" for cooking questions (substitutions, techniques, doneness) and put the answer in reply. Use "open_recipe" with arg = a recipe id from the list. Use "adapt" with arg = the change requested. Use "swap" with arg = the missing ingredient. Use "set_timer" with seconds. Never invent actions. Keep replies under 30 words, plain speech, no markdown.';
@@ -384,7 +439,7 @@ async function askLLM(text){
   try{
     const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${LLM.model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':LLM.key},body:JSON.stringify({systemInstruction:{parts:[{text:sys}]},contents:[{role:'user',parts:[{text:JSON.stringify({context:ctx,heard:text})}]}],generationConfig:{responseMimeType:'application/json',temperature:.2,maxOutputTokens:220}})});
     if(res.status===429){LLM.busy=false;return say('The free AI limit is reached for now. Basic commands still work.')}
-    if(!res.ok){LLM.busy=false;return say('The AI service said no. Check the key with the AI button. Basic commands still work.')}
+    if(!res.ok){LLM.busy=false;return say('The AI service said no. Check your key in Settings. Basic commands still work.')}
     const data=await res.json();let a=JSON.parse((data.candidates[0].content.parts[0].text||'{}').replace(/```json|```/g,''));
     LLM.busy=false;
     switch(a.action){
@@ -404,16 +459,65 @@ async function askLLM(text){
     say(a.reply||'Sorry, I couldn’t help with that.');
   }catch(e){LLM.busy=false;say('I couldn’t reach the AI. Basic commands still work.')}
 }
-(function(){const b=document.createElement('button');b.textContent='AI';b.setAttribute('aria-label','Set AI key');
-  b.style.cssText='position:fixed;right:10px;top:10px;z-index:99;font:700 12px system-ui;padding:10px 12px;border-radius:12px;border:1px solid rgba(0,0,0,.2);background:#fff;opacity:.75;min-width:44px;min-height:44px';
-  b.onclick=()=>{const k=prompt('Paste a free Gemini API key from aistudio.google.com. It is stored only in this browser. Leave empty to turn AI off.',LLM.key);if(k===null)return;
-    try{k.trim()?localStorage.setItem('sk_ai_key',k.trim()):localStorage.removeItem('sk_ai_key')}catch(e){}
-    caption(k.trim()?'AI is on. Ask me anything about the recipe.':'AI is off. Basic commands still work.','CHEF AI')};
-  document.body.appendChild(b)})();
+/* ---------- AI settings sheet (key stays in this browser only) ---------- */
+const GEM=m=>`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`;
+let keyState={t:'',cls:''};
+let sheetOpener=null;
+function openSettings(){sheetOpener=document.activeElement;const sh=$('#sheet');keyState=LLM.key?{t:'Key saved on this device',cls:'ok'}:{t:'No key yet. Basic voice commands only',cls:''};drawSettings();sh.classList.add('on');setTimeout(()=>{const f=$('#keyin');f&&f.focus()},250)}
+function closeSettings(){const sh=$('#sheet');if(!sh.classList.contains('on'))return;sh.classList.remove('on');setTimeout(()=>{const g=$('.gear');(g||sheetOpener)&&(g||sheetOpener).focus&&(g||sheetOpener).focus()},0)}
+function drawSettings(){
+  $('#sheet').innerHTML=`<div class="sheet-card"><div class="grab"></div>
+   <div class="row"><h2 style="flex:1">Smart features</h2><button class="icon-btn press" data-act="closesheet" aria-label="Close settings">${ic('x')}</button></div>
+   <p class="note">Add a free Gemini API key to unlock open-ended voice, smart ingredient scanning and recipe adapting. The key is stored only in this browser.</p>
+   <div class="feat"><div>${ic('check')}<span>Say anything: “can I use curd instead of cream?”</span></div><div>${ic('check')}<span>Scan ingredients with real vision, not just colour</span></div><div>${ic('check')}<span>Adapt recipes to any request, not a fixed list</span></div><div>${ic('check')}<span>Hand gestures run on-device and need no key</span></div></div>
+   <label class="label" for="keyin" style="padding:0">GEMINI API KEY</label>
+   <input class="field" id="keyin" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your key" value="${esc(LLM.key)}">
+   <div class="state ${keyState.cls}" role="status"><i></i><span>${esc(keyState.t)}</span></div>
+   <button class="btn p press" data-act="savekey">Save &amp; test key</button>
+   <div class="row"><button class="btn s press" data-act="removekey" style="flex:1">Remove</button><button class="btn s press" data-act="closesheet" style="flex:1">Done</button></div>
+   <p class="note" style="font-size:12px">Treat your key like a password. If it was ever shared in a chat or a public file, create a new one at aistudio.google.com and delete the old one.</p></div>`;
+}
+async function saveKey(){
+  const k=($('#keyin').value||'').trim();
+  if(!k){try{localStorage.removeItem('sk_ai_key')}catch(e){};keyState={t:'Key removed',cls:''};drawSettings();render();return}
+  keyState={t:'Testing key…',cls:''};drawSettings();$('#keyin').value=k;
+  try{
+    const r=await fetch(GEM(LLM.model),{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':k},body:JSON.stringify({contents:[{role:'user',parts:[{text:'Reply with the single word ok'}]}],generationConfig:{maxOutputTokens:8}})});
+    if(r.ok){try{localStorage.setItem('sk_ai_key',k)}catch(e){};keyState={t:'Key works. Smart features are on',cls:'ok'};drawSettings();render();say('Smart features are on. Ask me anything.')}
+    else{keyState={t:r.status===429?'Key is valid but the free limit is reached. Try later':(r.status===400||r.status===403)?'Google rejected this key. Check it and try again':'Could not verify (error '+r.status+')',cls:'bad'};if(r.status===429){try{localStorage.setItem('sk_ai_key',k)}catch(e){}};drawSettings()}
+  }catch(e){keyState={t:'No connection. Check your internet and try again',cls:'bad'};drawSettings()}
+  const f=$('#keyin');if(f)f.value=k;
+}
+function removeKey(){try{localStorage.removeItem('sk_ai_key')}catch(e){};keyState={t:'Key removed',cls:''};drawSettings();render()}
+
+/* ---------- Gemini helpers ---------- */
+async function gem(parts,sys,extra){
+  const body={contents:[{role:'user',parts}],generationConfig:Object.assign({responseMimeType:'application/json',temperature:.2,maxOutputTokens:400},extra||{})};
+  if(sys)body.systemInstruction={parts:[{text:sys}]};
+  const r=await fetch(GEM(LLM.model),{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':LLM.key},body:JSON.stringify(body)});
+  if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
+  const d=await r.json();return JSON.parse((d.candidates[0].content.parts[0].text||'{}').replace(/```json|```/g,''));
+}
+/* real vision scan: sends one still frame to Gemini and maps results onto the pantry ids */
+async function visionScan(){
+  if(!LLM.key||!video||video.readyState<2)return null;
+  const c=document.createElement('canvas'),k=Math.min(1,640/Math.max(video.videoWidth,video.videoHeight));
+  c.width=Math.round(video.videoWidth*k);c.height=Math.round(video.videoHeight*k);c.getContext('2d').drawImage(video,0,0,c.width,c.height);
+  const b64=c.toDataURL('image/jpeg',.7).split(',')[1];
+  const sys='You identify food ingredients in a kitchen photo. Reply with ONE JSON object: {"known":[ids],"other":[names]}. "known" may only contain ids from: tomato, onion, basil, paneer, pasta. "other" lists any other clearly visible edible ingredients in plain English, max 6. If nothing edible is visible return empty arrays.';
+  return gem([{inline_data:{mime_type:'image/jpeg',data:b64}},{text:'What ingredients are visible?'}],sys,{maxOutputTokens:200});
+}
+/* smart adapt: Gemini returns structured edits for ANY request, applied to the real ingredient list */
+async function adaptSmart(t){
+  const r=R();
+  const sys='You adapt recipes by voice. Reply with ONE JSON object: {"edits":[{"i":number,"name":"new ingredient name or empty","amount":"new amount or empty","text":"short human readable change"}],"notes":["short extra tips"],"spoken":"one short sentence"}. "i" is the index of the ingredient in the list. Only edit what the request needs. Max 4 edits and 2 notes. Never change cooking times.';
+  return gem([{text:JSON.stringify({request:t,recipe:r.title,ingredients:r.ing.map((x,i)=>({i,name:x[0],amount:x[1]}))})}],sys,{maxOutputTokens:500});
+}
 
 /* ---------- command brain ---------- */
 const has=(t,...w)=>w.some(x=>t.includes(x));
 function command(t){
+  if(LLM.key&&t.split(' ').length>=3&&!/^(set timer for \d+|rate |go home|finish cooking|how much time is left|start timer|go to |mute|unmute)/.test(t)){return askLLM(t)}
   /* rating */
   let m=t.match(/rate (it )?(\w+) star/);if(m){const n={one:1,two:2,three:3,four:4,five:5}[m[2]]||parseInt(m[2])||5;return rate(n)}
   if(has(t,'mute','be quiet','stop talking')){S.muted=true;try{speechSynthesis.cancel()}catch(e){};caption('Voice replies muted. Say “unmute” to hear me again.','CHEF AI');return}
@@ -468,7 +572,7 @@ function go(s){
   if(s==='scan')startCamera('environment');
   if(s==='cook'&&S.gestures)startCamera('user',true);
 }
-function openRecipe(id){S.rid=id;S.step=0;S.adapt=null;S.applied=false;S.timers=S.timers.filter(t=>t.keep);go('detail')}
+function openRecipe(id){if(S.screen==='home'||S.screen==='results')S.from=S.screen;S.rid=id;S.step=0;S.adapt=null;S.applied=false;S.timers=S.timers.filter(t=>t.keep);go('detail')}
 
 /* ---------- timers ---------- */
 function addTimer(name,secs,sub,step){
@@ -496,7 +600,7 @@ function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)
 function activeTimers(){return S.timers.filter(t=>!t.fired)}
 
 /* ---------- cooking actions ---------- */
-function startCooking(){S.step=0;S.startedAt=Date.now();S.cmds=0;S.timers=[];S.alert=null;startRec();S.handsfree=true;go('cook');setTimeout(readStep,350)}
+function startCooking(){S.inCook=true;S.step=0;S.startedAt=Date.now();S.cmds=0;S.timers=[];S.alert=null;startRec();S.handsfree=true;go('cook');setTimeout(readStep,350)}
 function readStep(){const s=R().steps[S.step];return say(`Step ${S.step+1} of ${R().steps.length}. ${s.t} ${s.d}`)}
 function nextStep(){
   const r=R();if(S.step>=r.steps.length-1){return finish()}
@@ -513,6 +617,7 @@ function swapIngredient(t){
   say(`No problem. Instead of ${k}, use ${map[k]}.`);
 }
 function finish(){
+  S.inCook=false;
   const mins=Math.max(1,Math.round((Date.now()-(S.startedAt||Date.now()))/60000));S.took=mins;
   stopStream();S.gestures=false;S.timers.forEach(t=>t.fired=true);S.alert=null;S.rating=0;go('done');
   say(`Dinner is ready! ${R().title}, cooked hands-free in ${mins} minutes. Say rate it five stars to save feedback.`);
@@ -520,7 +625,13 @@ function finish(){
 function rate(n){S.rating=n;if(S.screen==='done')render();say(`Saved ${n} star${n>1?'s':''}. Enjoy your meal!`)}
 
 /* ---------- adapt ---------- */
-function adaptVoice(t){
+async function adaptVoice(t){
+  if(LLM.key){
+    try{caption('Adapting your recipe…','CHEF AI');const a=await adaptSmart(t);const edits=(a.edits||[]).filter(e=>R().ing[e.i]);
+      const ch=edits.map(e=>e.text||`${R().ing[e.i][0]} changed`).concat((a.notes||[]).slice(0,2));ch.push('Cook time unchanged');
+      S.adapt={said:t.replace(/^./,c=>c.toUpperCase())+'.',ch,edits};go('adapt');return say(a.spoken||'Done. Say apply to start cooking.')}
+    catch(e){/* fall back to local rules */}
+  }
   const ch=[];
   if(!R().ing.every(i=>isHave(i[2])))R().ing.filter(i=>!isHave(i[2])&&i[2]==='garlic').forEach(()=>ch.push('Garlic missing → added 1 tsp onion powder'));
   if(has(t,'less spicy','mild','no chili')||!has(t,'more spicy'))ch.push('Chili flakes 2 tsp → ½ tsp');
@@ -534,6 +645,7 @@ function adaptVoice(t){
 function applyAdapt(){
   const r=R();
   S.applied=true;
+  if(S.adapt&&S.adapt.edits){S.adapt.edits.forEach(e=>{const i=r.ing[e.i];if(!i)return;if(e.name)i[0]=e.name;if(e.amount)i[1]=e.amount})}
   S.adapt.ch.forEach(c=>{if(/Chili/.test(c)){const i=r.ing.find(x=>x[2]==='chili');if(i)i[1]=/½/.test(c)?'½ tsp':'3 tsp'}if(/Paneer → firm tofu/.test(c)){const i=r.ing.find(x=>x[2]==='paneer');if(i){i[0]='Firm tofu';i[2]='paneer'}}});
   startCooking();
 }
@@ -616,7 +728,15 @@ function drawBoxes(f){
   const sp=$('#spill');if(sp)sp.textContent=f.length?`Scanning… ${f.length} found`:'Scanning… move closer';
   window._cur=f;
 }
-function capture(){
+async function capture(){
+  if(LLM.key&&video){
+    caption('Looking at your ingredients…','CHEF AI');
+    try{const v=await visionScan();if(v){const known=(v.known||[]).filter(k=>PANTRY_ALL[k]);known.forEach(k=>S.found.add(k));buzz(40);scanVotes={};go('results');
+      const other=(v.other||[]).slice(0,4);
+      if(!known.length&&!other.length)return say('I couldn’t spot any ingredients. Try better light, or tap items on the next screen.');
+      return say(`I can see ${[...known.map(k=>PANTRY_ALL[k]),...other].join(', ')}. ${known.length?'Here’s what you can cook now.':'None of these match my recipes yet, so you can add items by hand.'}`)}}
+    catch(e){/* fall through to colour scan */}
+  }
   let keys=Object.keys(scanVotes).filter(k=>scanVotes[k]>=2);
   if(!keys.length&&window._cur)keys=window._cur.map(o=>o.k);
   if(!keys.length){return say('I couldn’t see any ingredients yet. Hold them closer to the camera in good light, then say capture again. You can also tap items on the next screen.')}
@@ -749,27 +869,27 @@ const VIEWS={
 home(){
   const a=activeTimers().sort((x,y)=>x.end-y.end)[0];
   return `${status()}<div class="body">
-   <div class="greet"><div><div class="eyebrow" style="color:var(--accent)">HANDS-FREE KITCHEN</div><h1>What are we cooking?</h1></div><div class="avatar">${ic('chef')}</div></div>
+   <div class="greet"><div><div class="eyebrow" style="color:var(--accent)">HANDS-FREE KITCHEN</div><h1>What are we cooking?</h1></div><div class="actions"><button class="icon-btn gear press ${LLM.key?'on':''}" data-act="settings" aria-label="Smart features settings">${ic('gear')}</button></div></div>
    ${a?`<button class="pill-timer press" data-go="tasks">${ic('timer')}<span style="flex:1" data-bind="homet">${esc(a.name)} · ${fmt((a.end-Date.now())/1000)} left</span>${ic('chev')}</button>`:''}
    <button class="voice-card press" data-act="talk" aria-label="Tell me what you’re craving"><div style="flex:1;min-width:0"><div class="eyebrow">VOICE FIRST</div><h3>Tell me what you’re craving</h3><small>Try: “Show me a quick pasta”</small></div><div class="mic-ring ${recOn&&S.listenOnce?'live':''}" id="homering"><div class="mic-orb">${ic('mic')}</div></div></button>
    <div class="quick"><button class="card press" data-go="scan"><div class="qi">${ic('camera')}</div><div><b>Scan ingredients</b><span>CAMERA</span></div></button><button class="card press" data-go="results"><div class="qi">${ic('book')}</div><div><b>Browse recipes</b><span>VOICE + TOUCH</span></div></button></div>
    <div class="label">SUGGESTED TONIGHT</div>${recipeCard(RECIPES[0])}
   </div><div class="bottom">${hfBar(S.handsfree?'Listening… say “Hey Chef”':'Say “Hey Chef” to start',S.handsfree&&recOn)}</div>`},
 scan(){return `${status()}<div class="body" style="padding-bottom:8px;gap:12px">
-   <div class="top"><button class="icon-btn press" data-go="home" aria-label="Close" style="background:rgba(255,255,255,.14);border:0;color:#fff">${ic('x')}</button><h2 style="flex:1;font-size:22px">Scan ingredients</h2><span class="tag">AI SCAN</span></div>
+   <div class="top"><button class="icon-btn press" data-go="home" aria-label="Close" style="background:rgba(255,255,255,.14);border:0;color:#fff">${ic('x')}</button><h2 style="flex:1;font-size:22px">Scan ingredients</h2><span class="tag">SCAN</span></div>
    <div class="cam" id="camwrap"><video id="camv" playsinline muted></video><div class="boxes" id="boxes"></div><div class="status-pill" id="spill">Starting camera…</div></div>
    <div class="center"><div style="font-weight:600;font-size:16px">Hold ingredients in frame</div><div class="eyebrow" style="color:var(--accent-soft);margin-top:4px">SAY “CAPTURE” · OR SHOW AN OPEN PALM</div></div>
    <div class="ctrls"><button class="cbtn press ${recOn?'act':''}" data-act="talk" aria-label="Voice"><i>${ic('mic')}</i>VOICE</button><button class="shutter press" data-act="capture" aria-label="Capture ingredients"><i></i></button><button class="cbtn press ${S.scanGesture?'act':''}" data-act="scangesture" aria-label="Gesture capture"><i>${ic('hand')}</i>GESTURE</button></div>
    </div><div style="height:max(16px,env(safe-area-inset-bottom));flex:none"></div>`},
 results(){
   const list=S.found.size?RECIPES.slice().sort((a,b)=>b.ing.filter(i=>isHave(i[2])).length/b.ing.length-a.ing.filter(i=>isHave(i[2])).length/a.ing.length):RECIPES;
-  return `${status()}<div class="body"><div class="hdr">${backBtn('home')}<h2>${S.found.size?'Your ingredients':'Recipes'}</h2></div>
+  return `${status()}<div class="body"><div class="hdr"><h2>${S.found.size?'Your ingredients':'Recipes'}</h2></div>
    ${S.found.size?`<div class="label">${S.found.size} INGREDIENT${S.found.size>1?'S':''} DETECTED</div><div class="chips">${[...S.found].map(k=>`<button class="chip on press" data-rm="${k}" aria-label="Remove ${PANTRY_ALL[k]}">${PANTRY_ALL[k]} ${ic('x')}</button>`).join('')}</div>`:''}
    <div class="label" style="margin-top:4px">ADD MISSING ONES</div><div class="chips">${Object.keys(PANTRY_ALL).filter(k=>!S.found.has(k)).map(k=>`<button class="chip press" data-add="${k}">+ ${PANTRY_ALL[k]}</button>`).join('')||'<span class="chip">All added</span>'}</div>
    <div class="label">${S.found.size?'READY TO COOK NOW':'ALL RECIPES'}</div>${list.map(recipeCard).join('')}
   </div><div class="bottom">${hfBar('Say “Show me the pasta”',S.handsfree&&recOn)}</div>`},
 detail(){const r=R(),miss=r.ing.filter(i=>!isHave(i[2])).length;
-  return `${status()}<div class="body"><div class="hdr">${backBtn('results')}<h2>Recipe</h2></div>
+  return `${status()}<div class="body"><div class="hdr">${backBtn(S.from||'results')}<h2>Recipe</h2></div>
    <div class="hero ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}<button class="addphoto press" data-act="photo" aria-label="${photoOf(r.id)?'Change':'Add'} photo of ${esc(r.title)}">${ic('camera')}<span>${photoOf(r.id)?'Change photo':'Add photo'}</span></button></div><h1 class="rtitle">${esc(r.title)}</h1>
    <div class="chips"><span class="chip">${r.time} MIN</span><span class="chip">${r.serv} SERVINGS</span><span class="chip">${r.level.toUpperCase()}</span></div>
    <div class="label">INGREDIENTS · ${r.ing.length-miss} OF ${r.ing.length} IN YOUR KITCHEN</div>
@@ -794,11 +914,11 @@ cook(){const r=R(),s=r.steps[S.step],pct=((S.step+1)/r.steps.length)*100,tm=s.ti
    <div class="chips">${['Next','Repeat','Swap ingredient'].map(c=>`<button class="chip press" data-say="${c.toLowerCase()}">“${c}”</button>`).join('')}</div>
   </div><div class="bottom">${hfBar(recOn?'Listening… say “Next step”':'Tap to turn on voice',recOn)}<div class="row"><button class="btn s press" data-act="prev" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="next" style="flex:1">${S.step>=r.steps.length-1?'Finish':'Next step'}</button></div></div>`},
 tasks(){const all=S.timers.slice().sort((a,b)=>(a.fired-b.fired)||(a.end-b.end));
-  return `${status()}<div class="body"><div class="hdr">${backBtn(S.startedAt&&R()?'cook':'home')}<h2>Active tasks</h2></div>
+  return `${status()}<div class="body"><div class="hdr">${S.inCook?backBtn('cook'):''}<h2>Active timers</h2></div>
    ${S.alert?`<div class="alert" role="alert"><div class="bell">${ic('bell')}</div><div><div class="eyebrow">ALERT · NOW</div><p>${esc(S.alert)}</p></div></div>`:''}
    <div class="label">RUNNING · ${activeTimers().length} TASK${activeTimers().length===1?'':'S'}</div>
    ${all.map(t=>{const left=(t.end-Date.now())/1000,p=t.fired?100:100-(left/t.total*100);return `<div class="card task ${t.fired?'done':''}" data-tid="${t.id}"><div class="st">${t.fired?ic('check'):ic('timer')}</div><div class="tx"><b>${esc(t.name)}</b><div class="tr"><div style="width:${p}%"></div></div><small>${t.step?'STEP '+t.step+' · ':''}${t.fired?'COMPLETED':esc(t.sub||'RUNNING')}</small></div><div class="tm" data-bind="tm">${t.fired?'DONE':fmt(left)}</div>${t.fired?'':`<button class="x press" data-canceltid="${t.id}" aria-label="Cancel ${esc(t.name)}">${ic('x')}</button>`}</div>`}).join('')||`<div class="card" style="padding:24px;text-align:center;font-weight:600;color:var(--ink-soft)">No timers yet. Say “Start timer” while cooking.</div>`}
-  </div><div class="bottom">${hfBar('Ask “How much time is left?”',recOn)}<div class="row"><button class="btn s press" data-go="${S.startedAt?'cook':'home'}" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="finish" style="flex:1">Finish cooking</button></div></div>`},
+  </div><div class="bottom">${hfBar('Ask “How much time is left?”',recOn)}${S.inCook?`<div class="row"><button class="btn s press" data-go="cook" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="finish" style="flex:1">Finish cooking</button></div>`:''}</div>`},
 done(){return `${status()}<div class="body" style="align-items:stretch">
    <div class="ok">${ic('check')}</div><h1 class="center" style="font-size:34px;margin-top:8px">Dinner is ready!</h1>
    <p class="center" style="font-weight:600;font-size:17px;line-height:23px;color:var(--ink-soft);padding:0 20px">${esc(R().title)} · cooked hands-free in ${S.took||28} min</p>
@@ -806,10 +926,15 @@ done(){return `${status()}<div class="body" style="align-items:stretch">
    <div class="card" style="padding:12px 16px"><div class="row" style="justify-content:center;gap:8px;font-weight:600;font-size:16px;padding:4px 0 6px">${ic('mic','')}<span>Say “Rate it 5 stars” to save feedback</span></div><div class="stars">${[1,2,3,4,5].map(n=>`<button class="${n<=S.rating?'on':''}" data-rate="${n}" aria-label="${n} star${n>1?'s':''}">${ic('star')}</button>`).join('')}</div></div>
   </div><div class="bottom"><button class="btn p press" data-go="home">Cook something else</button><button class="btn s press" data-go="home">Back to home</button></div>`}
 };
+function tabbar(active){
+  const n=activeTimers().length;
+  return `<nav class="tabbar" aria-label="Main navigation">${[['home','Home','home'],['scan','Scan','camera'],['results','Recipes','book'],['tasks','Timers','timer']].map(([k,l,i])=>`<button class="tab press ${active===k?'on':''}" data-go="${k}" ${k==='tasks'&&n?`aria-label="Timers, ${n} running"`:''} ${active===k?'aria-current="page"':''}>${ic(i,'o')}<span>${l}</span>${k==='tasks'&&n?`<b class="badge" aria-hidden="true">${n}</b>`:''}</button>`).join('')}</nav>`}
+const TABS=['home','results','tasks'];
+function showTabs(){return TABS.includes(S.screen)&&!(S.screen==='tasks'&&S.inCook)}
 function render(){
-  const v=VIEWS[S.screen]();
+  const v=VIEWS[S.screen]()+(showTabs()?tabbar(S.screen):'');
   const dark=S.screen==='scan';
-  app.innerHTML=`<section class="screen on ${dark?'dark':''}" data-screen="${S.screen}">${v}</section>`;
+  app.innerHTML=`<section class="screen on ${dark?'dark':''} ${showTabs()?'has-tabs':''}" data-screen="${S.screen}">${v}</section>`;
   fixStars();
   if(S.stream){const el=S.screen==='scan'?$('#camv'):(S.screen==='cook'&&S.gestures?$('#pipv'):null);
     if(el){el.srcObject=S.stream;el.classList.toggle('rear',S.facing==='environment');el.play().catch(()=>{});video=el}}
@@ -829,6 +954,7 @@ function renderTimerBits(force){
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
+  if(e.target.id==='sheet'){closeSettings();return}
   const t=e.target.closest('[data-go],[data-act],[data-recipe],[data-say],[data-add],[data-rm],[data-rate],[data-canceltid]');if(!t)return;
   if(t.dataset.go){go(t.dataset.go);return}
   if(t.dataset.recipe){openRecipe(t.dataset.recipe);say(`${R().title}. ${ingCount(R())}.`);return}
@@ -844,6 +970,10 @@ document.addEventListener('click',e=>{
     if(S.screen==='home'){const r=$('#homering');r&&r.classList.add('live')}
     if(S.screen==='adapt')render();
     say(S.screen==='adapt'?'I’m listening. How should I change the recipe?':S.screen==='scan'?'Listening. Say capture when you’re ready.':'I’m listening. What are you craving?');return}
+  if(a==='settings')return openSettings();
+  if(a==='closesheet')return closeSettings();
+  if(a==='savekey')return saveKey();
+  if(a==='removekey')return removeKey();
   if(a==='photo'){S.photoFor=S.rid;$('#photoin').value='';$('#photoin').click();return}
   if(a==='capture')return capture();
   if(a==='scangesture')return scanGesture();
@@ -857,15 +987,16 @@ document.addEventListener('click',e=>{
   if(a==='gest')return toggleGestures();
   if(a==='steptimer'){const st=R().steps[S.step];if(st.timer&&!S.timers.find(x=>x.name===st.timer[0]&&!x.fired))startStepTimer(false);return go('tasks')}
   if(a==='finish')return finish();
-  if(a==='exitcook'){stopStream();S.gestures=false;go('detail');return}
+  if(a==='exitcook'){S.inCook=false;stopStream();S.gestures=false;go('detail');return}
 });
-document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('#hfbar')){e.preventDefault();e.target.click()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();
+  if(e.key==='Tab'&&$('#sheet').classList.contains('on')){const f=$$('#sheet button,#sheet input'),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}if(e.key==='Enter'&&e.target.id==='keyin'){saveKey();return}if((e.key==='Enter'||e.key===' ')&&e.target.matches('#hfbar')){e.preventDefault();e.target.click()}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&S.stream){/* keep timers, stop camera */stopStream()}});
 
 document.addEventListener('change',e=>{if(e.target.id==='photoin'&&e.target.files[0])savePhoto(S.photoFor||S.rid,e.target.files[0])});
 /* ---------- boot ---------- */
 render();
-setTimeout(()=>{if(S.screen==='home')caption('Tap the big mic and say “Show me a quick pasta”.','CHEF AI')},600);
+setTimeout(()=>{if(S.screen==='home')caption('Tap the mic and say “Show me a quick pasta”.','CHEF AI')},600);
 window.__S=S;
 </script>
 </body>
