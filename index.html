@@ -601,6 +601,39 @@ body{font-size:16px;line-height:1.45;color:var(--ink)}
 .ob-actions{display:flex;flex-direction:column;gap:10px}
 .ob-form{display:flex;flex-direction:column;gap:10px}
 .ob-form label{font-weight:800;font-size:14px}
+
+/* ===== v9: Apple-style finish ===== */
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+:root{--ios:cubic-bezier(.32,.72,0,1);--pop:cubic-bezier(.34,1.38,.64,1)}
+/* no haze, no faded edges */
+#phone::before{content:none!important;display:none!important}
+.bottom,.dark .bottom{background:none!important}
+.body{-webkit-mask-image:none!important;mask-image:none!important}
+/* crisp, hairline depth instead of blurry glow */
+.card,.feat{box-shadow:0 0 0 .5px rgba(21,21,26,.06),0 1px 3px rgba(21,21,26,.06)!important}
+.recipe .ph{box-shadow:0 0 0 .5px rgba(21,21,26,.08)!important}
+.feat .fimg::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 .5px rgba(21,21,26,.06);pointer-events:none}
+.feat .fimg{position:relative}
+/* notification banner: light frosted material, drops in from the top */
+#phone #cap{position:absolute;left:14px;right:14px;top:calc(var(--wk) + 8px);bottom:auto;display:flex;align-items:center;gap:12px;
+  padding:12px 18px 12px 12px;border:0;border-radius:26px;color:var(--ink);z-index:45;
+  background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(28px) saturate(180%);backdrop-filter:blur(28px) saturate(180%);
+  box-shadow:0 0 0 .5px rgba(21,21,26,.08),0 12px 32px rgba(21,21,26,.14);
+  opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-22px) scale(.93);transform-origin:50% 0;animation:none!important;
+  transition:transform .35s ease-in,opacity .2s ease-in,visibility 0s linear .35s}
+#phone #cap.on{opacity:1;visibility:visible;pointer-events:auto;transform:none;animation:none!important;
+  transition:transform .6s var(--pop),opacity .25s ease-out,visibility 0s}
+#phone #cap .cap-ic{flex:none;width:38px;height:38px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--lav);color:var(--accent-ink,#3d2a9a);font-size:20px}
+#phone #cap .cap-tx{min-width:0;font-weight:600;font-size:14.5px;line-height:1.32;letter-spacing:-.011em;color:var(--ink)}
+#phone #cap small{display:block;margin:0 0 1px;font-size:12px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink-2)}
+/* Hey Chef pill + voice bar: same material */
+.wake{background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 0 0 .5px rgba(21,21,26,.08),0 2px 10px rgba(21,21,26,.05)}
+.wake.awake{background:var(--accent)}
+.bar{background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:0 0 0 .5px rgba(21,21,26,.08),0 6px 20px rgba(21,21,26,.08)}
+.tabbar{box-shadow:0 0 0 .5px rgba(255,255,255,.08),0 10px 28px rgba(21,21,26,.22)}
+/* iOS-style spring on press */
+.press{transition:transform .4s var(--ios),opacity .15s,background .2s}
+.press:active{transform:scale(.965);opacity:1;transition-duration:.12s}
 </style>
 </head>
 <body>
@@ -652,8 +685,9 @@ const buzz=n=>{try{PREF.haptics&&navigator.vibrate&&navigator.vibrate(n)}catch(e
    Paste real image links here, or tap "Add photo" on a recipe to pick one from your device. */
 const PHOTO_URLS={pasta:'',bhurji:'',soup:''};
 let PH={};try{PH=JSON.parse(localStorage.getItem('ska-photos')||'{}')}catch(e){}
-const photoOf=id=>PH[id]||PHOTO_URLS[id]||artOf(id);
-const photoStyle=id=>{const u=photoOf(id);return u?` style="background-image:url(&quot;${String(u).replace(/[&<>\"]/g,'')}&quot;)"`:''};
+let WP={};try{WP=JSON.parse(localStorage.getItem('ska-wphotos')||'{}')}catch(e){}
+const photoOf=id=>PH[id]||PHOTO_URLS[id]||WP[id]||artOf(id);
+const photoStyle=id=>{const u=photoOf(id),a=artOf(id);const q=x=>`url(&quot;${String(x).replace(/[&<>\"]/g,'')}&quot;)`;return u?` style="background-image:${u===a||!a?q(u):q(u)+','+q(a)}"`:''};
 function savePhoto(id,file){
   const img=new Image(),url=URL.createObjectURL(file);
   img.onload=()=>{const m=900,k=Math.min(1,m/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
@@ -752,7 +786,9 @@ function say(text,opts={}){
     u.onend=done;u.onerror=done;try{speechSynthesis.speak(u)}catch(e){done()}
   });
 }
-let capT;function caption(t,who){const c=$('#cap');c.innerHTML=`<small>${who}</small>${esc(t)}`;c.classList.add('on');clearTimeout(capT);capT=setTimeout(()=>c.classList.remove('on'),Math.min(9000,2500+t.length*55))}
+let capT;function caption(t,who){const c=$('#cap');const w=/^CHEF AI$/i.test(who)?'Chef AI':who;c.innerHTML=`<i class="cap-ic">${ic('sparkle')}</i><div class="cap-tx"><small>${esc(w)}</small>${esc(t)}</div>`;c.classList.add('on');clearTimeout(capT);capT=setTimeout(()=>c.classList.remove('on'),Math.min(9000,2800+t.length*55))}
+document.addEventListener('click',e=>{if(e.target.closest('#cap')){clearTimeout(capT);$('#cap').classList.remove('on')}});
+document.addEventListener('pointerdown',e=>{if(e.target.closest('.tab,.chip,.btn,.feat,.recipe,.quick>button')){try{navigator.vibrate&&navigator.vibrate(8)}catch(_){}}},{passive:true});
 function youSaid(t){caption(t,'YOU SAID')}
 
 /* ---------- speech in: always-on “Hey Chef” ---------- */
@@ -1611,6 +1647,42 @@ render();
 showIntro();
 setTimeout(()=>{if(S.screen==='home')caption(SR?'Tap anywhere once, then say “Hey Chef”.':'Voice needs Chrome, Edge or Safari. Every button still works.','CHEF AI')},600);
 window.__S=S;
+
+/* ---------- real dish photos: free-licence images from Wikipedia / Wikimedia Commons ----------
+   Loaded once, checked, cached on the device. If one can't load, the illustration shows instead.
+   Your own photo (Add photo) or a link in PHOTO_URLS always wins. */
+const WIKI_DISH={soup:'Tomato soup',biryani:'Biryani',dal:'Dal',shakshuka:'Shakshouka',carbonara:'Carbonara',friedrice:'Fried rice',tacos:'Taco',greek:'Greek salad',teriyaki:'Teriyaki'};
+const COMMONS_Q={bhurji:'paneer bhurji',pasta:'penne tomato sauce basil'};
+const imgOk=u=>new Promise(res=>{const i=new Image();i.onload=()=>res(true);i.onerror=()=>res(false);i.src=u});
+async function wikiPhotos(map){
+  const titles=[...new Set(Object.values(map))];
+  const j=await (await fetch('https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=720&titles='+encodeURIComponent(titles.join('|')))).json();
+  const q=j.query||{},canon={},byTitle={},out={};
+  (q.normalized||[]).forEach(n=>canon[n.from]=n.to);(q.redirects||[]).forEach(n=>canon[n.from]=n.to);
+  Object.values(q.pages||{}).forEach(p=>{if(p.thumbnail)byTitle[p.title]=p.thumbnail.source});
+  for(const [id,t] of Object.entries(map)){let x=canon[t]||t;x=canon[x]||x;if(byTitle[x])out[id]=byTitle[x]}
+  return out;
+}
+async function commonsPhoto(term){
+  const j=await (await fetch('https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&gsrsearch='+encodeURIComponent(term)+'&prop=imageinfo&iiprop=url|size|mime&iiurlwidth=720')).json();
+  const pages=Object.values((j.query||{}).pages||{}).sort((a,b)=>a.index-b.index);
+  for(const p of pages){const i=(p.imageinfo||[])[0];if(i&&/jpeg/.test(i.mime||'')&&i.width>=700&&i.thumburl)return i.thumburl}
+  return '';
+}
+async function loadDishPhotos(){
+  const need=RECIPES.filter(r=>!r.ai&&!WP[r.id]);
+  if(!need.length||navigator.onLine===false)return;
+  let got={};
+  try{const m={};need.forEach(r=>{if(WIKI_DISH[r.id]&&!COMMONS_Q[r.id])m[r.id]=WIKI_DISH[r.id]});if(Object.keys(m).length)got=await wikiPhotos(m)}catch(e){}
+  await Promise.all(need.filter(r=>!got[r.id]&&COMMONS_Q[r.id]).map(async r=>{try{const u=await commonsPhoto(COMMONS_Q[r.id]);if(u)got[r.id]=u}catch(e){}}));
+  const ids=Object.keys(got),ok=await Promise.all(ids.map(id=>imgOk(got[id])));
+  const fin={};ids.forEach((id,k)=>{if(ok[k])fin[id]=got[id]});
+  if(!Object.keys(fin).length)return;
+  Object.assign(WP,fin);try{localStorage.setItem('ska-wphotos',JSON.stringify(WP))}catch(e){}
+  const a=document.activeElement;
+  if(['home','recipes','detail'].includes(S.screen)&&!(a&&/INPUT|TEXTAREA/.test(a.tagName)))render();
+}
+setTimeout(loadDishPhotos,300);
 </script>
 </body>
 </html>
