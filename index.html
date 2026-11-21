@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#f3f3f8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Smart Kitchen Assistant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#eef2dc;--ink:#2e312e;--ink-soft:#5f655a;--accent:#bf4521;--accent-soft:#e8ccd6;
@@ -148,7 +149,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 .task .tm{font-weight:800;font-size:18px;font-variant-numeric:tabular-nums}.task.done .tm{color:var(--success)}
 .task .x{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:22px;color:var(--ink-soft)}
 /* complete */
-.ok{width:120px;height:120px;border-radius:60px;background:var(--success);color:#fff;display:flex;align-items:center;justify-content:center;font-size:56px;margin:50px auto 0}
+.okmark{width:120px;height:120px;border-radius:60px;background:var(--success);color:#fff;display:flex;align-items:center;justify-content:center;font-size:56px;margin:50px auto 0}
 .stats{display:flex;gap:12px}.stats>div{flex:1;padding:16px 8px;text-align:center}.stats b{display:block;font-family:var(--display);font-size:22px;font-weight:600}.stats small{font-weight:800;font-size:11px;letter-spacing:.08em;color:var(--ink-soft)}
 .stars{display:flex;gap:6px;justify-content:center}.stars button{font-size:30px;color:var(--line);padding:6px}.stars button.on{color:var(--accent)}
 /* toast + captions */
@@ -253,7 +254,7 @@ svg.i.o{fill:none;stroke:currentColor;stroke-width:2}
 }
 @media(max-height:520px){.bar{height:52px}.bar .orb{width:40px;height:40px}.tab{min-height:44px}.status{height:28px}.tabbar{margin-bottom:8px}}
 .sheet-card>*{flex-shrink:0}
-@media(max-height:620px){.orb-wrap{height:130px}.ok{margin-top:16px}.hero{height:110px}}
+@media(max-height:620px){.orb-wrap{height:130px}.okmark{margin-top:16px}.hero{height:110px}}
 
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
@@ -285,11 +286,328 @@ svg.i.o{fill:none;stroke:currentColor;stroke-width:2}
 .hrow{display:flex;gap:12px;align-items:center;padding:12px 16px}.hrow b{flex:1;font-size:16px}.hrow small{font-weight:800;font-size:12px;letter-spacing:.06em;color:var(--ink-soft)}
 .state a{color:var(--accent);font-weight:800}
 @media(prefers-reduced-transparency:reduce){.srch,.field,.seg{background:#eef2dc}.seg button.on{background:#fff}}
+
+/* ===== v4: ui-ux-pro-max pass — type, spacing, hierarchy, motion ===== */
+:root{
+  --accent-ink:#9c3417;--ease:cubic-bezier(.22,1,.36,1);--spring:cubic-bezier(.34,1.56,.64,1);
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --shadow-1:0 1px 2px rgba(46,49,46,.06),0 6px 18px rgba(46,49,46,.08);
+  --shadow-2:0 2px 4px rgba(46,49,46,.06),0 14px 32px rgba(46,49,46,.14);
+}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body,button,input{font-feature-settings:"kern","liga"}
+h1,h2,h3{text-wrap:balance;letter-spacing:-.015em}
+p,small,.note2{text-wrap:pretty}
+.status,.tm,.stats b,.timer-card b,.hrow small,.recipe small{font-variant-numeric:tabular-nums}
+
+/* Type scale: one clear step between levels */
+.greet h1{font-size:32px;line-height:1.08;letter-spacing:-.025em;margin-top:6px}
+.rtitle{font-size:30px;line-height:1.12;letter-spacing:-.025em}
+.hdr h2{font-size:24px;letter-spacing:-.02em}
+.eyebrow,.label,.cbtn,.tag,.task small,.top .t{letter-spacing:.1em}
+.recipe b{font-size:18px;line-height:1.25;letter-spacing:-.01em}
+.recipe small{font-size:13px;font-weight:700;margin:4px 0 8px}
+.quick b{font-size:17px;line-height:1.2;letter-spacing:-.01em}
+.voice-card h3{font-size:24px;line-height:28px;margin:6px 0 8px}
+.btn{letter-spacing:-.01em}
+
+/* Spacing rhythm: related items sit closer than separate sections */
+.body{gap:var(--s4);padding:var(--s2) var(--s5) var(--s5);scroll-behavior:smooth;overscroll-behavior:contain;scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 18px),transparent)}
+.body::-webkit-scrollbar{display:none}
+.label{display:flex;align-items:center;gap:var(--s3);margin:var(--s3) 0 -6px;padding:0;color:var(--ink-soft)}
+.label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.chips{gap:var(--s2)}
+.card .eyebrow+*,.recipe small{margin-top:var(--s1)}
+.bottom{gap:var(--s3);padding-top:var(--s3)}
+.hdr{height:52px;margin-bottom:var(--s1)}
+
+/* Hierarchy: one strong primary, calmer secondary, soft tags */
+.tag{background:rgba(191,69,33,.12);color:var(--accent-ink);border:1px solid rgba(191,69,33,.18);font-size:12px;padding:4px 10px;border-radius:10px}
+.tag.warn{background:#8a2a14;color:#fff;border-color:transparent}
+.prov .tag:not(.soft){background:var(--accent);color:#fff;border-color:transparent}
+.prov .tag.soft{color:#fff;border-color:transparent}
+.dark .tag{background:rgba(255,255,255,.18);color:#fff;border-color:rgba(255,255,255,.2)}
+.chip{font-size:14px;padding:8px 16px;transition:background .2s,border-color .2s,transform .2s var(--spring),box-shadow .2s}
+.chip.on{color:var(--accent-ink);font-weight:700;border-color:rgba(191,69,33,.3)}
+.eyebrow[style*="accent)"]{color:var(--accent-ink)!important}
+.recipe{padding:12px 14px 12px 12px}
+.recipe .ph{width:76px;height:76px;border-radius:18px}
+.recipe::after{content:"";flex:none;width:18px;height:18px;opacity:.4;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e312e' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .25s var(--ease),opacity .25s}
+.quick>button{gap:var(--s4);padding:var(--s4)}
+.quick .qi{width:44px;height:44px;border-radius:14px}
+.voice-card{padding:20px 20px 20px 24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 18px 40px rgba(30,32,30,.32)}
+.btn.p{box-shadow:inset 0 1px 0 rgba(255,255,255,.38),0 12px 26px rgba(191,69,33,.36);font-weight:700}
+.btn.s{font-weight:700}
+.now h2{letter-spacing:-.02em}
+.ing li{padding:14px 0}
+.ing li.miss{font-weight:700}
+
+/* Motion: entrance only when the screen changes (not on every re-render) */
+.screen.on{animation:none}
+.screen.enter{animation:fade .3s ease-out backwards}
+@keyframes fade{from{opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(14px) scale(.985)}}
+@keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+@keyframes sheetUp{from{transform:translateY(48px);opacity:0}}
+@keyframes drift{to{transform:translate3d(3%,2%,0) scale(1.06)}}
+@keyframes breathe{50%{transform:scale(1.05)}}
+@keyframes ripple{0%{transform:scale(.9);opacity:.55}100%{transform:scale(1.9);opacity:0}}
+@keyframes bell{0%,60%,100%{transform:rotate(0)}10%,30%,50%{transform:rotate(-14deg)}20%,40%{transform:rotate(14deg)}}
+@keyframes scanline{0%{top:6%;opacity:0}15%,85%{opacity:.9}100%{top:92%;opacity:0}}
+.screen.enter .body>*{animation:rise .6s var(--ease) backwards}
+.screen.enter .body>*:nth-child(2){animation-delay:.05s}.screen.enter .body>*:nth-child(3){animation-delay:.1s}
+.screen.enter .body>*:nth-child(4){animation-delay:.15s}.screen.enter .body>*:nth-child(5){animation-delay:.2s}
+.screen.enter .body>*:nth-child(6){animation-delay:.25s}.screen.enter .body>*:nth-child(7){animation-delay:.3s}
+.screen.enter .body>*:nth-child(n+8){animation-delay:.35s}
+.screen.enter .bottom,.screen.enter .tabbar{animation:rise .6s var(--ease) .22s backwards}
+.screen.enter .tab.on svg{animation:pop .5s var(--spring) .3s backwards}
+.screen.enter .okmark{animation:pop .7s var(--spring) .15s backwards}
+.okmark{position:relative}
+.okmark::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--success);animation:ripple 1.8s var(--ease) .5s 2 backwards;pointer-events:none}
+.screen.enter .stars button.on svg{animation:pop .4s var(--spring) backwards}
+#phone::before{animation:drift 28s ease-in-out infinite alternate;will-change:transform}
+.voice-card .mic-orb{animation:breathe 3.2s ease-in-out infinite}
+.alert .bell{animation:bell 2.4s ease-in-out infinite;transform-origin:50% 10%}
+.cam::after{content:"";position:absolute;left:12%;right:12%;top:6%;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:scanline 3.2s ease-in-out infinite;pointer-events:none}
+.det{animation:fade .3s ease-out backwards}
+#cap.on{animation:rise .35s var(--ease)}
+#sheet.on{animation:fade .25s ease-out}
+#sheet.on .sheet-card{animation:sheetUp .45s var(--ease)}
+.track>div,.task .tr>div{transition:width .8s var(--ease)}
+.sw::after{transition:transform .35s var(--spring)}
+.press{transition:transform .22s var(--spring),opacity .15s,background .2s,box-shadow .25s}
+.press:active{transform:scale(.96);opacity:.92;transition-duration:.08s}
+.shutter:active{transform:scale(.92)}
+@media(hover:hover){
+  .card.press:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.85),var(--shadow-2)}
+  .card.press:hover.recipe::after{transform:translateX(3px);opacity:.7}
+  .btn.p:hover{filter:brightness(1.06)}.chip.press:hover{transform:translateY(-1px)}
+  .card.press:active,.btn.press:active{transform:scale(.97)}
+}
+.tab{transition:background .25s,color .25s,box-shadow .25s}
+.status-pill,.det span{animation:fade .3s ease-out backwards}
+
+/* ===== v5: reference match — lavender + pastel blocks, flat cards, dark floating nav ===== */
+:root{
+  --bg:#f3f3f8;--ink:#15151a;--ink-soft:#656575;--accent:#6d4ae8;--accent-ink:#4a2fc0;--accent-soft:#e3dafc;
+  --line:#e4e4ee;--surface:#fff;--dark:#17171c;--success:#3a9a5b;
+  --lav:#cdbdfa;--mint:#c6f0b0;--sun:#fdf0a2;--peach:#fbd9bb;
+  --display:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;--body:var(--display);
+  --r-card:28px;--r-pill:999px;
+  --shadow-1:0 1px 2px rgba(21,21,26,.04),0 8px 24px rgba(21,21,26,.06);
+  --shadow-2:0 2px 4px rgba(21,21,26,.05),0 16px 34px rgba(21,21,26,.12);
+}
+body{background:#e5e5ee}
+#phone::before{background:radial-gradient(60% 26% at 8% 0%,rgba(205,189,250,.6),transparent 70%),radial-gradient(50% 22% at 100% 100%,rgba(253,240,162,.5),transparent 70%)}
+h1,h2,h3{font-weight:800;letter-spacing:-.03em}
+.body{padding-top:max(20px,calc(env(safe-area-inset-top) + 12px))}
+
+/* flat white cards, no glass */
+.card,.icon-btn,.chip,.btn.s{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border:0;box-shadow:var(--shadow-1)}
+.card{border-radius:var(--r-card)}
+.btn.s{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.p{background:var(--ink);color:#fff;box-shadow:0 12px 26px rgba(21,21,26,.28);font-weight:700}
+.btn.p:hover{filter:none;background:#26262e}
+.chip{border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line);font-weight:700}
+.chip.on,.chip.on.press{background:var(--ink);color:#fff;box-shadow:none}
+.tag,.tag.warn{border:0}
+.tag{background:#fff;color:var(--ink);box-shadow:var(--shadow-1);border-radius:999px;padding:5px 12px}
+.tag.warn{background:#8a2a14;color:#fff}
+.prov .tag:not(.soft){background:var(--accent);color:#fff}
+.dark .tag{background:rgba(255,255,255,.18);color:#fff;box-shadow:none}
+.eyebrow[style*="accent)"]{color:var(--ink-soft)!important}
+
+/* home */
+.greet h1{font-size:34px;line-height:1.05;letter-spacing:-.035em}
+.avatar,.qi,.task .st,.cue .ph{background:var(--lav);color:var(--accent-ink);box-shadow:none}
+.voice-card{background:var(--lav);color:var(--ink);border:0;border-radius:32px;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 18px 40px rgba(109,74,232,.22);padding:24px}
+.voice-card .eyebrow{color:var(--accent-ink)}.voice-card small{color:#4a4566}
+.voice-card h3{font-size:26px;line-height:1.1}
+.mic-ring{border-color:rgba(255,255,255,.75)}.mic-orb{background:var(--ink)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(21,21,26,.28)}50%{box-shadow:0 0 0 14px rgba(21,21,26,0)}}
+.quick>button{position:relative;overflow:hidden;border-radius:28px;min-height:132px;justify-content:space-between}
+.quick>button>*{position:relative}
+.quick>button::before{content:"";position:absolute;right:-26px;bottom:-26px;width:104px;height:104px;border-radius:50%;background:rgba(255,255,255,.4)}
+.quick>button:nth-child(1){background:var(--mint)}.quick>button:nth-child(2){background:var(--sun)}
+.quick .qi{background:#fff;color:var(--ink);border-radius:50%}
+.quick span{color:#3d3d48}
+.pill-timer,.timer-card{background:var(--sun);border:0;box-shadow:var(--shadow-1);-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:999px}
+.timer-card{border-radius:var(--r-card)}
+.pill-timer svg,.timer-card svg{color:var(--ink)}
+.resp,.hint:not(.live){background:var(--accent-soft);border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.alert,.hint.live{background:var(--accent);border:0;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 12px 28px rgba(109,74,232,.34)}
+.alert .bell{color:var(--accent)}
+
+/* recipe cards: pastel rotation */
+.recipe{border-radius:28px}
+button.recipe:nth-of-type(3n+1){background:#e4dafc}
+button.recipe:nth-of-type(3n+2){background:var(--peach)}
+button.recipe:nth-of-type(3n){background:var(--mint)}
+.recipe .ph{background:rgba(255,255,255,.7);color:var(--accent-ink);box-shadow:none;border-radius:22px}
+.recipe small{color:#3d3d48}
+
+/* hands-free bar: white pill so only the nav is dark */
+.voice-card+.quick,.bar{}
+.bar{background:#fff;color:var(--ink);border:0;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:var(--shadow-1)}
+.bar .orb{background:var(--accent);color:#fff}
+.wave span{background:var(--accent)}
+.now{background:var(--dark);border-radius:32px;border:0;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 18px 40px rgba(21,21,26,.3)}
+.now .eyebrow,.now p{color:#cfc4f7}
+#cap{background:var(--dark);-webkit-backdrop-filter:none;backdrop-filter:none}
+#cap small{color:#cfc4f7}
+
+/* search, fields, segments: flat, pill-shaped */
+.srch{background:#fff;border:0;border-radius:999px;box-shadow:var(--shadow-1);height:56px;padding:0 20px}
+.field{background:#fff;border:1.5px solid var(--line);box-shadow:none;border-radius:18px}
+.seg{background:#e9e9f1;box-shadow:none;border-radius:999px}
+.seg button{border-radius:999px;font-weight:700}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow-1)}
+.seg.dk{background:rgba(255,255,255,.1)}.seg.dk button{color:#d8d2f0}.seg.dk button.on{background:#fff;color:var(--ink);box-shadow:none}
+.sw{background:#d9d9e5;box-shadow:none}.sw.on{background:var(--accent)}
+.sw::after{background:#fff;box-shadow:0 2px 6px rgba(21,21,26,.25)}
+.prov.sel{box-shadow:inset 0 0 0 2px var(--accent),0 10px 26px rgba(109,74,232,.16)}
+.state{background:var(--accent-soft)}
+.phero{background:#fff}
+.avatar.big{box-shadow:none}
+
+/* recipe detail */
+.hero{background:var(--lav);border:0;border-radius:32px;height:170px;box-shadow:none}
+.rtitle{font-size:32px}
+.addphoto{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border:0}
+.ing li.miss,.ing li.miss svg,.ing li.miss em{color:#b23a12}
+.ing li svg{color:var(--success)}
+
+/* completion */
+.stats>div:nth-child(1){background:var(--mint)}.stats>div:nth-child(2){background:var(--sun)}.stats>div:nth-child(3){background:var(--lav)}
+.stats small{color:#3d3d48}
+.stars button.on{color:#f2b01e}
+.track{background:#e4e4ee;box-shadow:none}.track>div,.task .tr>div{background:var(--accent)}
+.task .tr{background:#e4e4ee}
+
+/* sheet */
+.sheet-card{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border:0;border-radius:32px 32px 0 0}
+.grab{background:#d8d8e2}
+.bottom{background:linear-gradient(to top,rgba(243,243,248,.9),transparent)}
+
+/* floating dark nav, white active pill */
+.tabbar{background:var(--dark);border:0;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 16px 36px rgba(21,21,26,.34);border-radius:999px;padding:8px;margin:4px 20px max(16px,env(safe-area-inset-bottom))}
+.tab{color:#b4b4c4;border-radius:999px;min-height:56px}
+.tab.on{background:#fff;color:var(--ink);box-shadow:none}
+.tab .badge{background:var(--accent);border-color:var(--dark)}.tab.on .badge{background:var(--accent);color:#fff;border-color:#fff}
+.tab:focus-visible{outline-color:#fff}
+.screen.dark .icon-btn{background:rgba(255,255,255,.16)}
+
+/* ===== v6: layout fixes + always-on "Hey Chef" pill ===== */
+:root{--wk:calc(38px + env(safe-area-inset-top))}
+@supports(height:100dvh){html,body{height:100dvh}}
+.screen{inset:var(--wk) 0 0 0}
+.body{padding-top:10px}
+/* root cause of the squashed rows: flex items were allowed to shrink */
+.body>*,.bottom>*,.pcard>*,.sheet-card>*{flex-shrink:0}
+.card,.btn,.chip,.srch,.seg,.srow,.prov,.hrow,.field,.state,.hdr,.label{flex-shrink:0}
+.aibtn{height:52px;min-height:52px}
+.srow{padding:14px 16px;align-items:center}
+.srow b{line-height:1.25}.srow small{line-height:1.35}
+.seg button{display:flex;align-items:center;justify-content:center;white-space:nowrap;font-size:13px;padding:0 4px;line-height:1.15}
+.srch{min-height:56px}
+.sin{text-overflow:ellipsis}.sin::placeholder{color:var(--ink-soft);opacity:.85;text-overflow:ellipsis}
+.srch:focus-within{outline:0;box-shadow:inset 0 0 0 2px var(--accent),var(--shadow-1)}
+.state{min-height:48px}
+.state span{flex:1;min-width:0}
+/* wake pill */
+#wakebar{position:absolute;top:0;left:0;right:0;height:var(--wk);padding-top:env(safe-area-inset-top);display:flex;align-items:center;justify-content:center;z-index:30;pointer-events:none}
+.wake{pointer-events:auto;display:flex;align-items:center;gap:8px;height:30px;padding:0 14px;border-radius:999px;background:#fff;box-shadow:var(--shadow-1);font-weight:700;font-size:12.5px;color:var(--ink);max-width:90%;white-space:nowrap;transition:background .25s,color .25s}
+.wake i{width:8px;height:8px;border-radius:50%;background:#b4b4c4;flex:none}
+.wake.on i{background:var(--success)}
+.wake.say i{background:var(--accent)}
+.wake.warn i{background:#d9822b}
+.wake.off{color:var(--ink-soft)}
+.wake.awake{background:var(--accent);color:#fff}
+.wake.awake i{background:#fff;animation:wakep 1s ease-in-out infinite}
+@keyframes wakep{50%{transform:scale(1.7);opacity:.5}}
+.wake:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* ===== v7: polish ===== */
+:root{--r-sm:14px;--r-md:20px;--r-lg:28px;--ink-2:#4a4a58}
+body{font-size:16px;line-height:1.45;color:var(--ink)}
+.ink-soft,.recipe small,.srow small,.note2{color:var(--ink-2)}
+.eyebrow,.quick span,.stats small,.task small,.tag,.top .t{text-transform:lowercase;letter-spacing:.01em;font-size:13px;font-weight:700}
+.eyebrow::first-letter,.tag::first-letter,.task small::first-letter{text-transform:uppercase}
+.quick span,.stats small{display:block}.quick span::first-letter,.stats small::first-letter{text-transform:uppercase}
+.greet .eyebrow{text-transform:none;color:var(--ink-2)!important}
+.label{font-size:14px;letter-spacing:-.005em;color:var(--ink);font-weight:800;margin:var(--s4) 0 -4px}
+.label::after{background:linear-gradient(90deg,#d9d9e6,transparent)}
+/* cards: one radius family, soft layered depth */
+.card{border-radius:var(--r-lg);box-shadow:0 1px 2px rgba(21,21,26,.05),0 10px 28px rgba(21,21,26,.07)}
+.recipe{padding:10px 14px 10px 10px;gap:14px}
+.recipe .ph{width:92px;height:92px;border-radius:22px;background-color:#fff;box-shadow:0 4px 12px rgba(21,21,26,.1)}
+.recipe b{font-size:17px;line-height:1.25}
+.recipe small{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;letter-spacing:0;margin:5px 0 9px}
+.recipe small svg,.feat small svg{font-size:15px}
+.recipe .tag{font-size:12.5px}
+.tag{padding:5px 12px}
+/* featured card on home */
+.feat{display:block;width:100%;padding:0;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 2px 4px rgba(21,21,26,.05),0 18px 40px rgba(21,21,26,.12);text-align:left}
+.fimg{height:168px;background-color:var(--lav);background-size:cover;background-position:center}
+.fbody{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding:16px 20px 20px}
+.fbody b{font-family:var(--display);font-size:22px;line-height:1.15;letter-spacing:-.025em}
+.fbody small{display:flex;align-items:center;gap:6px;font-weight:700;font-size:13.5px;color:var(--ink-2)}
+.feat .tag{background:var(--lav);color:var(--accent-ink);box-shadow:none}
+@media(hover:hover){.feat:hover .fimg{transform:scale(1.03)}}
+.fimg{transition:transform .5s var(--ease)}.feat{overflow:hidden}
+/* recipe detail hero */
+.hero{height:210px;border-radius:32px;box-shadow:0 18px 40px rgba(21,21,26,.14);background-color:var(--lav)}
+.rtitle{font-size:30px}
+.chip{font-size:14px;font-weight:700;gap:7px}.chip svg{font-size:16px}
+.ing li{font-size:16px}
+.ing li svg{background:#e7f6ec;border-radius:50%;padding:3px;width:22px;height:22px;box-sizing:border-box}
+.ing li.miss svg{background:#fdeae3}
+/* quiet, tidy controls */
+.quick>button{min-height:124px}
+.voice-card{border-radius:32px}
+.voice-card small{font-size:14px;line-height:1.35}
+.btn{height:56px;font-size:16.5px}
+.tabbar{box-shadow:0 14px 34px rgba(21,21,26,.3)}
+.tab{font-size:12px}
+.srow{border-radius:var(--r-lg)}
+.prov small,.srow small{font-size:13.5px}
+@media(prefers-reduced-motion:reduce){.fimg{transition:none}}
+
+/* ===== v8: splash + first-run onboarding ===== */
+#intro{position:absolute;inset:0;z-index:60;display:none;flex-direction:column;background:var(--bg);padding:max(20px,env(safe-area-inset-top)) 24px max(24px,env(safe-area-inset-bottom));overflow-y:auto}
+#intro.on{display:flex}#intro.out{opacity:0;transition:opacity .35s ease;pointer-events:none}
+#intro::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 40% at 15% 0%,rgba(205,189,250,.7),transparent 70%),radial-gradient(60% 35% at 100% 100%,rgba(253,240,162,.6),transparent 70%)}
+#intro>*{position:relative;flex-shrink:0}
+.splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}
+.logo{width:112px;height:112px;border-radius:34px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:56px;box-shadow:0 20px 44px rgba(21,21,26,.28);animation:pop .7s var(--spring) backwards}
+.logo svg{stroke-width:1.7}
+.splash h1{font-size:32px;animation:rise .6s var(--ease) .2s backwards}
+.splash p{font-size:17px;color:var(--ink-2);font-weight:600;animation:rise .6s var(--ease) .3s backwards}
+.ob-top{display:flex;justify-content:space-between;align-items:center;height:48px}
+.ob-top button{min-height:44px;padding:0 8px;font-weight:700;color:var(--ink-2)}
+.ob-art{height:250px;border-radius:36px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-top:8px}
+.ob-art::before,.ob-art::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.45)}
+.ob-art::before{width:150px;height:150px;left:-40px;top:-40px}.ob-art::after{width:120px;height:120px;right:-30px;bottom:-30px}
+.ob-art .big{position:relative;width:124px;height:124px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:56px;color:var(--accent);box-shadow:0 14px 34px rgba(21,21,26,.14);animation:pop .6s var(--spring) backwards}
+.ob-body{flex:1;display:flex;flex-direction:column;gap:12px;padding-top:24px;animation:rise .5s var(--ease) backwards}
+.ob-body h1{font-size:32px;line-height:1.08}
+.ob-body p{font-size:17px;line-height:1.45;color:var(--ink-2);font-weight:600}
+.say-chip{align-self:flex-start;background:#fff;box-shadow:var(--shadow-1);border-radius:999px;padding:10px 16px;font-weight:700;font-size:15px}
+.dots{display:flex;gap:8px;justify-content:center;padding:16px 0 12px}
+.dots i{width:8px;height:8px;border-radius:4px;background:#d3d3e0;transition:width .3s var(--ease),background .3s}
+.dots i.on{width:26px;background:var(--ink)}
+.ob-actions{display:flex;flex-direction:column;gap:10px}
+.ob-form{display:flex;flex-direction:column;gap:10px}
+.ob-form label{font-weight:800;font-size:14px}
 </style>
 </head>
 <body>
 <div id="phone">
+  <div id="wakebar"><button id="wake" class="wake off" aria-label="Hey Chef voice control"><i></i><span class="wt">Voice</span></button></div>
   <main id="app"></main>
+  <div id="intro" role="dialog" aria-modal="true" aria-label="Welcome"></div>
   <div id="cap" role="status" aria-live="polite"></div>
   <div id="sheet" role="dialog" aria-modal="true" aria-label="Dialog"></div>
   <input type="file" id="photoin" accept="image/*" hidden><input type="file" id="scanin" accept="image/*" hidden>
@@ -323,7 +641,7 @@ const FILLED=new Set(['mic','camera','book','hand','bell','sparkle','star','home
 const ic=(n,c='')=>`<svg class="i ${FILLED.has(n)?'f':''} ${c}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
 const fmt=s=>{s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const DEF={name:'',diet:'any',spice:'medium',skill:'Easy',serv:2,cuis:[],allergy:'',speak:true,rate:1,lang:'en-IN',haptics:true,autoVoice:true,awake:true};
+const DEF={name:'',diet:'any',spice:'medium',skill:'Easy',serv:2,cuis:[],allergy:'',speak:true,rate:1,lang:'en-IN',haptics:true,autoVoice:true,awake:true,wake:true,onboarded:false};
 let PREF=Object.assign({},DEF),HIST=[],FAVS=[];
 try{Object.assign(PREF,JSON.parse(localStorage.getItem('ska-prefs')||'{}'));HIST=JSON.parse(localStorage.getItem('ska-hist')||'[]');FAVS=JSON.parse(localStorage.getItem('ska-favs')||'[]')}catch(e){}
 const saveLS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
@@ -334,7 +652,7 @@ const buzz=n=>{try{PREF.haptics&&navigator.vibrate&&navigator.vibrate(n)}catch(e
    Paste real image links here, or tap "Add photo" on a recipe to pick one from your device. */
 const PHOTO_URLS={pasta:'',bhurji:'',soup:''};
 let PH={};try{PH=JSON.parse(localStorage.getItem('ska-photos')||'{}')}catch(e){}
-const photoOf=id=>PH[id]||PHOTO_URLS[id]||'';
+const photoOf=id=>PH[id]||PHOTO_URLS[id]||artOf(id);
 const photoStyle=id=>{const u=photoOf(id);return u?` style="background-image:url(&quot;${String(u).replace(/[&<>\"]/g,'')}&quot;)"`:''};
 function savePhoto(id,file){
   const img=new Image(),url=URL.createObjectURL(file);
@@ -384,6 +702,25 @@ mk('tacos','Chicken Tacos','Mexican','nonveg',25,'Easy','Tortillas:6 pc:tortilla
 mk('greek','Greek Salad','Greek','veg',10,'Easy','Cucumber:1 pc:cucumber;Tomatoes:3 pc:tomato;Onion:½ pc:onion;Feta cheese:100 g:cheese;Olives:½ cup:olive',[['Chop the vegetables.','Large chunks of cucumber, tomato and onion.','Chunky, bite-sized pieces.'],['Add feta and olives.','Place feta on top in a slab.','Colourful and generous.'],['Dress and serve.','Olive oil, lemon, oregano and salt.','Glistening, lightly coated.']]);
 mk('teriyaki','Teriyaki Chicken Bowl','Japanese','nonveg',30,'Easy','Rice:2 cups:rice;Chicken:300 g:chicken;Soy sauce:3 tbsp:soy;Ginger:1 tsp:ginger;Carrot:1 pc:carrot',[['Cook the rice.','Rinse and simmer covered.','Tender, steam holes on top.',900,'Cook rice','LOW HEAT'],['Sear the chicken.','Cook skin-side down.','Deep golden brown.',360,'Sear chicken','MEDIUM-HIGH HEAT'],['Glaze with teriyaki.','Add soy, ginger and honey.','Sticky glaze coats each piece.',120,'Glaze','LOW HEAT'],['Build the bowl.','Rice, chicken, carrot ribbons.','Glossy and steaming.']]);
 try{JSON.parse(localStorage.getItem('ska-ai-recipes')||'[]').forEach(r=>RECIPES.push(r))}catch(e){}
+
+/* ---------- dish illustrations: original vector art, one per recipe; your own photo always wins ---------- */
+const BGS=['#e4dafc','#fbd9bb','#c6f0b0','#fdf0a2','#cdbdfa'];
+function dishArt(r){
+  const t=(r.title+' '+(r.cuisine||'')).toLowerCase(),h=[...r.id].reduce((a,c)=>a+c.charCodeAt(0),0),bg=BGS[h%5];
+  const lf=(x,y,a)=>`<ellipse cx="${x}" cy="${y}" rx="9" ry="4.5" fill="#3a9a5b" transform="rotate(${a} ${x} ${y})"/>`;
+  const dots=(p,c,rad)=>p.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="${rad}" fill="${c}"/>`).join('');
+  let f;
+  if(/pasta|spaghetti|carbonara|noodle/.test(t))f=`<circle cx="100" cy="102" r="44" fill="#f2c14e"/>`+[0,1,2,3,4].map(i=>`<path d="M${64+i*3} ${92+i*7}q36-20 72 0" stroke="#e0a526" stroke-width="3.5" fill="none" stroke-linecap="round"/>`).join('')+dots([[92,92],[112,106]],'#d9482b',9)+`<rect x="104" y="82" width="10" height="10" rx="2" fill="#fff6dd"/><rect x="84" y="108" width="9" height="9" rx="2" fill="#fff6dd"/>`+lf(98,114,-30)+lf(122,90,30);
+  else if(/soup|dal|shakshuka|curry/.test(t))f=`<circle cx="100" cy="102" r="46" fill="${/dal/.test(t)?'#f0b429':'#d9482b'}"/><circle cx="100" cy="102" r="46" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="5"/><path d="M78 98q22 14 44-6" stroke="#fff6e8" stroke-width="5" fill="none" stroke-linecap="round"/>`+lf(106,84,20)+lf(88,114,-25)+(/shakshuka/.test(t)?dots([[86,96],[116,108]],'#fff',11)+dots([[86,96],[116,108]],'#f5a623',5):'');
+  else if(/rice|biryani|bowl/.test(t))f=`<path d="M56 106a44 40 0 0 1 88 0z" fill="#fffaf0"/>`+dots([[76,96],[94,86],[112,90],[126,98],[86,102],[106,100]],'#f0b429',4)+`<rect x="88" y="84" width="17" height="12" rx="5" fill="#b9652b"/><rect x="112" y="92" width="16" height="12" rx="5" fill="#b9652b"/><rect x="72" y="100" width="9" height="9" rx="2" fill="#f08a24"/>`+lf(102,80,-20);
+  else if(/salad/.test(t))f=dots([[80,94],[100,84],[120,94],[90,112],[112,112]],'#5cb85c',17)+dots([[84,92],[116,104],[98,112]],'#d9482b',7)+`<rect x="96" y="90" width="13" height="13" rx="3" fill="#fffaf0"/><rect x="74" y="108" width="12" height="12" rx="3" fill="#fffaf0"/>`+dots([[110,86],[88,104]],'#3b2f4a',4);
+  else if(/taco/.test(t))f=`<path d="M58 118a42 42 0 0 1 84 0z" fill="#f3d38a"/><path d="M68 114a32 32 0 0 1 64 0z" fill="#5cb85c"/>`+dots([[84,104],[100,98],[116,104]],'#d9482b',6)+dots([[92,108],[110,110]],'#b9d36b',5);
+  else f=Array.from({length:16},(_,i)=>`<rect x="${70+(i*37)%62}" y="${72+(i*23)%52}" width="12" height="9" rx="4" fill="${i%5?'#f6d86b':'#fff3c4'}" transform="rotate(${i*40} 100 100)"/>`).join('')+dots([[88,96],[112,104],[100,116]],'#d9482b',7)+lf(104,84,25)+lf(86,112,-30);
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="${bg}"/><circle cx="60" cy="30" r="60" fill="#fff" opacity=".35"/><circle cx="350" cy="180" r="70" fill="#fff" opacity=".3"/><g transform="translate(100 0)"><ellipse cx="100" cy="162" rx="62" ry="8" fill="#15151a" opacity=".12"/><circle cx="100" cy="100" r="68" fill="#fff"/><circle cx="100" cy="100" r="56" fill="#f6f5fb" stroke="#e7e5f1" stroke-width="2"/>${f}</g></svg>`;
+  return 'data:image/svg+xml,'+encodeURIComponent(svg);
+}
+const _art={};const artOf=id=>{const r=RECIPES.find(x=>x.id===id);return r?(_art[id]=_art[id]||dishArt(r)):''};
+const userPhoto=id=>PH[id]||PHOTO_URLS[id]||'';
 const DIETOK={veg:['veg','vegan'],egg:['veg','vegan','egg'],vegan:['vegan']};
 const okDiet=r=>!DIETOK[PREF.diet]||DIETOK[PREF.diet].includes(r.diet);
 const allergyHit=r=>{const w=PREF.allergy.toLowerCase().split(/[,;]+/).map(x=>x.trim()).filter(x=>x.length>2);return w.find(a=>r.ing.some(i=>i[0].toLowerCase().includes(a)))||''};
@@ -408,36 +745,102 @@ function say(text,opts={}){
   return new Promise(res=>{
     try{speechSynthesis.cancel()}catch(e){}
     const u=new SpeechSynthesisUtterance(text);if(voice)u.voice=voice;u.rate=opts.rate||PREF.rate;u.pitch=1.02;
-    speaking=true;pauseRec();
-    const done=()=>{speaking=false;resumeRec();res()};
-    u.onend=done;u.onerror=done;speechSynthesis.speak(u);
-    setTimeout(()=>{if(speaking&&!speechSynthesis.speaking)done()},800+text.length*120);
+    V.spoken=norm(text);V.spokenAt=Date.now();speaking=true;pauseRec();paintWake();
+    let fin=false;const t0=Date.now();
+    const done=()=>{if(fin)return;fin=true;clearInterval(iv);speaking=false;V.spokenAt=Date.now();V.quietUntil=Date.now()+900;if(V.awake)wakeUp(9000);resumeRec();paintWake();res()};
+    const iv=setInterval(()=>{if(Date.now()-t0>700&&!speechSynthesis.speaking&&!speechSynthesis.pending)done();if(Date.now()-t0>45000)done()},400);
+    u.onend=done;u.onerror=done;try{speechSynthesis.speak(u)}catch(e){done()}
   });
 }
 let capT;function caption(t,who){const c=$('#cap');c.innerHTML=`<small>${who}</small>${esc(t)}`;c.classList.add('on');clearTimeout(capT);capT=setTimeout(()=>c.classList.remove('on'),Math.min(9000,2500+t.length*55))}
 function youSaid(t){caption(t,'YOU SAID')}
 
-/* ---------- speech in ---------- */
+/* ---------- speech in: always-on “Hey Chef” ---------- */
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-let rec=null,recOn=false,recWanted=false,recMode='cmd',recCb=null,wake=false;
+let rec=null,recOn=false,recWanted=false;
+const V={sid:0,seen:new Set(),lastTxt:'',lastAt:0,awake:false,awakeUntil:0,awakeT:null,quietUntil:0,spoken:'',spokenAt:0,greetAt:0,fails:0,gestured:false,blocked:false,userOff:false};
+const WAKE_RE=/(?:^|\b)(?:hey|hi|hello|ok|okay|hay|hei)[\s,]*(?:chef|chief|shef|sheff|cheff|chaf|shaf)\b|(?:हे|हेलो|हाय|ओके)\s*(?:शेफ|चेफ)/i;
+const WAKE_G=new RegExp(WAKE_RE.source,'gi');
+const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9\u0900-\u097f ]/g,' ').replace(/\s+/g,' ').trim();
+let startT=null;
+function scheduleStart(ms){clearTimeout(startT);startT=setTimeout(()=>{if(!recWanted||recOn||speaking||document.hidden||!rec)return;try{rec.start()}catch(e){}},ms)}
 function initRec(){
   if(!SR||rec)return;
   rec=new SR();rec.lang=PREF.lang;rec.continuous=true;rec.interimResults=true;rec.maxAlternatives=3;
-  rec.onresult=e=>{
-    for(let i=e.resultIndex;i<e.results.length;i++){
-      const r=e.results[i],txt=r[0].transcript.trim();
-      if(!r.isFinal){const el=$('#heard');if(el)el.textContent='“'+txt+'”';continue}
-      handleHeard(txt,Array.from(r,a=>a.transcript.trim()));
-    }
+  rec.onstart=()=>{recOn=true;V.sid++;V.seen.clear();paintWake()};
+  rec.onresult=onResult;
+  rec.onend=()=>{recOn=false;paintWake();if(recWanted&&!speaking)scheduleStart(V.fails>2?3000:300)};
+  rec.onerror=e=>{
+    const er=e&&e.error;
+    if(er==='not-allowed'||er==='service-not-allowed'){recWanted=false;recOn=false;S.handsfree=false;
+      if(V.gestured){V.blocked=true;caption('Microphone is blocked. Allow it in the browser address bar, then tap the pill at the top.','CHEF AI')}paintWake();return}
+    if(er==='audio-capture'){recWanted=false;caption('No microphone found.','CHEF AI');paintWake();return}
+    if(er==='network'){V.fails++;if(V.fails===3)caption('Voice needs an internet connection.','CHEF AI')}
   };
-  rec.onend=()=>{recOn=false;if(recWanted&&!speaking)setTimeout(()=>{try{rec.start();recOn=true}catch(e){}},250)};
-  rec.onerror=e=>{recOn=false;if(e.error==='not-allowed'||e.error==='service-not-allowed'){recWanted=false;S.handsfree=false;caption('Microphone is blocked. Allow it in the browser address bar, then tap the mic again.','CHEF AI');renderBars()}};
 }
-function startRec(){if(!SR){caption('Voice input needs Chrome, Edge or Safari. You can still tap every button.','CHEF AI');return false}
-  initRec();recWanted=true;if(!recOn&&!speaking){try{rec.start();recOn=true}catch(e){}}renderBars();return true}
-function stopRec(){recWanted=false;if(rec&&recOn){try{rec.stop()}catch(e){}}recOn=false;renderBars()}
+function startRec(user){
+  if(!SR){caption('Voice input needs Chrome, Edge or Safari. You can still tap every button.','CHEF AI');paintWake();return false}
+  initRec();recWanted=true;if(user){V.userOff=false;V.blocked=false}
+  if(!recOn&&!speaking){try{rec.start()}catch(e){}}
+  paintWake();return true}
+function stopRec(user){recWanted=false;if(user)V.userOff=true;clearTimeout(startT);if(rec){try{rec.abort()}catch(e){}}recOn=false;paintWake()}
 function pauseRec(){if(rec&&recOn){try{rec.abort()}catch(e){}recOn=false}}
-function resumeRec(){if(recWanted&&rec&&!recOn){setTimeout(()=>{try{rec.start();recOn=true}catch(e){}},300)}}
+function resumeRec(){if(recWanted&&rec&&!recOn)scheduleStart(450)}
+
+/* awake window: “Hey Chef” opens ~10s of listening on ANY screen; cooking keeps it open */
+function alwaysAwake(){return S.handsfree&&S.inCook&&(S.screen==='cook'||S.screen==='tasks')}
+function awakeNow(){return (V.awake&&Date.now()<V.awakeUntil)||alwaysAwake()}
+const isLive=awakeNow;
+function wakeUp(ms=10000){V.awake=true;V.awakeUntil=Date.now()+ms;clearTimeout(V.awakeT);V.awakeT=setTimeout(sleepNow,ms+60);paintWake()}
+function sleepNow(){const left=V.awakeUntil-Date.now();if(left>80){V.awakeT=setTimeout(sleepNow,left+60);return}V.awake=false;S.listenOnce=false;paintWake()}
+function wake(ms=12000){const was=V.awake&&Date.now()<V.awakeUntil;wakeUp(ms);if(!was)chime()}
+function chime(){try{const a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(660,a.currentTime);o.frequency.exponentialRampToValueAtTime(990,a.currentTime+.12);o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.001,a.currentTime);g.gain.exponentialRampToValueAtTime(.12,a.currentTime+.02);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.2);o.start();o.stop(a.currentTime+.22);setTimeout(()=>{try{a.close()}catch(e){}},500)}catch(e){}}
+function hintFor(){
+  const sc=S.screen;
+  if(awakeNow())return sc==='cook'?'Listening… say “Next step”':'Listening… go ahead';
+  if(!recOn)return sc==='cook'?'Tap to turn on voice':'Tap to enable “Hey Chef”';
+  return {cook:'Say “Hey Chef” or “Next step”',tasks:'Say “Hey Chef, how much time is left?”',results:'Say “Hey Chef, show me the pasta”'}[sc]||'Say “Hey Chef” to start';
+}
+/* patch the DOM in place so the mic state never re-renders (and never steals focus from inputs) */
+function paintWake(){
+  const w=$('#wake');
+  if(w){let txt,cls;
+    if(!SR){cls='off';txt='Voice not supported here'}
+    else if(V.blocked){cls='warn';txt='Mic blocked · tap to retry'}
+    else if(!recWanted){cls='off';txt=PREF.wake&&!V.userOff?'Tap anywhere to enable “Hey Chef”':'“Hey Chef” is off · tap to turn on'}
+    else if(speaking){cls='say';txt='Chef is speaking…'}
+    else if(awakeNow()){cls='awake';txt='Listening… go ahead'}
+    else if(recOn){cls='on';txt='Say “Hey Chef”'}
+    else{cls='on';txt='Starting mic…'}
+    w.className='wake '+cls;$('.wt',w).textContent=txt}
+  const live=awakeNow(),bar=$('#hfbar');
+  if(bar){const wv=$('.wave',bar);if(wv)wv.classList.toggle('live',live);const h=$('#hint');if(h)h.textContent=hintFor()}
+  const hr=$('#homering');if(hr)hr.classList.toggle('live',live);
+  const ow=$('.orb-wrap');if(ow)ow.classList.toggle('live',live);
+  const cb=$('.cbtn[data-act=talk]');if(cb)cb.classList.toggle('act',live);
+}
+function toggleWake(){
+  if(!SR){caption('Voice input needs Chrome, Edge or Safari.','CHEF AI');return}
+  if(V.blocked||!recWanted){PREF.wake=true;savePrefs();startRec(true);caption('Voice is on. Say “Hey Chef” on any screen.','CHEF AI');return}
+  PREF.wake=false;savePrefs();stopRec(true);caption('“Hey Chef” is off.','CHEF AI');
+}
+function onResult(e){
+  if(speaking||Date.now()<V.quietUntil)return;
+  V.fails=0;
+  const n=e.results.length;
+  /* Android Chrome re-sends every earlier result on each event, so walk them all and skip the ones already handled */
+  for(let i=0;i<n;i++){
+    const r=e.results[i],txt=((r[0]&&r[0].transcript)||'').trim(),key=V.sid+':'+i;
+    if(!txt)continue;
+    if(!r.isFinal){
+      if(i===n-1){const el=$('#heard');if(el)el.textContent='“'+txt+'”';
+        if(!awakeNow()&&WAKE_RE.test(txt.toLowerCase())&&!V.seen.has(key))wake(12000)}
+      continue}
+    if(V.seen.has(key))continue;
+    V.seen.add(key);
+    handleHeard(txt,Array.from(r,a=>a.transcript.trim()));
+  }
+}
 
 /* number words (English + Hinglish) for “timer for five minutes” */
 const NUMW={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,twelve:12,fifteen:15,twenty:20,thirty:30,forty:40,sixty:60,ek:1,do:2,teen:3,char:4,paanch:5,panch:5,chhe:6,saat:7,aath:8,nau:9,das:10};
@@ -463,17 +866,26 @@ function canonical(t){
 }
 function handleHeard(raw,alts){
   alts=alts&&alts.length?alts:[raw];
-  const clean=x=>x.toLowerCase().replace(/[.,!?]/g,'').trim();
-  const WAKE=/\b(hey|hi|ok|okay) ?(chef|shef)\b/;
-  /* use the best of the recogniser's alternatives: first one that maps to a known command */
-  let pick=raw;for(const x of alts){if(canonical(clean(x).replace(WAKE,'').trim())){pick=x;break}}
-  let t=clean(pick);if(!t)return;
-  const hasWake=WAKE.test(t);
-  if(S.screen==='home'&&!hasWake&&!S.listenOnce&&!S.handsfree)return;
-  if(S.handsfree&&!hasWake&&!S.listenOnce&&!['cook','tasks','adapt','scan'].includes(S.screen)&&S.screen!=='results'&&S.screen!=='detail'&&S.screen!=='done')return;
-  t=t.replace(WAKE,'').trim();
+  const clean=x=>x.toLowerCase().replace(/[.,!?।]/g,'').replace(/\s+/g,' ').trim();
+  let t=clean(raw);if(!t)return;
+  const now=Date.now();
+  if(t===V.lastTxt&&now-V.lastAt<3500)return;          /* same phrase twice in a row = a repeat, not a new command */
+  V.lastTxt=t;V.lastAt=now;
+  const nt=norm(t);
+  if(V.spoken&&now-V.spokenAt<8000&&nt.split(' ').length>=4&&V.spoken.includes(nt))return;   /* Chef hearing itself */
+  const wakeAlt=alts.find(x=>WAKE_RE.test(clean(x)));
+  const hasWake=!!wakeAlt||WAKE_RE.test(t);
+  if(!hasWake&&!awakeNow())return;                     /* asleep: ignore everything except “Hey Chef” */
+  let pick=t;
+  if(wakeAlt)pick=clean(wakeAlt);
+  else for(const x of alts){const c=clean(x);if(canonical(c)){pick=c;break}}
+  t=pick.replace(WAKE_G,' ').replace(/\s+/g,' ').trim();
+  if(hasWake)wake(12000);else wakeUp(10000);
   S.listenOnce=false;
-  if(!t){say('I’m listening. What are we cooking?');return}
+  if(!t){
+    if(now-V.greetAt>10000){V.greetAt=now;say(S.screen==='home'?'Yes? What are we cooking?':S.screen==='cook'?'Yes, go ahead.':'Yes, I’m listening.')}
+    else caption('Listening…','CHEF AI');
+    return}
   S.cmds++;youSaid(raw);$('#heard')&&($('#heard').textContent='“'+raw+'”');
   command(canonical(t)||t);
 }
@@ -489,30 +901,32 @@ let AI={p:'groq',keys:{},models:{},base:''};try{Object.assign(AI,JSON.parse(loca
 if(!PROVIDERS[AI.p])AI.p='groq';
 const saveAI=()=>saveLS('ska-ai',AI);
 const LLM={busy:false,get key(){return AI.keys[AI.p]||''},get model(){return AI.models[AI.p]||PROVIDERS[AI.p].model},get base(){return (AI.p==='custom'?AI.base:PROVIDERS[AI.p].base).replace(/\/$/,'')}};
+const TMO=()=>('timeout' in AbortSignal)?AbortSignal.timeout(20000):undefined;
 const httpErr=r=>Object.assign(new Error('http'),{status:r.status});
 async function llm({sys,text,img,max=500}){
   if(!LLM.key)throw Object.assign(new Error('nokey'),{status:0});
   let r,d;
   if(PROVIDERS[AI.p].kind==='ant'){
     const c=[];if(img)c.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:img}});c.push({type:'text',text});
-    r=await fetch(LLM.base+'/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':LLM.key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:LLM.model,max_tokens:max,temperature:.2,system:sys,messages:[{role:'user',content:c}]})});
+    r=await fetch(LLM.base+'/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':LLM.key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},signal:TMO(),body:JSON.stringify({model:LLM.model,max_tokens:max,temperature:.2,system:sys,messages:[{role:'user',content:c}]})});
     if(!r.ok)throw httpErr(r);d=await r.json();return (d.content||[]).map(x=>x.text||'').join('');
   }
   const c=[{type:'text',text}];if(img)c.push({type:'image_url',image_url:{url:'data:image/jpeg;base64,'+img}});
-  r=await fetch(LLM.base+'/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+LLM.key},body:JSON.stringify({model:LLM.model,max_tokens:max,temperature:.2,messages:[{role:'system',content:sys},{role:'user',content:img?c:text}]})});
+  r=await fetch(LLM.base+'/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+LLM.key},signal:TMO(),body:JSON.stringify({model:LLM.model,max_tokens:max,temperature:.2,messages:[{role:'system',content:sys},{role:'user',content:img?c:text}]})});
   if(!r.ok)throw httpErr(r);d=await r.json();return d.choices[0].message.content||'';
 }
 const ask=async o=>{const t=await llm(o),m=String(t).match(/\{[\s\S]*\}/);return JSON.parse(m?m[0]:'{}')};
-const aiErr=e=>e.status===429?'The AI limit is reached for now. Basic commands still work.':(e.status===401||e.status===403)?'The AI provider rejected the key. Check it in Settings.':e.status===404||e.status===400?'The AI model name looks wrong. Check Settings.':'I couldn’t reach the AI. Basic commands still work.';
+const aiErr=e=>(e&&(e.name==='TimeoutError'||e.name==='AbortError'))?'The AI took too long. Try again.':e.status===429?'The AI limit is reached for now. Basic commands still work.':(e.status===401||e.status===403)?'The AI provider rejected the key. Check it in Settings.':e.status===404||e.status===400?'The AI model name looks wrong. Check Settings.':'I couldn’t reach the AI. Basic commands still work.';
 const prefCtx=()=>({diet:PREF.diet,spice:PREF.spice,allergies:PREF.allergy,likedCuisines:PREF.cuis,servings:PREF.serv,skill:PREF.skill});
+const CHAT=[];
 async function askLLM(text){
   if(!LLM.key){caption('Add an AI key in Settings to answer open questions.','CHEF AI');return say('Sorry, I didn’t catch that. Try next, repeat, or start timer.')}
-  if(LLM.busy)return;LLM.busy=true;caption('Thinking…','CHEF AI');
+  if(LLM.busy&&Date.now()-(LLM.busyAt||0)<25000)return;LLM.busy=true;LLM.busyAt=Date.now();wakeUp(20000);caption('Thinking…','CHEF AI');
   const r=R(),st=r.steps[S.step];
-  const sys='You are Chef AI inside a hands-free kitchen app. The user spoke a command or question. Reply with ONE JSON object only: {"action":"next|previous|repeat|start_timer|set_timer|time_left|open_recipe|recipe|adapt|swap|scan|home|finish|answer","arg":"string or empty","seconds":0,"reply":"one or two short spoken sentences"}. Use "answer" for cooking questions (substitutions, techniques, doneness) and put the answer in reply. Use "open_recipe" with arg = a recipe id from the list. Use "recipe" with arg = the dish or cuisine when the user wants a dish that is not in the list (any cuisine in the world). Use "adapt" with arg = the change requested. Use "swap" with arg = the missing ingredient. Use "set_timer" with seconds. Never invent actions. Respect the cook preferences. Keep replies under 30 words, plain speech, no markdown.';
-  const ctx={screen:S.screen,recipe:r.title,currentStep:S.screen==='cook'?{n:S.step+1,of:r.steps.length,text:st.t,detail:st.d}:null,ingredients:r.ing.map(i=>i[0]+' '+i[1]),userHas:[...S.found],recipes:RECIPES.slice(0,40).map(x=>x.id+': '+x.title),prefs:prefCtx()};
+  const sys='You are Chef AI inside a hands-free kitchen app. The user spoke a command or question. Reply with ONE JSON object only: {"action":"next|previous|repeat|start_timer|set_timer|time_left|open_recipe|recipe|adapt|swap|scan|home|finish|go|search|add_ingredient|answer","arg":"string or empty","seconds":0,"reply":"one or two short spoken sentences"}. Use "answer" for cooking questions (substitutions, techniques, doneness) and put the answer in reply. Use "open_recipe" with arg = a recipe id from the list. Use "recipe" with arg = the dish or cuisine when the user wants a dish that is not in the list (any cuisine in the world). Use "adapt" with arg = the change requested. Use "swap" with arg = the missing ingredient. Use "set_timer" with seconds. Use \"go\" with arg = one of home, scan, results, tasks, profile, settings to change screen. Use \"search\" with arg = words to search in the recipe list. Use \"add_ingredient\" with arg = one ingredient the user says they have. The context field \"history\" holds the last few turns: use it to resolve words like \"it\" or \"that\". Never invent actions. Respect the cook preferences. Keep replies under 30 words, plain speech, no markdown.';
+  const ctx={screen:S.screen,recipe:r.title,currentStep:S.screen==='cook'?{n:S.step+1,of:r.steps.length,text:st.t,detail:st.d}:null,ingredients:r.ing.map(i=>i[0]+' '+i[1]),userHas:[...S.found],history:CHAT.slice(-4),recipes:RECIPES.slice(0,40).map(x=>x.id+': '+x.title),prefs:prefCtx()};
   try{
-    const a=await ask({sys,text:JSON.stringify({context:ctx,heard:text}),max:260});LLM.busy=false;
+    const a=await ask({sys,text:JSON.stringify({context:ctx,heard:text}),max:260});LLM.busy=false;CHAT.push({heard:text,reply:a.reply||a.action});if(CHAT.length>8)CHAT.shift();
     switch(a.action){
       case 'next':return nextStep();case 'previous':return prevStep();case 'repeat':return readStep();
       case 'start_timer':return startStepTimer(true);case 'time_left':return tellTime();
@@ -520,6 +934,9 @@ async function askLLM(text){
       case 'open_recipe':if(RECIPES.some(x=>x.id===a.arg)){openRecipe(a.arg);return say(a.reply||'Here you go.')}break;
       case 'recipe':return aiGenerate(a.arg||text);
       case 'adapt':return adaptVoice(a.arg||text);case 'swap':return swapIngredient(a.arg||text);
+      case 'go':{const m={home:'home',scan:'scan',results:'results',recipes:'results',tasks:'tasks',timers:'tasks',profile:'profile',settings:'settings'};if(m[a.arg]){go(m[a.arg]);return say(a.reply||'Okay.')}break}
+      case 'search':S.q=String(a.arg||'');S.showAll=false;go('results');return say(a.reply||`Here’s what I found for ${S.q}.`);
+      case 'add_ingredient':{const k=String(a.arg||'').toLowerCase().replace(/[^a-z]/g,'');if(k){if(!PANTRY_ALL[k])PANTRY_ALL[k]=String(a.arg).replace(/^./,c=>c.toUpperCase());S.found.add(k);go('results');return say(a.reply||`Added ${PANTRY_ALL[k]}.`)}break}
       case 'scan':go('scan');return say(a.reply||'Opening the camera.');
       case 'home':return go('home');case 'finish':return finish();
     }
@@ -541,7 +958,7 @@ async function aiGenerate(q,img){
 }
 function addAIRecipe(a){
   if(!a||!a.title||!Array.isArray(a.ing)||!Array.isArray(a.steps)||!a.steps.length)return null;
-  const r={id:'ai'+Date.now().toString(36),ai:true,title:String(a.title).slice(0,60),cuisine:String(a.cuisine||'World').slice(0,24),diet:['veg','vegan','egg','nonveg'].includes(a.diet)?a.diet:'nonveg',time:Math.round(a.time)||30,serv:a.serv||2,level:a.level||'Medium',tag:'AI CREATED',kw:String(a.title).toLowerCase().split(' ').filter(w=>w.length>3),
+  const r={id:'ai'+Date.now().toString(36),ai:true,title:String(a.title).slice(0,60),cuisine:String(a.cuisine||'World').slice(0,24),diet:['veg','vegan','egg','nonveg'].includes(a.diet)?a.diet:'nonveg',time:Math.round(a.time)||30,serv:a.serv||2,level:a.level||'Medium',tag:'Created by AI',kw:String(a.title).toLowerCase().split(' ').filter(w=>w.length>3),
    ing:a.ing.slice(0,14).map(x=>[String(x[0]),String(x[1]||''),String(x[2]||x[0]).toLowerCase().replace(/[^a-z]/g,'')]),
    steps:a.steps.slice(0,14).map(t=>({t:String(t.t||''),d:String(t.d||''),cue:String(t.cue||'It looks and smells right.'),timer:Array.isArray(t.timer)&&t.timer[1]>0&&t.timer[1]<=7200?[String(t.timer[0]||'Timer'),Math.round(t.timer[1]),String(t.timer[2]||'MEDIUM HEAT')]:null}))};
   RECIPES.unshift(r);saveLS('ska-ai-recipes',RECIPES.filter(x=>x.ai).slice(0,20));return r;
@@ -578,7 +995,10 @@ async function saveKey(){
 function removeKey(){AI.keys[AI.p]='';saveAI();keyState={t:'Key removed',cls:''};render()}
 /* ---------- command brain ---------- */
 const has=(t,...w)=>w.some(x=>t.includes(x));
+const NAVMAP={home:['home','Home'],scan:['scan','the camera'],scanner:['scan','the camera'],camera:['scan','the camera'],recipe:['results','recipes'],recipes:['results','recipes'],timer:['tasks','your timers'],timers:['tasks','your timers'],profile:['profile','your profile'],settings:['settings','settings']};
 function command(t){
+  const mn=t.match(/^(?:(?:go to|open|show|show me|take me to|switch to)\s+)?(?:the\s+|my\s+)?(home|scanner|scan|camera|recipes?|timers?|profile|settings)(?:\s+(?:page|screen|tab))?$/);
+  if(mn){const [to,label]=NAVMAP[mn[1]];if(to!==S.screen){go(to);return say(to==='scan'?'Opening the camera. Hold your ingredients in the frame, then say capture.':`Opening ${label}.`)}}
   if(LLM.key&&t.split(' ').length>=3&&!/^(set timer for \d+|rate |go home|finish cooking|how much time is left|start timer|go to |mute|unmute)/.test(t)){return askLLM(t)}
   /* rating */
   let m=t.match(/rate (it )?(\w+) star/);if(m){const n={one:1,two:2,three:3,four:4,five:5}[m[2]]||parseInt(m[2])||5;return rate(n)}
@@ -687,7 +1107,7 @@ function finish(){
   const mins=Math.max(1,Math.round((Date.now()-(S.startedAt||Date.now()))/60000));S.took=mins;
   HIST.unshift({id:S.rid,title:R().title,mins,at:Date.now(),rating:0});HIST=HIST.slice(0,50);saveLS('ska-hist',HIST);
   stopStream();S.gestures=false;S.timers.forEach(t=>t.fired=true);S.alert=null;S.rating=0;go('done');
-  say(`Dinner is ready! ${R().title}, cooked hands-free in ${mins} minutes. Say rate it five stars to save feedback.`);
+  wakeUp(15000);say(`Dinner is ready! ${R().title}, cooked hands-free in ${mins} minutes. Say rate it five stars to save feedback.`);
 }
 function rate(n){S.rating=n;if(HIST[0]&&HIST[0].id===S.rid){HIST[0].rating=n;saveLS('ska-hist',HIST)}if(S.screen==='done')render();say(`Saved ${n} star${n>1?'s':''}. Enjoy your meal!`)}
 
@@ -933,26 +1353,35 @@ async function scanGesture(){
 }
 /* ---------- rendering ---------- */
 const app=$('#app');
-function status(dark){return `<div class="status"><span>${new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit',hour12:false})}</span><span><b>5G</b><i></i></span></div>`}
+function status(){return ''}
 function hfBar(hint,live){return `<div class="bar" id="hfbar" role="button" tabindex="0" data-act="hf" aria-label="Toggle hands-free voice"><div class="orb">${ic('mic')}</div><p id="hint">${esc(hint)}</p><div class="wave ${live?'live':''}">${'<span></span>'.repeat(5)}</div></div>`}
 function backBtn(go2,label='Back'){return `<button class="icon-btn press" data-go="${go2}" aria-label="${label}">${ic('back')}</button>`}
-function recipeCard(r){const have=r.ing.filter(i=>isHave(i[2])).length;return `<button class="card recipe press" data-recipe="${r.id}"><div class="ph ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}</div><div style="flex:1;min-width:0"><b>${esc(r.title)}</b><small>${r.time} MIN · ${r.level.toUpperCase()}</small><span class="tag">${S.found.size?Math.round(have/r.ing.length*100)+'% MATCH':esc(r.tag)}</span>${allergyHit(r)?'<span class="tag warn">CONTAINS '+esc(allergyHit(r).toUpperCase())+'</span>':''}</div></button>`}
+function featCard(r){return `<button class="feat press" data-recipe="${r.id}"><div class="fimg"${photoStyle(r.id)}></div><div class="fbody"><span class="tag">${S.found.size?Math.round(r.ing.filter(i=>isHave(i[2])).length/r.ing.length*100)+'% match':esc(r.tag)}</span><b>${esc(r.title)}</b><small>${ic('timer','o')}${r.time} min · ${r.level} · ${ingCount(r)}</small></div></button>`}
+function recipeCard(r){const have=r.ing.filter(i=>isHave(i[2])).length;return `<button class="card recipe press" data-recipe="${r.id}"><div class="ph ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}</div><div style="flex:1;min-width:0"><b>${esc(r.title)}</b><small>${ic('timer','o')}${r.time} min · ${r.level}</small><span class="tag">${S.found.size?Math.round(have/r.ing.length*100)+'% MATCH':esc(r.tag)}</span>${allergyHit(r)?'<span class="tag warn">CONTAINS '+esc(allergyHit(r).toUpperCase())+'</span>':''}</div></button>`}
 
+function listHTML(){
+  const q=(S.q||'').toLowerCase().trim(),cf=S.cf||'All';
+  const base=RECIPES.filter(r=>(cf==='All'||r.cuisine===cf)&&(!q||(r.title+' '+r.cuisine+' '+r.ing.map(i=>i[0]).join(' ')).toLowerCase().includes(q)));
+  const shown=S.showAll?base:base.filter(okDiet),hidden=base.length-shown.length,hv=r=>r.ing.filter(i=>isHave(i[2])).length/r.ing.length;
+  const list=S.found.size?shown.slice().sort((a,b)=>hv(b)-hv(a)):shown;
+  return `<div class="label">${S.found.size?'Ready to cook now':'All recipes'} · ${list.length}</div>${list.map(recipeCard).join('')||'<div class="card" style="padding:20px;text-align:center;font-weight:600">No match. Try “Create any recipe with AI”.</div>'}
+   ${hidden?`<button class="chip press" data-act="showall">${hidden} hidden by your diet · Show</button>`:''}`;
+}
 const VIEWS={
 home(){
   const a=activeTimers().sort((x,y)=>x.end-y.end)[0];
   return `${status()}<div class="body">
-   <div class="greet"><div><div class="eyebrow" style="color:var(--accent)">${PREF.name?'HELLO, '+esc(PREF.name.toUpperCase()):'HANDS-FREE KITCHEN'}</div><h1>What are we cooking?</h1></div><div class="actions"><button class="avatar press" data-go="profile" aria-label="Your profile">${esc((PREF.name||'C')[0].toUpperCase())}</button><button class="icon-btn gear press ${LLM.key?'on':''}" data-act="settings" aria-label="Settings">${ic('gear')}</button></div></div>
+   <div class="greet"><div><div class="eyebrow" style="color:var(--accent)">${PREF.name?'Hello, '+esc(PREF.name):'Hands-free kitchen'}</div><h1>What are we cooking?</h1></div><div class="actions"><button class="avatar press" data-go="profile" aria-label="Your profile">${esc((PREF.name||'C')[0].toUpperCase())}</button><button class="icon-btn gear press ${LLM.key?'on':''}" data-act="settings" aria-label="Settings">${ic('gear')}</button></div></div>
    ${a?`<button class="pill-timer press" data-go="tasks">${ic('timer')}<span style="flex:1" data-bind="homet">${esc(a.name)} · ${fmt((a.end-Date.now())/1000)} left</span>${ic('chev')}</button>`:''}
-   <button class="voice-card press" data-act="talk" aria-label="Tell me what you’re craving"><div style="flex:1;min-width:0"><div class="eyebrow">VOICE FIRST</div><h3>Tell me what you’re craving</h3><small>Try: “Show me a quick pasta”</small></div><div class="mic-ring ${recOn&&S.listenOnce?'live':''}" id="homering"><div class="mic-orb">${ic('mic')}</div></div></button>
+   <button class="voice-card press" data-act="talk" aria-label="Tell me what you’re craving"><div style="flex:1;min-width:0"><div class="eyebrow">VOICE FIRST</div><h3>Tell me what you’re craving</h3><small>Say “Hey Chef” on any screen, then “Show me a quick pasta”</small></div><div class="mic-ring ${isLive()?'live':''}" id="homering"><div class="mic-orb">${ic('mic')}</div></div></button>
    <div class="quick"><button class="card press" data-go="scan"><div class="qi">${ic('camera')}</div><div><b>Scan ingredients</b><span>CAMERA</span></div></button><button class="card press" data-go="results"><div class="qi">${ic('book')}</div><div><b>Browse recipes</b><span>VOICE + TOUCH</span></div></button></div>
-   <div class="label">SUGGESTED TONIGHT</div>${recipeCard(suggest())}
-  </div><div class="bottom">${hfBar(S.handsfree?'Listening… say “Hey Chef”':'Say “Hey Chef” to start',S.handsfree&&recOn)}</div>`},
+   <div class="label">Suggested tonight</div>${featCard(suggest())}
+  </div><div class="bottom">${hfBar(hintFor(),isLive())}</div>`},
 scan(){return `${status()}<div class="body" style="padding-bottom:8px;gap:12px">
    <div class="top"><button class="icon-btn press" data-go="home" aria-label="Close" style="background:rgba(255,255,255,.14);border:0;color:#fff">${ic('x')}</button><h2 style="flex:1;font-size:22px">Scan ingredients</h2><span class="tag">SCAN</span></div>
    <div class="cam" id="camwrap"><video id="camv" playsinline muted></video><div class="boxes" id="boxes"></div><div class="status-pill" id="spill">Starting camera…</div></div>
    <div class="seg dk" role="group" aria-label="Scan mode"><button class="press ${S.scanMode!=='dish'?'on':''}" data-scanmode="ing">Ingredients</button><button class="press ${S.scanMode==='dish'?'on':''}" data-scanmode="dish">Identify dish</button></div><div class="center"><div style="font-weight:600;font-size:16px">${S.scanMode==='dish'?'Point at a finished dish':'Hold ingredients in frame'}</div><div class="eyebrow" style="color:var(--accent-soft);margin-top:4px">${LLM.key?'AI VISION ON · SAY “CAPTURE”':'BASIC COLOUR SCAN · ADD AI KEY FOR ACCURACY'}</div></div>
-   <div class="ctrls"><button class="cbtn press ${recOn?'act':''}" data-act="talk" aria-label="Voice"><i>${ic('mic')}</i>VOICE</button><button class="cbtn press" data-act="scanup" aria-label="Use a photo"><i>${ic('image')}</i>PHOTO</button><button class="shutter press" data-act="capture" aria-label="Capture ingredients"><i></i></button><button class="cbtn press ${S.scanGesture?'act':''}" data-act="scangesture" aria-label="Gesture capture"><i>${ic('hand')}</i>GESTURE</button></div>
+   <div class="ctrls"><button class="cbtn press ${isLive()?'act':''}" data-act="talk" aria-label="Voice"><i>${ic('mic')}</i>VOICE</button><button class="cbtn press" data-act="scanup" aria-label="Use a photo"><i>${ic('image')}</i>PHOTO</button><button class="shutter press" data-act="capture" aria-label="Capture ingredients"><i></i></button><button class="cbtn press ${S.scanGesture?'act':''}" data-act="scangesture" aria-label="Gesture capture"><i>${ic('hand')}</i>GESTURE</button></div>
    </div><div style="height:max(16px,env(safe-area-inset-bottom));flex:none"></div>`},
 results(){
   const q=(S.q||'').toLowerCase().trim(),cf=S.cf||'All',cuis=['All',...new Set(RECIPES.map(r=>r.cuisine).filter(Boolean))];
@@ -960,25 +1389,24 @@ results(){
   const shown=S.showAll?base:base.filter(okDiet),hidden=base.length-shown.length,hv=r=>r.ing.filter(i=>isHave(i[2])).length/r.ing.length;
   const list=S.found.size?shown.slice().sort((a,b)=>hv(b)-hv(a)):shown;
   return `${status()}<div class="body"><div class="hdr"><h2>${S.found.size?'Your ingredients':'Recipes'}</h2></div>
-   <label class="srch">${ic('search')}<input id="qin" class="sin" type="search" placeholder="Search dishes, cuisines, ingredients" value="${esc(S.q||'')}" aria-label="Search recipes"></label>
+   <label class="srch">${ic('search')}<input id="qin" class="sin" type="search" placeholder="Search dishes or ingredients" value="${esc(S.q||'')}" aria-label="Search recipes"></label>
    <div class="chips hs" role="group" aria-label="Cuisine">${cuis.map(c=>`<button class="chip press ${c===cf?'on':''}" data-cf="${esc(c)}" aria-pressed="${c===cf}">${esc(c)}</button>`).join('')}</div>
    <button class="btn s press aibtn" data-act="aigen">${ic('sparkle')}<span>Create any recipe with AI</span></button>
-   ${S.found.size?`<div class="label">${S.found.size} INGREDIENT${S.found.size>1?'S':''} DETECTED</div><div class="chips">${[...S.found].map(k=>`<button class="chip on press" data-rm="${k}" aria-label="Remove ${PANTRY_ALL[k]}">${PANTRY_ALL[k]} ${ic('x')}</button>`).join('')}</div>`:''}
-   <div class="label">ADD INGREDIENTS YOU HAVE</div><div class="chips hs">${Object.keys(PANTRY_ALL).filter(k=>!S.found.has(k)).map(k=>`<button class="chip press" data-add="${k}">+ ${PANTRY_ALL[k]}</button>`).join('')||'<span class="chip">All added</span>'}</div>
-   <div class="label">${S.found.size?'READY TO COOK NOW':'ALL RECIPES'} · ${list.length}</div>${list.map(recipeCard).join('')||'<div class="card" style="padding:20px;text-align:center;font-weight:600">No match. Try “Create any recipe with AI”.</div>'}
-   ${hidden?`<button class="chip press" data-act="showall">${hidden} hidden by your diet · Show</button>`:''}
-  </div><div class="bottom">${hfBar('Say “Show me the pasta”',S.handsfree&&recOn)}</div>`},
+   ${S.found.size?`<div class="label">${S.found.size} ingredient${S.found.size>1?'s':''} detected</div><div class="chips">${[...S.found].map(k=>`<button class="chip on press" data-rm="${k}" aria-label="Remove ${PANTRY_ALL[k]}">${PANTRY_ALL[k]} ${ic('x')}</button>`).join('')}</div>`:''}
+   <div class="label">Add what you have</div><div class="chips hs">${Object.keys(PANTRY_ALL).filter(k=>!S.found.has(k)).map(k=>`<button class="chip press" data-add="${k}">+ ${PANTRY_ALL[k]}</button>`).join('')||'<span class="chip">All added</span>'}</div>
+   <div id="rlist" style="display:contents">${listHTML()}</div>
+  </div><div class="bottom">${hfBar(hintFor(),isLive())}</div>`},
 detail(){const r=R(),miss=r.ing.filter(i=>!isHave(i[2])).length;
   return `${status()}<div class="body"><div class="hdr">${backBtn(S.from||'results')}<h2>Recipe</h2><button class="icon-btn press ${FAVS.includes(r.id)?'favon':''}" data-fav="${r.id}" aria-pressed="${FAVS.includes(r.id)}" aria-label="Save recipe">${ic('heart',FAVS.includes(r.id)?'f':'')}</button></div>
-   <div class="hero ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}<button class="addphoto press" data-act="photo" aria-label="${photoOf(r.id)?'Change':'Add'} photo of ${esc(r.title)}">${ic('camera')}<span>${photoOf(r.id)?'Change photo':'Add photo'}</span></button></div><h1 class="rtitle">${esc(r.title)}</h1>
-   <div class="chips"><span class="chip">${r.time} MIN</span><span class="chip">${r.serv} SERVINGS</span><span class="chip">${r.level.toUpperCase()}</span>${r.cuisine?`<span class="chip">${esc(r.cuisine.toUpperCase())}</span>`:''}${allergyHit(r)?`<span class="chip" style="color:#8a2a14">CONTAINS ${esc(allergyHit(r).toUpperCase())}</span>`:''}</div>
-   <div class="label">INGREDIENTS · ${r.ing.length-miss} OF ${r.ing.length} IN YOUR KITCHEN</div>
+   <div class="hero ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}<button class="addphoto press" data-act="photo" aria-label="${userPhoto(r.id)?'Change':'Add'} photo of ${esc(r.title)}">${ic('camera')}<span>${userPhoto(r.id)?'Change photo':'Add photo'}</span></button></div><h1 class="rtitle">${esc(r.title)}</h1>
+   <div class="chips"><span class="chip">${ic('timer','o')}${r.time} min</span><span class="chip">${r.serv} servings</span><span class="chip">${r.level}</span>${r.cuisine?`<span class="chip">${esc(r.cuisine)}</span>`:''}${allergyHit(r)?`<span class="chip" style="color:#8a2a14">CONTAINS ${esc(allergyHit(r).toUpperCase())}</span>`:''}</div>
+   <div class="label">Ingredients · ${r.ing.length-miss} of ${r.ing.length} in your kitchen</div>
    <ul class="card ing">${r.ing.map(i=>{const h=isHave(i[2]);return `<li class="${h?'':'miss'}">${h?ic('check'):ic('circle')}<span>${esc(i[0])}</span><em>${h?esc(i[1]):'MISSING'}</em></li>`}).join('')}</ul>
   </div><div class="bottom"><button class="btn s press" data-act="adapt">Adapt with voice</button><button class="btn p press" data-act="cook">Start hands-free cooking</button></div>`},
 adapt(){const a=S.adapt||{said:'',ch:[]};
   return `${status()}<div class="body"><div class="top"><button class="icon-btn press" data-go="detail" aria-label="Close">${ic('x')}</button><h2 style="flex:1;font-size:22px">Voice assistant</h2></div>
-   <div class="orb-wrap ${recOn?'live':''}"><i class="r3"></i><i class="r2"></i><i class="o">${ic('mic')}</i></div>
-   <div class="eyebrow center" style="color:var(--accent)">${recOn?'LISTENING…':'TAP THE ORB TO SPEAK'}</div>
+   <div class="orb-wrap ${isLive()?'live':''}"><i class="r3"></i><i class="r2"></i><i class="o">${ic('mic')}</i></div>
+   <div class="eyebrow center" style="color:var(--accent)">${isLive()?'LISTENING…':'SAY “HEY CHEF” OR TAP MIC'}</div>
    <div class="card said"><div class="eyebrow" style="color:var(--ink-soft)">YOU SAID</div><p id="heard">${a.said?'“'+esc(a.said)+'”':'Try “Make it vegetarian and less spicy”'}</p></div>
    ${a.ch.length?`<div class="resp"><div class="head">${ic('sparkle')}<span class="eyebrow">CHEF AI · RECIPE ADAPTED</span></div>${a.ch.map(c=>`<div class="chg">${ic('check')}<span>${esc(c)}</span></div>`).join('')}</div>`:''}
   </div><div class="bottom"><button class="btn p press" data-act="apply" ${a.ch.length?'':'disabled'}>Apply &amp; start cooking</button><button class="btn s press" data-go="detail">Back to recipe</button></div>`},
@@ -992,13 +1420,13 @@ cook(){const r=R(),s=r.steps[S.step],pct=((S.step+1)/r.steps.length)*100,tm=s.ti
    <div class="card cue"><div class="ph">${ic('chef')}</div><div><div class="eyebrow">LOOK FOR</div><p>${esc(s.cue)}</p></div></div>
    ${s.timer?`<button class="timer-card press" data-act="steptimer">${ic('timer')}<div style="flex:1;text-align:left"><b data-bind="steptime">${fmt(left)}</b><small>${tm&&!tm.fired?esc(s.timer[2]):'Say “Start timer”'}</small></div>${ic('chev')}</button>`:''}
    <div class="chips">${['Next','Repeat','Swap ingredient'].map(c=>`<button class="chip press" data-say="${c.toLowerCase()}">“${c}”</button>`).join('')}</div>
-  </div><div class="bottom">${hfBar(recOn?'Listening… say “Next step”':'Tap to turn on voice',recOn)}<div class="row"><button class="btn s press" data-act="prev" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="next" style="flex:1">${S.step>=r.steps.length-1?'Finish':'Next step'}</button></div></div>`},
+  </div><div class="bottom">${hfBar(hintFor(),isLive())}<div class="row"><button class="btn s press" data-act="prev" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="next" style="flex:1">${S.step>=r.steps.length-1?'Finish':'Next step'}</button></div></div>`},
 tasks(){const all=S.timers.slice().sort((a,b)=>(a.fired-b.fired)||(a.end-b.end));
   return `${status()}<div class="body"><div class="hdr">${S.inCook?backBtn('cook'):''}<h2>Active timers</h2></div>
    ${S.alert?`<div class="alert" role="alert"><div class="bell">${ic('bell')}</div><div><div class="eyebrow">ALERT · NOW</div><p>${esc(S.alert)}</p></div></div>`:''}
-   <div class="label">RUNNING · ${activeTimers().length} TASK${activeTimers().length===1?'':'S'}</div>
+   <div class="label">Running · ${activeTimers().length} timer${activeTimers().length===1?'':'s'}</div>
    ${all.map(t=>{const left=(t.end-Date.now())/1000,p=t.fired?100:100-(left/t.total*100);return `<div class="card task ${t.fired?'done':''}" data-tid="${t.id}"><div class="st">${t.fired?ic('check'):ic('timer')}</div><div class="tx"><b>${esc(t.name)}</b><div class="tr"><div style="width:${p}%"></div></div><small>${t.step?'STEP '+t.step+' · ':''}${t.fired?'COMPLETED':esc(t.sub||'RUNNING')}</small></div><div class="tm" data-bind="tm">${t.fired?'DONE':fmt(left)}</div>${t.fired?'':`<button class="x press" data-canceltid="${t.id}" aria-label="Cancel ${esc(t.name)}">${ic('x')}</button>`}</div>`}).join('')||`<div class="card" style="padding:24px;text-align:center;font-weight:600;color:var(--ink-soft)">No timers yet. Say “Start timer” while cooking.</div>`}
-  </div><div class="bottom">${hfBar('Ask “How much time is left?”',recOn)}${S.inCook?`<div class="row"><button class="btn s press" data-go="cook" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="finish" style="flex:1">Finish cooking</button></div>`:''}</div>`},
+  </div><div class="bottom">${hfBar(hintFor(),isLive())}${S.inCook?`<div class="row"><button class="btn s press" data-go="cook" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="finish" style="flex:1">Finish cooking</button></div>`:''}</div>`},
 profile(){
   const rated=HIST.filter(h=>h.rating),avg=rated.length?(rated.reduce((x,h)=>x+h.rating,0)/rated.length).toFixed(1):'–',favs=FAVS.map(id=>RECIPES.find(r=>r.id===id)).filter(Boolean);
   const opt=(k,arr)=>`<div class="seg" role="group">${arr.map(([v,l])=>`<button class="press ${String(PREF[k])===String(v)?'on':''}" data-pref="${k}" data-v="${v}" aria-pressed="${String(PREF[k])===String(v)}">${l}</button>`).join('')}</div>`;
@@ -1006,19 +1434,19 @@ profile(){
   return `${status()}<div class="body"><div class="hdr"><h2>Profile</h2><button class="icon-btn gear press ${LLM.key?'on':''}" data-go="settings" aria-label="Settings">${ic('gear')}</button></div>
    <div class="card phero"><div class="avatar big">${esc((PREF.name||'C')[0].toUpperCase())}</div><div style="flex:1;min-width:0"><label class="eyebrow" for="namein" style="color:var(--ink-soft)">YOUR NAME</label><input id="namein" class="field" placeholder="Add your name" value="${esc(PREF.name)}" maxlength="24" autocomplete="given-name" style="margin-top:6px"></div></div>
    <div class="stats"><div class="card"><b>${HIST.length}</b><small>COOKED</small></div><div class="card"><b>${favs.length}</b><small>SAVED</small></div><div class="card"><b>${avg}</b><small>AVG RATING</small></div></div>
-   <div class="label">FOOD PREFERENCES</div>
+   <div class="label">Food preferences</div>
    <div class="card pcard"><h3>Diet</h3>${opt('diet',[['any','Anything'],['veg','Veg'],['egg','Egg'],['vegan','Vegan']])}<h3>Spice level</h3>${opt('spice',[['mild','Mild'],['medium','Medium'],['hot','Hot']])}<h3>Cooking level</h3>${opt('skill',[['Easy','Beginner'],['Medium','Home cook'],['Hard','Confident']])}<h3>Usual servings</h3>${opt('serv',[[1,'1'],[2,'2'],[4,'4'],[6,'6']])}</div>
    <div class="card pcard"><h3>Cuisines you love</h3><div class="chips">${CU.map(c=>`<button class="chip press ${PREF.cuis.includes(c)?'on':''}" data-cuis="${c}" aria-pressed="${PREF.cuis.includes(c)}">${c}</button>`).join('')}</div>
     <label for="allergyin" class="eyebrow" style="color:var(--ink-soft)">ALLERGIES OR FOODS TO AVOID</label><input id="allergyin" class="field" placeholder="e.g. peanut, shellfish" value="${esc(PREF.allergy)}" autocomplete="off"></div>
-   <div class="label">SAVED RECIPES</div>${favs.map(recipeCard).join('')||'<div class="card" style="padding:18px;text-align:center;font-weight:600;color:var(--ink-soft)">Tap the heart on any recipe to save it here.</div>'}
-   ${HIST.length?`<div class="label">RECENTLY COOKED</div><div class="card">${HIST.slice(0,5).map(h=>`<div class="hrow"><b>${esc(h.title)}</b><small>${h.mins} MIN${h.rating?' · '+h.rating+'★':''}</small></div>`).join('')}</div>`:''}
+   <div class="label">Saved recipes</div>${favs.map(recipeCard).join('')||'<div class="card" style="padding:18px;text-align:center;font-weight:600;color:var(--ink-soft)">Tap the heart on any recipe to save it here.</div>'}
+   ${HIST.length?`<div class="label">Recently cooked</div><div class="card">${HIST.slice(0,5).map(h=>`<div class="hrow"><b>${esc(h.title)}</b><small>${h.mins} MIN${h.rating?' · '+h.rating+'★':''}</small></div>`).join('')}</div>`:''}
   </div>`},
 settings(){
   const pr=PROVIDERS[AI.p],ks=keyState.t?keyState:(LLM.key?{t:'Key saved on this device',cls:'ok'}:{t:'No key yet. Basic voice commands only',cls:''});
   const tog=(k,t,d)=>`<button class="card srow press" role="switch" aria-checked="${!!PREF[k]}" data-tog="${k}"><span><b>${t}</b><small>${d}</small></span><i class="sw ${PREF[k]?'on':''}"></i></button>`;
   const opt=(k,arr)=>`<div class="seg" role="group">${arr.map(([v,l])=>`<button class="press ${String(PREF[k])===String(v)?'on':''}" data-pref="${k}" data-v="${v}" aria-pressed="${String(PREF[k])===String(v)}">${l}</button>`).join('')}</div>`;
   return `${status()}<div class="body"><div class="hdr">${backBtn('profile')}<h2>Settings</h2></div>
-   <div class="label">AI PROVIDER</div><p class="note2">Powers open questions, camera recognition and recipe creation. Our pick to start: Groq (free and fast). Choose OpenAI or Claude for the most accurate photo recognition.</p>
+   <div class="label">AI provider</div><p class="note2">Powers open questions, camera recognition and recipe creation. Our pick to start: Groq (free and fast). Choose OpenAI or Claude for the most accurate photo recognition.</p>
    ${Object.entries(PROVIDERS).map(([k,p])=>`<button class="card prov press ${k===AI.p?'sel':''}" data-prov="${k}" role="radio" aria-checked="${k===AI.p}"><div style="flex:1;min-width:0"><div class="prow"><b>${p.name}</b><span class="tag ${p.rec?'':'soft'}">${p.rec?'RECOMMENDED':p.tag}</span></div><small>${p.why}</small></div></button>`).join('')}
    <div class="card pcard"><label class="eyebrow" for="keyin" style="color:var(--ink-soft)">${pr.name.toUpperCase()} API KEY</label>
     <input class="field" id="keyin" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your key" value="${esc(LLM.key)}">
@@ -1027,13 +1455,13 @@ settings(){
     <div class="state ${ks.cls}" role="status"><i></i><span>${esc(ks.t)}</span></div>
     <button class="btn p press" data-act="savekey">Save &amp; test</button><button class="btn s press" data-act="removekey" style="height:48px">Remove key</button>
     <p class="note2" style="font-size:12px">${pr.url?'Get a key at '+pr.url+'. ':''}Stored only in this browser. Treat it like a password and never share it.</p></div>
-   <div class="label">VOICE</div>${tog('speak','Spoken replies','Chef AI talks you through each step')}
+   <div class="label">Voice</div>${tog('speak','Spoken replies','Chef AI talks you through each step')}${tog('wake','Hey Chef anywhere','Say “Hey Chef” on any screen to start voice control')}
    <div class="card pcard"><h3>Speaking speed</h3>${opt('rate',[[0.9,'Slow'],[1,'Normal'],[1.15,'Fast']])}<h3>Language</h3>${opt('lang',[['en-IN','English (IN)'],['en-US','English (US)'],['hi-IN','हिन्दी']])}</div>
-   <div class="label">COOKING</div>${tog('autoVoice','Hands-free on start','Turn the microphone on when cooking begins')}${tog('awake','Keep screen awake','Stops the screen sleeping while you cook')}${tog('haptics','Vibration','Small buzz for steps and timers')}
-   <div class="label">DATA</div><div class="card pcard"><button class="btn s press" data-clear="hist" style="height:48px">Clear cooking history</button><button class="btn s press" data-clear="airec" style="height:48px">Remove AI-created recipes</button><button class="btn s press" data-clear="all" style="height:48px;color:#8a2a14;border-color:#8a2a14">Reset everything</button></div>
+   <div class="label">Cooking</div>${tog('autoVoice','Hands-free on start','Turn the microphone on when cooking begins')}${tog('awake','Keep screen awake','Stops the screen sleeping while you cook')}${tog('haptics','Vibration','Small buzz for steps and timers')}
+   <div class="label">Data</div><div class="card pcard"><button class="btn s press" data-clear="intro" style="height:48px">Show welcome tour again</button><button class="btn s press" data-clear="hist" style="height:48px">Clear cooking history</button><button class="btn s press" data-clear="airec" style="height:48px">Remove AI-created recipes</button><button class="btn s press" data-clear="all" style="height:48px;color:#8a2a14;border-color:#8a2a14">Reset everything</button></div>
   </div>`},
 done(){return `${status()}<div class="body" style="align-items:stretch">
-   <div class="ok">${ic('check')}</div><h1 class="center" style="font-size:34px;margin-top:8px">Dinner is ready!</h1>
+   <div class="okmark">${ic('check')}</div><h1 class="center" style="font-size:34px;margin-top:8px">Dinner is ready!</h1>
    <p class="center" style="font-weight:600;font-size:17px;line-height:23px;color:var(--ink-soft);padding:0 20px">${esc(R().title)} · cooked hands-free in ${S.took||28} min</p>
    <div class="stats"><div class="card"><b>${S.took||28} min</b><small>TIME</small></div><div class="card"><b>${R().steps.length} / ${R().steps.length}</b><small>STEPS</small></div><div class="card"><b>${S.cmds}</b><small>VOICE CMDS</small></div></div>
    <div class="card" style="padding:12px 16px"><div class="row" style="justify-content:center;gap:8px;font-weight:600;font-size:16px;padding:4px 0 6px">${ic('mic','')}<span>Say “Rate it 5 stars” to save feedback</span></div><div class="stars">${[1,2,3,4,5].map(n=>`<button class="${n<=S.rating?'on':''}" data-rate="${n}" aria-label="${n} star${n>1?'s':''}">${ic('star')}</button>`).join('')}</div></div>
@@ -1044,20 +1472,20 @@ function tabbar(active){
   return `<nav class="tabbar" aria-label="Main navigation">${[['home','Home','home'],['scan','Scan','camera'],['results','Recipes','book'],['tasks','Timers','timer'],['profile','Profile','user']].map(([k,l,i])=>`<button class="tab press ${active===k?'on':''}" data-go="${k}" ${k==='tasks'&&n?`aria-label="Timers, ${n} running"`:''} ${active===k?'aria-current="page"':''}>${ic(i,'o')}<span>${l}</span>${k==='tasks'&&n?`<b class="badge" aria-hidden="true">${n}</b>`:''}</button>`).join('')}</nav>`}
 const TABS=['home','results','tasks','profile','settings'];
 function showTabs(){return TABS.includes(S.screen)&&!(S.screen==='tasks'&&S.inCook)}
+var _lastScreen=null;
 function render(){
   const _b=$('.body'),_st=(_b&&app.firstElementChild&&app.firstElementChild.dataset.screen===S.screen)?_b.scrollTop:0;
   const v=VIEWS[S.screen]()+(showTabs()?tabbar(S.screen==='settings'?'profile':S.screen):'');
-  const dark=S.screen==='scan';
-  app.innerHTML=`<section class="screen on ${dark?'dark':''} ${showTabs()?'has-tabs':''}" data-screen="${S.screen}">${v}</section>`;
+  const dark=S.screen==='scan',_enter=_lastScreen!==S.screen;_lastScreen=S.screen;
+  app.innerHTML=`<section class="screen on ${_enter?'enter':''} ${dark?'dark':''} ${showTabs()?'has-tabs':''}" data-screen="${S.screen}">${v}</section>`;
   fixStars();if(_st){const b2=$('.body');if(b2)b2.scrollTop=_st}
   if(S.stream){const el=S.screen==='scan'?$('#camv'):(S.screen==='cook'&&S.gestures?$('#pipv'):null);
     if(el){el.srcObject=S.stream;el.classList.toggle('rear',S.facing==='environment');el.play().catch(()=>{});video=el}}
   if(S.screen==='cook'&&S.gestures&&!S.stream)startCamera('user',true);
+  paintWake();
 }
 function fixStars(){$$('.stars svg').forEach(s=>{const on=s.closest('button').classList.contains('on');s.style.fill=on?'currentColor':'none';s.style.stroke='currentColor';s.style.strokeWidth=on?'0':'1.6'})}
-function renderBars(){const b=$('#hfbar');if(!b){if(S.screen==='adapt'||S.screen==='scan'||S.screen==='home')render();return}
-  const live=recOn||recWanted;$('.wave',b).classList.toggle('live',live);
-  const h=$('#hint');if(h)h.textContent=S.screen==='cook'?(live?'Listening… say “Next step”':'Tap to turn on voice'):S.screen==='tasks'?'Ask “How much time is left?”':S.screen==='home'?(live?'Listening… say “Hey Chef”':'Say “Hey Chef” to start'):h.textContent}
+function renderBars(){paintWake()}
 function renderTimerBits(force){
   if(force&&(S.screen==='tasks')){render();return}
   if(S.screen==='tasks'){$$('.task').forEach(el=>{const t=S.timers.find(x=>String(x.id)===el.dataset.tid);if(!t||t.fired)return;const left=(t.end-Date.now())/1000;$('.tm',el).textContent=fmt(left);$('.tr>div',el).style.width=(100-left/t.total*100)+'%'})}
@@ -1068,17 +1496,19 @@ function renderTimerBits(force){
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
+  if(e.target.closest('#wake')){toggleWake();return}
   if(e.target.id==='sheet'){closeSettings();return}
   const t=e.target.closest('[data-go],[data-act],[data-recipe],[data-say],[data-add],[data-rm],[data-rate],[data-canceltid],[data-fav],[data-prov],[data-tog],[data-pref],[data-cuis],[data-cf],[data-scanmode],[data-clear]');if(!t)return;
   if(t.dataset.go){go(t.dataset.go);return}
   if(t.dataset.fav){const i=FAVS.indexOf(t.dataset.fav);i<0?FAVS.unshift(t.dataset.fav):FAVS.splice(i,1);saveLS('ska-favs',FAVS);render();return}
   if(t.dataset.prov){AI.p=t.dataset.prov;keyState={t:'',cls:''};saveAI();render();return}
-  if(t.dataset.tog){const k=t.dataset.tog;PREF[k]=!PREF[k];if(k==='speak'){S.muted=!PREF.speak;if(S.muted)try{speechSynthesis.cancel()}catch(e){}}savePrefs();render();return}
-  if(t.dataset.pref){const k=t.dataset.pref,v=t.dataset.v;PREF[k]=(v!==''&&!isNaN(+v))?+v:v;if(k==='lang'){if(rec)rec.lang=PREF.lang;pickVoice()}savePrefs();render();return}
+  if(t.dataset.tog){const k=t.dataset.tog;PREF[k]=!PREF[k];if(k==='speak'){S.muted=!PREF.speak;if(S.muted)try{speechSynthesis.cancel()}catch(e){}}if(k==='wake'){if(PREF.wake)startRec(true);else stopRec(true)}savePrefs();render();return}
+  if(t.dataset.pref){const k=t.dataset.pref,v=t.dataset.v;PREF[k]=(v!==''&&!isNaN(+v))?+v:v;if(k==='lang'){if(rec){rec.lang=PREF.lang;if(recOn){pauseRec();resumeRec()}}pickVoice()}savePrefs();render();return}
   if(t.dataset.cuis){const c=t.dataset.cuis,i=PREF.cuis.indexOf(c);i<0?PREF.cuis.push(c):PREF.cuis.splice(i,1);savePrefs();render();return}
   if(t.dataset.cf){S.cf=t.dataset.cf;render();return}
   if(t.dataset.scanmode){S.scanMode=t.dataset.scanmode;render();return}
   if(t.dataset.clear){const c=t.dataset.clear;
+    if(c==='intro'){showIntro(true);return}
     if(c==='hist'){HIST=[];saveLS('ska-hist',HIST)}
     if(c==='airec'){for(let i=RECIPES.length-1;i>=0;i--)if(RECIPES[i].ai)RECIPES.splice(i,1);saveLS('ska-ai-recipes',[]);FAVS=FAVS.filter(id=>RECIPES.some(r=>r.id===id));saveLS('ska-favs',FAVS)}
     if(c==='all'){if(!confirm('Reset all preferences, keys, history and saved recipes on this device?'))return;['ska-prefs','ska-hist','ska-favs','ska-ai','ska-ai-recipes','ska-photos'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});location.reload();return}
@@ -1091,9 +1521,8 @@ document.addEventListener('click',e=>{
   if(t.dataset.canceltid){S.timers=S.timers.filter(x=>String(x.id)!==t.dataset.canceltid);render();return}
   const a=t.dataset.act;
   if(a==='talk'||a==='hf'){
-    if(a==='hf'&&(S.screen==='cook'||S.screen==='tasks')){recWanted?stopRec():startRec();return}
-    const ok=startRec();if(!ok)return;S.listenOnce=true;S.handsfree=true;
-    if(S.screen==='home'){const r=$('#homering');r&&r.classList.add('live')}
+    if(a==='hf'&&S.inCook&&(S.screen==='cook'||S.screen==='tasks')){if(recWanted){stopRec(true);caption('Voice is off. Tap the bar to turn it back on.','CHEF AI')}else{startRec(true);wakeUp(12000)}return}
+    if(!startRec(true))return;S.listenOnce=true;wakeUp(12000);
     if(S.screen==='adapt')render();
     say(S.screen==='adapt'?'I’m listening. How should I change the recipe?':S.screen==='scan'?'Listening. Say capture when you’re ready.':'I’m listening. What are you craving?');return}
   if(a==='settings')return openSettings();
@@ -1108,7 +1537,7 @@ document.addEventListener('click',e=>{
   if(a==='scangesture')return scanGesture();
   if(a==='retrycam')return startCamera('environment');
   if(a==='demo')return demoScan();
-  if(a==='adapt'){S.adapt=null;go('adapt');startRec();S.listenOnce=true;say('Tell me how you’d like to change this recipe. For example, make it vegetarian and less spicy.');return}
+  if(a==='adapt'){S.adapt=null;go('adapt');startRec(true);S.listenOnce=true;wakeUp(15000);say('Tell me how you’d like to change this recipe. For example, make it vegetarian and less spicy.');return}
   if(a==='apply')return applyAdapt();
   if(a==='cook')return startCooking();
   if(a==='next')return nextStep();
@@ -1120,19 +1549,67 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();
   if(e.key==='Tab'&&$('#sheet').classList.contains('on')){const f=$$('#sheet button,#sheet input'),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}if(e.key==='Enter'&&e.target.id==='keyin'){saveKey();return}if((e.key==='Enter'||e.key===' ')&&e.target.matches('#hfbar')){e.preventDefault();e.target.click()}});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&S.stream){/* keep timers, stop camera */stopStream()}});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){if(S.stream)stopStream();if(rec&&recOn){try{rec.abort()}catch(e){}}}
+  else if(recWanted)scheduleStart(400)});
+/* the browser only allows the mic after a tap: the first touch anywhere switches “Hey Chef” on for every screen */
+['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev,e=>{
+  V.gestured=true;
+  if(!SR||!PREF.wake||recWanted||V.userOff||V.blocked)return;
+  if(e.target&&e.target.closest&&e.target.closest('#wake,#hfbar'))return;
+  startRec();
+},true));
 
+let _qt=null;
+document.addEventListener('input',e=>{if(e.target.id==='qin'){clearTimeout(_qt);_qt=setTimeout(()=>{S.q=e.target.value;S.showAll=false;const l=$('#rlist');if(l)l.innerHTML=listHTML()},180)}});
 document.addEventListener('change',e=>{
   const id=e.target.id;
   if(id==='namein'){PREF.name=e.target.value.trim();savePrefs();render()}
   if(id==='allergyin'){PREF.allergy=e.target.value.trim();savePrefs();render()}
-  if(id==='qin'){S.q=e.target.value;S.showAll=false;render();const q=$('#qin');if(q&&S.q){q.focus();q.setSelectionRange(S.q.length,S.q.length)}}
+  if(id==='qin'){S.q=e.target.value;S.showAll=false;const l=$('#rlist');if(l)l.innerHTML=listHTML()}
   if(id==='scanin'&&e.target.files[0]){const f=e.target.files[0],im=new Image(),u=URL.createObjectURL(f);
     im.onload=()=>{const k=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);S.upImg=c.toDataURL('image/jpeg',.8).split(',')[1];e.target.value='';Promise.resolve(capture()).finally(()=>{S.upImg=null})};
     im.onerror=()=>{URL.revokeObjectURL(u);caption('That file couldn’t be read as a photo.','CHEF AI')};im.src=u}if(e.target.id==='photoin'&&e.target.files[0])savePhoto(S.photoFor||S.rid,e.target.files[0])});
 /* ---------- boot ---------- */
+
+/* ---------- splash + first-run onboarding ---------- */
+const OB={i:0,slides:[
+ {bg:'var(--lav)',icon:'mic',t:'Cook hands-free',p:'Say “Hey Chef” on any screen. I’ll read each step and set timers while your hands stay messy.',say:'“Hey Chef, next step”'},
+ {bg:'var(--mint)',icon:'camera',t:'Scan what you have',p:'Point the camera at your ingredients and I’ll show what you can cook right now.',say:'“Hey Chef, open scan”'},
+ {bg:'var(--sun)',icon:'user',t:'Make it yours',p:'Tell me your name and diet so every recipe fits you. You can change this any time in Profile.',form:true}]};
+function introEl(){return $('#intro')}
+function hideIntro(){const el=introEl();el.classList.add('out');setTimeout(()=>{el.classList.remove('on','out');el.innerHTML=''},380)}
+function showIntro(force){
+  const el=introEl(),first=force||!PREF.onboarded;
+  el.className='on';
+  el.innerHTML=`<div class="splash"><div class="logo">${ic('chef')}</div><h1>Smart Kitchen</h1><p>Your hands-free cooking sidekick</p></div>`;
+  setTimeout(()=>{first?(OB.i=0,drawOB()):hideIntro()},first?1500:1000);
+}
+function drawOB(){
+  const el=introEl(),sl=OB.slides[OB.i],last=OB.i===OB.slides.length-1;
+  el.innerHTML=`<div class="ob-top"><span></span>${last?'':'<button data-ob="skip">Skip</button>'}</div>
+   <div class="ob-art" style="background:${sl.bg}"><div class="big">${ic(sl.icon)}</div></div>
+   <div class="ob-body"><h1>${sl.t}</h1><p>${sl.p}</p>${sl.say?`<span class="say-chip">${sl.say}</span>`:''}
+   ${sl.form?`<div class="ob-form"><label for="obname">Your name</label><input id="obname" class="field" placeholder="e.g. Yash" maxlength="24" autocomplete="given-name" value="${esc(PREF.name)}"><label>Diet</label><div class="seg" role="group">${[['any','Anything'],['veg','Veg'],['egg','Egg'],['vegan','Vegan']].map(([v,l])=>`<button class="press ${PREF.diet===v?'on':''}" data-ob="diet" data-v="${v}">${l}</button>`).join('')}</div></div>`:''}</div>
+   <div class="dots" aria-hidden="true">${OB.slides.map((_,i)=>`<i class="${i===OB.i?'on':''}"></i>`).join('')}</div>
+   <div class="ob-actions"><button class="btn p press" data-ob="next">${last?'Start cooking':'Continue'}</button>${OB.i>0?'<button class="btn s press" data-ob="back" style="height:48px">Back</button>':''}</div>`;
+}
+function finishOB(){
+  const n=$('#obname');if(n)PREF.name=n.value.trim();
+  PREF.onboarded=true;savePrefs();hideIntro();render();
+  if(SR&&PREF.wake){startRec(true);caption('Voice is on. Say “Hey Chef” any time.','CHEF AI')}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('#intro [data-ob]');if(!b)return;e.stopPropagation();
+  const a=b.dataset.ob;
+  if(a==='skip')return finishOB();
+  if(a==='next')return OB.i>=OB.slides.length-1?finishOB():(OB.i++,drawOB());
+  if(a==='back'){OB.i=Math.max(0,OB.i-1);return drawOB()}
+  if(a==='diet'){const n=$('#obname');if(n)PREF.name=n.value.trim();PREF.diet=b.dataset.v;savePrefs();drawOB()}
+},true);
 render();
-setTimeout(()=>{if(S.screen==='home')caption('Tap the mic and say “Show me a quick pasta”.','CHEF AI')},600);
+showIntro();
+setTimeout(()=>{if(S.screen==='home')caption(SR?'Tap anywhere once, then say “Hey Chef”.':'Voice needs Chrome, Edge or Safari. Every button still works.','CHEF AI')},600);
 window.__S=S;
 </script>
 </body>
