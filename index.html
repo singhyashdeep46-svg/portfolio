@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Smart Kitchen Assistant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#eef2dc;--ink:#2e312e;--ink-soft:#5f655a;--accent:#bf4521;--accent-soft:#e8ccd6;
@@ -394,7 +394,7 @@ p,small,.note2{text-wrap:pretty}
   --bg:#f3f3f8;--ink:#15151a;--ink-soft:#656575;--accent:#6d4ae8;--accent-ink:#4a2fc0;--accent-soft:#e3dafc;
   --line:#e4e4ee;--surface:#fff;--dark:#17171c;--success:#3a9a5b;
   --lav:#cdbdfa;--mint:#c6f0b0;--sun:#fdf0a2;--peach:#fbd9bb;
-  --display:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;--body:var(--display);
+  --display:'Outfit','Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;--body:var(--display);
   --r-card:28px;--r-pill:999px;
   --shadow-1:0 1px 2px rgba(21,21,26,.04),0 8px 24px rgba(21,21,26,.06);
   --shadow-2:0 2px 4px rgba(21,21,26,.05),0 16px 34px rgba(21,21,26,.12);
@@ -634,6 +634,49 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 /* iOS-style spring on press */
 .press{transition:transform .4s var(--ios),opacity .15s,background .2s}
 .press:active{transform:scale(.965);opacity:1;transition-duration:.12s}
+
+/* ===== v11: login / sign-up (ekilu reference) ===== */
+#intro .auth-art{height:176px;margin:-20px -24px 0;border-radius:0 0 36px 36px;background:linear-gradient(180deg,#c9b8fb,#e4dcfd);display:flex;align-items:center;justify-content:center;gap:0}
+#intro .pc{width:92px;height:92px;border-radius:50%;background-size:cover;background-position:center;box-shadow:0 0 0 4px #fff;margin:0 -8px}
+#intro .pc:nth-child(2){width:112px;height:112px;z-index:1}
+#intro .auth-card{margin-top:-22px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border-radius:28px;padding:14px 16px 18px;box-shadow:0 0 0 .5px rgba(21,21,26,.06)}
+.auth-seg{display:flex;background:#fff;border-radius:999px;padding:4px;margin-bottom:14px}
+.auth-seg button{flex:1;height:44px;border:0;border-radius:999px;background:none;color:var(--ink);font:500 15px var(--display);transition:background .3s var(--ios),color .3s}
+.auth-seg button.on{background:#000;color:#fff}
+.auth-card h2{font-size:20px;font-weight:500;margin:4px 0 2px}.auth-card label{display:block;font:500 13px var(--display);margin:12px 0 6px}
+.auth-row{display:flex;gap:10px}.auth-row>div{flex:1;min-width:0}
+.auth-err{color:#c2410c;font-size:13px;min-height:18px;margin:8px 0 4px}
+.auth-card .btn.p{width:100%;border-radius:999px}
+.auth-or{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-size:13px;margin:14px 0}.auth-or:before,.auth-or:after{content:"";flex:1;height:1px;background:rgba(21,21,26,.12)}
+.auth-soc{display:flex;gap:10px}.auth-soc .btn{flex:1;border-radius:999px}
+.auth-guest{display:block;margin:14px auto 0;background:none;border:0;color:var(--accent-ink,#3d2a9a);font:500 14px var(--display);padding:8px}
+
+/* ===== v12 tabs ===== */
+.tabbar .tab span{white-space:nowrap;font-size:11px}
+.daystrip{display:flex;gap:8px;margin:4px 0 6px}
+.dchip{flex:1;min-width:0;height:64px;border:0;border-radius:20px;background:#fff;color:var(--ink);font:500 13px var(--display);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:background .3s var(--ios),color .3s}
+.dchip.on{background:#000;color:#fff}.dchip i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.pick{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:14px 16px;margin-bottom:8px;text-align:left}
+.chips-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+
+/* ===== v16 alignment pass (Emil: one spacing scale, 44px targets, nothing hidden under the bar) ===== */
+.body{padding-bottom:calc(132px + env(safe-area-inset-bottom))}
+h1,h2,h3{text-wrap:balance}p,.note2{text-wrap:pretty}
+.stats b,.timer-card b,.dchip,.pick small{font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.btn .i{width:18px;height:18px;flex:none}
+.pcard .btn{width:100%}.pcard .btn+.btn{margin-top:10px}
+.pcard>*+.eyebrow,.pcard>*+label{margin-top:14px}
+.chips-row{display:flex;flex-wrap:wrap;gap:8px}.chips-row .chip{width:auto;flex:none;display:inline-flex;align-items:center;min-height:40px}
+.tabbar .tab{min-width:0}.tabbar .tab .i{width:22px;height:22px}
+.card.pick b{display:block;line-height:1.25}.card.pick small{flex:none;color:var(--ink-soft)}
+.body>.card,.body>.recipe,.body>.btn{margin-bottom:10px}
+.greet{align-items:center}.greet h1{margin:2px 0 0}
+.daystrip{gap:6px}.dchip{height:60px}
+.note2 a{color:var(--accent-ink,#3d2a9a);font-weight:600;text-decoration:none}.tabbar .tab span{font-size:10.5px;letter-spacing:-.01em}
+
+.ing li .ingrow{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left}
+.ing li .ingrow span{flex:1;min-width:0}.ing li .ingrow em{font-style:normal;flex:none}
 </style>
 </head>
 <body>
@@ -686,7 +729,10 @@ const buzz=n=>{try{PREF.haptics&&navigator.vibrate&&navigator.vibrate(n)}catch(e
 const PHOTO_URLS={pasta:'',bhurji:'',soup:''};
 let PH={};try{PH=JSON.parse(localStorage.getItem('ska-photos')||'{}')}catch(e){}
 let WP={};try{WP=JSON.parse(localStorage.getItem('ska-wphotos')||'{}')}catch(e){}
-const photoOf=id=>PH[id]||PHOTO_URLS[id]||WP[id]||artOf(id);
+let PXP={};try{PXP=JSON.parse(localStorage.getItem('ska-pxphotos')||'{}')}catch(e){}
+const UNSPLASH_KEY='J5C5XmXCXF61TkiFrXFOuEAGeZrGjsM3Aw7X-ocdi1M'; /* public Access Key only, never put the Secret Key in this file */
+let PXKEY=UNSPLASH_KEY;try{PXKEY=localStorage.getItem('ska-px')||UNSPLASH_KEY}catch(e){}
+const photoOf=id=>PH[id]||PHOTO_URLS[id]||PXP[id]||WP[id]||artOf(id);
 const photoStyle=id=>{const u=photoOf(id),a=artOf(id);const q=x=>`url(&quot;${String(x).replace(/[&<>\"]/g,'')}&quot;)`;return u?` style="background-image:${u===a||!a?q(u):q(u)+','+q(a)}"`:''};
 function savePhoto(id,file){
   const img=new Image(),url=URL.createObjectURL(file);
@@ -773,7 +819,11 @@ let voice=null;
 function pickVoice(){if(!TTS)return;const v=speechSynthesis.getVoices();voice=v.find(x=>x.lang.replace('_','-').toLowerCase()===PREF.lang.toLowerCase())||v.find(x=>/en-IN/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang)&&/female|samantha|google/i.test(x.name))||v.find(x=>/^en/i.test(x.lang))||null}
 if(TTS){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
 let speaking=false;
+function askIngredients(){say(rnd(['What ingredients do you have?','Which of these do you already have?','Tell me what’s in your kitchen.'])+' Say, for example, “I have tomato and onion”, or “I have everything”.').then(()=>{if(S.screen==='detail')wakeUp(15000)})}
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
 function say(text,opts={}){
+  if(text===V.lastSaid&&Date.now()-(V.lastSaidAt||0)<30000)text=rnd(['Once more. ','Sure. ','Okay, again. '])+text;
+  V.lastSaid=text.replace(/^(Once more\. |Sure\. |Okay, again\. )/,'');V.lastSaidAt=Date.now();
   caption(text,'CHEF AI');$('#live').textContent=text;
   if(!TTS||S.muted){return Promise.resolve()}
   return new Promise(res=>{
@@ -781,9 +831,9 @@ function say(text,opts={}){
     const u=new SpeechSynthesisUtterance(text);if(voice)u.voice=voice;u.rate=opts.rate||PREF.rate;u.pitch=1.02;
     V.spoken=norm(text);V.spokenAt=Date.now();speaking=true;pauseRec();paintWake();
     let fin=false;const t0=Date.now();
-    const done=()=>{if(fin)return;fin=true;clearInterval(iv);speaking=false;V.spokenAt=Date.now();V.quietUntil=Date.now()+900;if(V.awake)wakeUp(9000);resumeRec();paintWake();res()};
+    const done=()=>{if(fin)return;fin=true;clearInterval(iv);speaking=false;V.spokenAt=Date.now();V.quietUntil=Date.now()+250;if(V.awake)wakeUp(9000);resumeRec();paintWake();res()};
     const iv=setInterval(()=>{if(Date.now()-t0>700&&!speechSynthesis.speaking&&!speechSynthesis.pending)done();if(Date.now()-t0>45000)done()},400);
-    u.onend=done;u.onerror=done;try{speechSynthesis.speak(u)}catch(e){done()}
+    u.onend=done;u.onerror=done;setTimeout(()=>{try{speechSynthesis.speak(u)}catch(e){done()}},60)
   });
 }
 let capT;function caption(t,who){const c=$('#cap');const w=/^CHEF AI$/i.test(who)?'Chef AI':who;c.innerHTML=`<i class="cap-ic">${ic('sparkle')}</i><div class="cap-tx"><small>${esc(w)}</small>${esc(t)}</div>`;c.classList.add('on');clearTimeout(capT);capT=setTimeout(()=>c.classList.remove('on'),Math.min(9000,2800+t.length*55))}
@@ -805,7 +855,7 @@ function initRec(){
   rec=new SR();rec.lang=PREF.lang;rec.continuous=true;rec.interimResults=true;rec.maxAlternatives=3;
   rec.onstart=()=>{recOn=true;V.sid++;V.seen.clear();paintWake()};
   rec.onresult=onResult;
-  rec.onend=()=>{recOn=false;paintWake();if(recWanted&&!speaking)scheduleStart(V.fails>2?3000:300)};
+  rec.onend=()=>{recOn=false;paintWake();if(recWanted&&!speaking)scheduleStart(V.fails>2?3000:100)};
   rec.onerror=e=>{
     const er=e&&e.error;
     if(er==='not-allowed'||er==='service-not-allowed'){recWanted=false;recOn=false;S.handsfree=false;
@@ -821,7 +871,7 @@ function startRec(user){
   paintWake();return true}
 function stopRec(user){recWanted=false;if(user)V.userOff=true;clearTimeout(startT);if(rec){try{rec.abort()}catch(e){}}recOn=false;paintWake()}
 function pauseRec(){if(rec&&recOn){try{rec.abort()}catch(e){}recOn=false}}
-function resumeRec(){if(recWanted&&rec&&!recOn)scheduleStart(450)}
+function resumeRec(){if(recWanted&&rec&&!recOn)scheduleStart(120)}
 
 /* awake window: “Hey Chef” opens ~10s of listening on ANY screen; cooking keeps it open */
 function alwaysAwake(){return S.handsfree&&S.inCook&&(S.screen==='cook'||S.screen==='tasks')}
@@ -869,7 +919,7 @@ function onResult(e){
     const r=e.results[i],txt=((r[0]&&r[0].transcript)||'').trim(),key=V.sid+':'+i;
     if(!txt)continue;
     if(!r.isFinal){
-      if(i===n-1){const el=$('#heard');if(el)el.textContent='“'+txt+'”';
+      if(i===n-1){const el=$('#heard');if(el)el.textContent='“'+txt+'”';if(awakeNow()){const w=$('#wake .wt');if(w)w.textContent='“'+txt.slice(-38)+'”'}
         if(!awakeNow()&&WAKE_RE.test(txt.toLowerCase())&&!V.seen.has(key))wake(12000)}
       continue}
     if(V.seen.has(key))continue;
@@ -905,7 +955,7 @@ function handleHeard(raw,alts){
   const clean=x=>x.toLowerCase().replace(/[.,!?।]/g,'').replace(/\s+/g,' ').trim();
   let t=clean(raw);if(!t)return;
   const now=Date.now();
-  if(t===V.lastTxt&&now-V.lastAt<3500)return;          /* same phrase twice in a row = a repeat, not a new command */
+  if(t===V.lastTxt&&now-V.lastAt<1200)return;          /* same phrase twice in a row = a repeat, not a new command */
   V.lastTxt=t;V.lastAt=now;
   const nt=norm(t);
   if(V.spoken&&now-V.spokenAt<8000&&nt.split(' ').length>=4&&V.spoken.includes(nt))return;   /* Chef hearing itself */
@@ -956,7 +1006,7 @@ const aiErr=e=>(e&&(e.name==='TimeoutError'||e.name==='AbortError'))?'The AI too
 const prefCtx=()=>({diet:PREF.diet,spice:PREF.spice,allergies:PREF.allergy,likedCuisines:PREF.cuis,servings:PREF.serv,skill:PREF.skill});
 const CHAT=[];
 async function askLLM(text){
-  if(!LLM.key){caption('Add an AI key in Settings to answer open questions.','CHEF AI');return say('Sorry, I didn’t catch that. Try next, repeat, or start timer.')}
+  if(!LLM.key){caption('Add an AI key in Settings to answer open questions.','CHEF AI');return say(helpHere())}
   if(LLM.busy&&Date.now()-(LLM.busyAt||0)<25000)return;LLM.busy=true;LLM.busyAt=Date.now();wakeUp(20000);caption('Thinking…','CHEF AI');
   const r=R(),st=r.steps[S.step];
   const sys='You are Chef AI inside a hands-free kitchen app. The user spoke a command or question. Reply with ONE JSON object only: {"action":"next|previous|repeat|start_timer|set_timer|time_left|open_recipe|recipe|adapt|swap|scan|home|finish|go|search|add_ingredient|answer","arg":"string or empty","seconds":0,"reply":"one or two short spoken sentences"}. Use "answer" for cooking questions (substitutions, techniques, doneness) and put the answer in reply. Use "open_recipe" with arg = a recipe id from the list. Use "recipe" with arg = the dish or cuisine when the user wants a dish that is not in the list (any cuisine in the world). Use "adapt" with arg = the change requested. Use "swap" with arg = the missing ingredient. Use "set_timer" with seconds. Use \"go\" with arg = one of home, scan, results, tasks, profile, settings to change screen. Use \"search\" with arg = words to search in the recipe list. Use \"add_ingredient\" with arg = one ingredient the user says they have. The context field \"history\" holds the last few turns: use it to resolve words like \"it\" or \"that\". Never invent actions. Respect the cook preferences. Keep replies under 30 words, plain speech, no markdown.';
@@ -1032,7 +1082,24 @@ function removeKey(){AI.keys[AI.p]='';saveAI();keyState={t:'Key removed',cls:''}
 /* ---------- command brain ---------- */
 const has=(t,...w)=>w.some(x=>t.includes(x));
 const NAVMAP={home:['home','Home'],scan:['scan','the camera'],scanner:['scan','the camera'],camera:['scan','the camera'],recipe:['results','recipes'],recipes:['results','recipes'],timer:['tasks','your timers'],timers:['tasks','your timers'],profile:['profile','your profile'],settings:['settings','settings']};
+const HELP_BY={detail:['Say “I have tomato and onion”, “I have everything”, or “what am I missing”.','Tell me which ingredients you have, or say start cooking.'],cook:['Try “next”, “repeat”, “start timer”, or ask me anything.','Say “next step” when you’re ready, or “how much time is left”.'],home:['Try “show me a quick pasta”, or “open scan”.','Tell me what you’re craving, or say “open recipes”.'],plan:['Try “open recipes” or “go home”.'],ai:['Describe a dish, or say “go home”.']};
+let helpN=0;function helpHere(){const a=HELP_BY[S.screen]||['Try “go home”, “open scan”, or “show me a pasta”.'];return rnd(['Hmm, I missed that. ','Sorry, say that once more? ','Not sure I got that. '])+a[helpN++%a.length]}
+/* ingredient check by voice: “I have tomato and onion”, “no basil”, “I have everything”, “what am I missing” */
+function ingVoice(t){
+  const r=R();if(!r||S.screen!=='detail')return false;
+  const left=()=>r.ing.filter(i=>!isHave(i[2])).map(i=>i[0]);
+  if(/\b(i have (everything|all of it|all)|have everything|got everything|got it all|sab hai|sab kuch hai)\b/.test(t)){r.ing.forEach(i=>S.found.add(i[2]));render();say(rnd(['Perfect, you have everything. Say start cooking when you’re ready.','Great, nothing to buy. Say start cooking.']));wakeUp(12000);return true}
+  if(/\b(clear|reset|start over|i have nothing)\b/.test(t)&&!/timer/.test(t)){r.ing.forEach(i=>S.found.delete(i[2]));render();say('Cleared. What do you have?');wakeUp(12000);return true}
+  if(/\b(what'?s missing|what am i missing|what do i need|what else do i need|missing)\b/.test(t)){const m=left();say(m.length?`You still need ${m.join(', ')}.`:'Nothing missing. You’re all set.');wakeUp(12000);return true}
+  const added=[],removed=[];
+  t.split(/\b(?:but|except|aur nahi)\b/).forEach(cl=>{const neg=/\b(no|not|don'?t have|do not have|without|nahi|out of|ran out)\b/.test(cl);
+    r.ing.forEach(i=>{const w=i[0].toLowerCase().split(/[^a-z]+/).filter(x=>x.length>2);if(cl.includes(i[2])||w.some(x=>cl.includes(x.replace(/s$/,'')))){neg?(S.found.delete(i[2]),removed.push(i[0])):(S.found.add(i[2]),added.push(i[0]))}})});
+  if(!added.length&&!removed.length)return false;
+  render();const m=left();
+  say((added.length?rnd(['Got it: ','Okay, ','Noted: '])+added.join(', ')+'. ':'')+(removed.length?'No '+removed.join(', ')+'. ':'')+(m.length?`Still checking: ${m.slice(0,3).join(', ')}${m.length>3?' and more':''}. Do you have those?`:'That’s everything. Say start cooking!'));
+  wakeUp(12000);return true}
 function command(t){
+  if(S.screen==='detail'&&ingVoice(t))return;
   const mn=t.match(/^(?:(?:go to|open|show|show me|take me to|switch to)\s+)?(?:the\s+|my\s+)?(home|scanner|scan|camera|recipes?|timers?|profile|settings)(?:\s+(?:page|screen|tab))?$/);
   if(mn){const [to,label]=NAVMAP[mn[1]];if(to!==S.screen){go(to);return say(to==='scan'?'Opening the camera. Hold your ingredients in the frame, then say capture.':`Opening ${label}.`)}}
   if(LLM.key&&t.split(' ').length>=3&&!/^(set timer for \d+|rate |go home|finish cooking|how much time is left|start timer|go to |mute|unmute)/.test(t)){return askLLM(t)}
@@ -1082,8 +1149,8 @@ function command(t){
   if(has(t,'help','what can i say','commands'))return say('You can say next, repeat, start timer, how much time is left, swap ingredient, scan ingredients, or rate it five stars.');
   askLLM(t);
 }
-const ingCount=r=>{const n=r.ing.filter(i=>isHave(i[2])).length;return `you have ${n} of ${r.ing.length} ingredients`};
-const isHave=k=>S.found.size?S.found.has(k)||k==='chili'&&false:!['garlic'].includes(k)&&!['chili'].includes(k)||(k==='chili');
+const ingCount=r=>{const n=r.ing.filter(i=>isHave(i[2])).length;return n?`you have ${n} of ${r.ing.length} ingredients`:`${r.ing.length} ingredients`};
+const isHave=k=>S.found.has(k);
 
 /* ---------- navigation ---------- */
 function go(s){
@@ -1093,7 +1160,7 @@ function go(s){
   if(s==='scan')startCamera('environment');
   if(s==='cook'&&S.gestures)startCamera('user',true);
 }
-function openRecipe(id){if(S.screen==='home'||S.screen==='results')S.from=S.screen;S.rid=id;S.step=0;S.adapt=null;S.applied=false;S.timers=S.timers.filter(t=>t.keep);go('detail')}
+function openRecipe(id){if(S.screen!=='results')S.found=new Set();if(['home','results','plan','ai','journal','learn'].includes(S.screen))S.from=S.screen;S.rid=id;S.step=0;S.adapt=null;S.applied=false;S.timers=S.timers.filter(t=>t.keep);go('detail')}
 
 /* ---------- timers ---------- */
 function addTimer(name,secs,sub,step){
@@ -1436,9 +1503,11 @@ detail(){const r=R(),miss=r.ing.filter(i=>!isHave(i[2])).length;
   return `${status()}<div class="body"><div class="hdr">${backBtn(S.from||'results')}<h2>Recipe</h2><button class="icon-btn press ${FAVS.includes(r.id)?'favon':''}" data-fav="${r.id}" aria-pressed="${FAVS.includes(r.id)}" aria-label="Save recipe">${ic('heart',FAVS.includes(r.id)?'f':'')}</button></div>
    <div class="hero ${photoOf(r.id)?'photo':''}"${photoStyle(r.id)}>${ic('chef')}<button class="addphoto press" data-act="photo" aria-label="${userPhoto(r.id)?'Change':'Add'} photo of ${esc(r.title)}">${ic('camera')}<span>${userPhoto(r.id)?'Change photo':'Add photo'}</span></button></div><h1 class="rtitle">${esc(r.title)}</h1>
    <div class="chips"><span class="chip">${ic('timer','o')}${r.time} min</span><span class="chip">${r.serv} servings</span><span class="chip">${r.level}</span>${r.cuisine?`<span class="chip">${esc(r.cuisine)}</span>`:''}${allergyHit(r)?`<span class="chip" style="color:#8a2a14">CONTAINS ${esc(allergyHit(r).toUpperCase())}</span>`:''}</div>
-   <div class="label">Ingredients · ${r.ing.length-miss} of ${r.ing.length} in your kitchen</div>
-   <ul class="card ing">${r.ing.map(i=>{const h=isHave(i[2]);return `<li class="${h?'':'miss'}">${h?ic('check'):ic('circle')}<span>${esc(i[0])}</span><em>${h?esc(i[1]):'MISSING'}</em></li>`}).join('')}</ul>
-  </div><div class="bottom"><button class="btn s press" data-act="adapt">Adapt with voice</button><button class="btn p press" data-act="cook">Start hands-free cooking</button></div>`},
+   <div class="label">What do you have? · ${r.ing.length-miss} of ${r.ing.length}</div>
+   <p class="note2" style="margin:-4px 0 10px">Tap each ingredient already in your kitchen. We’ll flag what’s missing.</p>
+   <div class="chips-row" style="margin:0 0 12px"><button class="chip press" data-pl="haveall">I have everything</button><button class="chip press" data-pl="haveclear">Clear</button></div>
+   <ul class="card ing">${r.ing.map(i=>{const h=isHave(i[2]),any=r.ing.length-miss>0;return `<li class="${h||!any?'':'miss'}"><button class="ingrow press" data-ing="${esc(i[2])}" aria-pressed="${h}">${h?ic('check'):ic('circle')}<span>${esc(i[0])}</span><em>${h?esc(i[1]):(any?'MISSING':esc(i[1]))}</em></button></li>`}).join('')}</ul>
+  </div><div class="bottom"><button class="btn s press" data-act="adapt">Adapt with voice</button><button class="btn p press" data-act="cook">${miss&&miss<r.ing.length?`Start cooking · ${miss} missing`:'Start hands-free cooking'}</button></div>`},
 adapt(){const a=S.adapt||{said:'',ch:[]};
   return `${status()}<div class="body"><div class="top"><button class="icon-btn press" data-go="detail" aria-label="Close">${ic('x')}</button><h2 style="flex:1;font-size:22px">Voice assistant</h2></div>
    <div class="orb-wrap ${isLive()?'live':''}"><i class="r3"></i><i class="r2"></i><i class="o">${ic('mic')}</i></div>
@@ -1491,6 +1560,14 @@ settings(){
     <div class="state ${ks.cls}" role="status"><i></i><span>${esc(ks.t)}</span></div>
     <button class="btn p press" data-act="savekey">Save &amp; test</button><button class="btn s press" data-act="removekey" style="height:48px">Remove key</button>
     <p class="note2" style="font-size:12px">${pr.url?'Get a key at '+pr.url+'. ':''}Stored only in this browser. Treat it like a password and never share it.</p></div>
+   <div class="label">Account</div>
+   <div class="card pcard"><p class="note2" style="margin:0 0 10px">${PREF.account?'Signed in as '+esc(PREF.account.id):'Guest mode. Recipes stay on this device.'}</p><button class="btn s press" data-pl="logout" style="height:48px">${PREF.account?'Log out':'Log in or sign up'}</button></div>
+   <div class="label">Dish photos</div>
+   <div class="card pcard"><label class="eyebrow" for="pxkey" style="color:var(--ink-soft)">UNSPLASH ACCESS KEY</label>
+    <input class="field" id="pxkey" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your Unsplash Access Key" value="${esc(PXKEY)}">
+    <div class="state ${PXKEY?'ok':''}" role="status"><i></i><span>${PXKEY?'Photos on · '+Object.keys(PXP).length+' loaded':'Add a free key for real photos of every dish'}</span></div>
+    <button class="btn p press" data-act="savepx">Save &amp; load photos</button><button class="btn s press" data-act="removepx" style="height:48px">Remove key</button>
+    <p class="note2" style="font-size:12px">Get a free key at unsplash.com/developers (New Application, then copy the Access Key). Stored only in this browser. Photos from Unsplash.</p></div>
    <div class="label">Voice</div>${tog('speak','Spoken replies','Chef AI talks you through each step')}${tog('wake','Hey Chef anywhere','Say “Hey Chef” on any screen to start voice control')}
    <div class="card pcard"><h3>Speaking speed</h3>${opt('rate',[[0.9,'Slow'],[1,'Normal'],[1.15,'Fast']])}<h3>Language</h3>${opt('lang',[['en-IN','English (IN)'],['en-US','English (US)'],['hi-IN','हिन्दी']])}</div>
    <div class="label">Cooking</div>${tog('autoVoice','Hands-free on start','Turn the microphone on when cooking begins')}${tog('awake','Keep screen awake','Stops the screen sleeping while you cook')}${tog('haptics','Vibration','Small buzz for steps and timers')}
@@ -1505,13 +1582,64 @@ done(){return `${status()}<div class="body" style="align-items:stretch">
 };
 function tabbar(active){
   const n=activeTimers().length;
-  return `<nav class="tabbar" aria-label="Main navigation">${[['home','Home','home'],['scan','Scan','camera'],['results','Recipes','book'],['tasks','Timers','timer'],['profile','Profile','user']].map(([k,l,i])=>`<button class="tab press ${active===k?'on':''}" data-go="${k}" ${k==='tasks'&&n?`aria-label="Timers, ${n} running"`:''} ${active===k?'aria-current="page"':''}>${ic(i,'o')}<span>${l}</span>${k==='tasks'&&n?`<b class="badge" aria-hidden="true">${n}</b>`:''}</button>`).join('')}</nav>`}
-const TABS=['home','results','tasks','profile','settings'];
+  return `<nav class="tabbar" aria-label="Main navigation">${[['home','Cook','chef'],['plan','Plan','cal'],['ai','AI Recipe','sparkle'],['journal','Journal','book'],['learn','Learn','bulb']].map(([k,l,i])=>`<button class="tab press ${active===k?'on':''}" data-go="${k}" ${k==='tasks'&&n?`aria-label="Timers, ${n} running"`:''} ${active===k?'aria-current="page"':''}>${ic(i,'o')}<span>${l}</span>${k==='tasks'&&n?`<b class="badge" aria-hidden="true">${n}</b>`:''}</button>`).join('')}</nav>`}
+const TABS=['home','results','tasks','profile','settings','plan','ai','journal','learn'];
+
+/* ===== v12: Cook / Plan / AI Recipe / Journal / Learn ===== */
+P.cal='<rect x="3.5" y="5" width="17" height="15.5" rx="3.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>';
+P.bulb='<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>';
+let PLAN={};try{PLAN=JSON.parse(localStorage.getItem('ska-plan')||'{}')}catch(e){}
+S.pd=(new Date().getDay()+6)%7;
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const LEARN=[
+ {t:'Knife skills',p:'Curl your fingertips back like a claw, and let the knife glide against your knuckle. Slow and even beats fast and uneven.'},
+ {t:'Salt and taste',p:'Season in small steps while you cook, and taste before you add more. A squeeze of lemon at the end wakes up a flat dish.'},
+ {t:'Heat control',p:'Preheat the pan before the oil goes in. If food sticks, it usually needs another minute before you flip it.'},
+ {t:'Rest your food',p:'Let cooked meat and paneer rest for a few minutes. The juices settle and every bite stays soft.'},
+ {t:'Kitchen safety',p:'Keep pot handles turned inward, use a dry cloth on hot pans, and never leave hot oil alone.'},
+ {t:'Voice commands',p:'Say Hey Chef, then try next, repeat, start timer, or ask any cooking question.'}];
+const tabHead=(a,t)=>`<div class="greet"><div><div class="eyebrow" style="color:var(--accent)">${a}</div><h1>${t}</h1></div><div class="actions"><button class="icon-btn press avatar" data-go="profile" aria-label="Profile">${esc((PREF.name||'C')[0].toUpperCase())}</button></div></div>`;
+VIEWS.plan=()=>{const id=PLAN[S.pd],r=id&&RECIPES.find(x=>x.id===id);
+ return `${status()}<div class="body">${tabHead('This week','Meal plan')}
+ <div class="daystrip" role="tablist">${DAYS.map((d,i)=>`<button class="dchip press ${i===S.pd?'on':''}" data-pl="d:${i}" role="tab" aria-selected="${i===S.pd}">${d}${PLAN[i]?'<i></i>':''}</button>`).join('')}</div>
+ <div class="label">${DAYS[S.pd]}</div>
+ ${r?`${recipeCard(r)}<button class="btn s press" data-pl="rm" style="height:48px;margin-top:10px">Remove from plan</button>`:`<p class="note2">Nothing planned yet. Pick a meal:</p>`}
+ ${r?'<div class="label">Swap for</div>':''}
+ ${RECIPES.slice(0,12).filter(x=>x.id!==id).map(x=>`<button class="card pick press" data-pl="set:${x.id}"><b>${esc(x.title)}</b><small>${x.time} min</small></button>`).join('')}</div>`};
+VIEWS.ai=()=>`${status()}<div class="body">${tabHead('Any dish, any cuisine','AI Recipe')}
+ <div class="card pcard"><label class="eyebrow" for="aiq" style="color:var(--ink-soft)">WHAT DO YOU WANT TO COOK?</label>
+  <input class="field" id="aiq" placeholder="e.g. mushroom risotto" autocomplete="off">
+  <div class="chips-row">${['Quick dinner for 2','High-protein veg','Use up my tomatoes'].map(t=>`<button class="chip press" data-pl="q:${t}">${t}</button>`).join('')}</div>
+  <button class="btn p press" data-pl="gen">Create recipe</button>
+  ${LLM.key?'':'<p class="note2" style="font-size:12px">Needs an AI key. <a href="#" data-go="settings">Add one in Settings</a>.</p>'}</div>
+ <div class="label">Your AI recipes</div>
+ ${RECIPES.filter(r=>r.ai).map(recipeCard).join('')||'<p class="note2">Recipes you create appear here.</p>'}</div>`;
+VIEWS.journal=()=>{const rated=HIST.filter(h=>h.rating),avg=rated.length?(rated.reduce((x,h)=>x+h.rating,0)/rated.length).toFixed(1):'–',mins=HIST.reduce((x,h)=>x+(h.mins||0),0);
+ return `${status()}<div class="body">${tabHead('Your cooking','Journal')}
+ <div class="stats"><div class="card"><b>${HIST.length}</b><small>COOKED</small></div><div class="card"><b>${avg}</b><small>AVG STARS</small></div><div class="card"><b>${mins}</b><small>MINUTES</small></div></div>
+ <div class="label">Recent</div>
+ ${HIST.slice(0,20).map(h=>`<button class="card pick press" ${RECIPES.some(r=>r.id===h.id)?`data-recipe="${h.id}"`:''}><div style="text-align:left"><b>${esc(h.title)}</b><br><small>${new Date(h.at).toLocaleDateString(undefined,{day:'numeric',month:'short'})} · ${h.mins||'?'} min</small></div><small>${h.rating?'★'.repeat(h.rating):''}</small></button>`).join('')||'<p class="note2">Finish a recipe and it shows up here, with your rating.</p>'}</div>`};
+VIEWS.learn=()=>`${status()}<div class="body">${tabHead('Tips from Chef AI','Learn')}
+ ${LEARN.map((l,i)=>`<div class="card pcard"><h3>${l.t}</h3><p class="note2">${l.p}</p><button class="btn s press" data-tip="${i}" style="height:44px">${ic('vol')} Listen</button></div>`).join('')}</div>`;
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-pl],[data-tip],[data-ing]');if(!b)return;
+  if(b.dataset.ing!==undefined){const k=b.dataset.ing;S.found.has(k)?S.found.delete(k):S.found.add(k);return render()}
+  if(b.dataset.tip!==undefined)return say(LEARN[+b.dataset.tip].p);
+  const [k,v]=b.dataset.pl.split(/:(.*)/),sv=()=>{saveLS('ska-plan',PLAN);render()};
+  if(k==='d'){S.pd=+v;render()}
+  else if(k==='set'){PLAN[S.pd]=v;sv()}
+  else if(k==='logout'){delete PREF.account;PREF.guest=false;savePrefs();const el=introEl();el.className='on';AU.m='in';AU.err='';drawAuth()}
+  else if(k==='haveall'){R().ing.forEach(i=>S.found.add(i[2]));render()}
+  else if(k==='haveclear'){R().ing.forEach(i=>S.found.delete(i[2]));render()}
+  else if(k==='rm'){delete PLAN[S.pd];sv()}
+  else if(k==='q'){const i=$('#aiq');i.value=v;i.focus()}
+  else if(k==='gen'){const q=($('#aiq').value||'').trim();if(!q)return caption('Tell me what you’d like to cook.','CHEF AI');aiGenerate(q)}
+});
 function showTabs(){return TABS.includes(S.screen)&&!(S.screen==='tasks'&&S.inCook)}
 var _lastScreen=null;
 function render(){
   const _b=$('.body'),_st=(_b&&app.firstElementChild&&app.firstElementChild.dataset.screen===S.screen)?_b.scrollTop:0;
-  const v=VIEWS[S.screen]()+(showTabs()?tabbar(S.screen==='settings'?'profile':S.screen):'');
+  const v=VIEWS[S.screen]()+(showTabs()?tabbar(({results:'home',tasks:'home',profile:'home',settings:'home',scan:'home'})[S.screen]||S.screen):'');
   const dark=S.screen==='scan',_enter=_lastScreen!==S.screen;_lastScreen=S.screen;
   app.innerHTML=`<section class="screen on ${_enter?'enter':''} ${dark?'dark':''} ${showTabs()?'has-tabs':''}" data-screen="${S.screen}">${v}</section>`;
   fixStars();if(_st){const b2=$('.body');if(b2)b2.scrollTop=_st}
@@ -1547,9 +1675,9 @@ document.addEventListener('click',e=>{
     if(c==='intro'){showIntro(true);return}
     if(c==='hist'){HIST=[];saveLS('ska-hist',HIST)}
     if(c==='airec'){for(let i=RECIPES.length-1;i>=0;i--)if(RECIPES[i].ai)RECIPES.splice(i,1);saveLS('ska-ai-recipes',[]);FAVS=FAVS.filter(id=>RECIPES.some(r=>r.id===id));saveLS('ska-favs',FAVS)}
-    if(c==='all'){if(!confirm('Reset all preferences, keys, history and saved recipes on this device?'))return;['ska-prefs','ska-hist','ska-favs','ska-ai','ska-ai-recipes','ska-photos'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});location.reload();return}
+    if(c==='all'){if(!S.rst){S.rst=true;t.textContent='Tap again to erase everything';setTimeout(()=>{S.rst=false;if(t.isConnected)t.textContent='Reset everything'},4000);return}S.rst=false;['ska-prefs','ska-hist','ska-favs','ska-ai','ska-ai-recipes','ska-plan','ska-photos','ska-px','ska-pxphotos','ska-wphotos'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});try{sessionStorage.clear()}catch(e){}location.replace(location.pathname);return}
     caption('Done.','CHEF AI');render();return}
-  if(t.dataset.recipe){openRecipe(t.dataset.recipe);say(`${R().title}. ${ingCount(R())}.`);return}
+  if(t.dataset.recipe){openRecipe(t.dataset.recipe);askIngredients();return}
   if(t.dataset.say){S.cmds++;command(t.dataset.say);return}
   if(t.dataset.add){S.found.add(t.dataset.add);render();return}
   if(t.dataset.rm){S.found.delete(t.dataset.rm);render();return}
@@ -1567,6 +1695,8 @@ document.addEventListener('click',e=>{
   if(a==='scanup'){$('#scanin').click();return}
   if(a==='closesheet')return closeSettings();
   if(a==='savekey')return saveKey();
+  if(a==='savepx'){const v=(($('#pxkey')||{}).value||'').trim();if(!v){caption('Paste your Unsplash key first.','CHEF AI');return}PXKEY=v;try{localStorage.setItem('ska-px',v)}catch(e){}PXP={};try{localStorage.removeItem('ska-pxphotos')}catch(e){}caption('Fetching dish photos…','CHEF AI');loadPexelsPhotos().then(n=>{caption(n?`Added ${n} dish photos.`:'Couldn’t load photos. Check the key and your connection.','CHEF AI');if(S.screen==='settings')render()});return}
+  if(a==='removepx'){PXKEY='';PXP={};try{localStorage.removeItem('ska-px');localStorage.removeItem('ska-pxphotos')}catch(e){}caption('Unsplash key removed.','CHEF AI');render();return}
   if(a==='removekey')return removeKey();
   if(a==='photo'){S.photoFor=S.rid;$('#photoin').value='';$('#photoin').click();return}
   if(a==='capture')return capture();
@@ -1619,7 +1749,7 @@ function showIntro(force){
   const el=introEl(),first=force||!PREF.onboarded;
   el.className='on';
   el.innerHTML=`<div class="splash"><div class="logo">${ic('chef')}</div><h1>Smart Kitchen</h1><p>Your hands-free cooking sidekick</p></div>`;
-  setTimeout(()=>{first?(OB.i=0,drawOB()):hideIntro()},first?1500:1000);
+  setTimeout(()=>{first?(OB.i=0,drawOB()):(PREF.account||PREF.guest?hideIntro():(AU.m='in',drawAuth()))},first?1500:1000);
 }
 function drawOB(){
   const el=introEl(),sl=OB.slides[OB.i],last=OB.i===OB.slides.length-1;
@@ -1631,11 +1761,38 @@ function drawOB(){
    <div class="ob-actions"><button class="btn p press" data-ob="next">${last?'Start cooking':'Continue'}</button>${OB.i>0?'<button class="btn s press" data-ob="back" style="height:48px">Back</button>':''}</div>`;
 }
 function finishOB(){
-  const n=$('#obname');if(n)PREF.name=n.value.trim();
-  PREF.onboarded=true;savePrefs();hideIntro();render();
-  if(SR&&PREF.wake){startRec(true);caption('Voice is on. Say “Hey Chef” any time.','CHEF AI')}
+  const n=$('#obname');if(n)PREF.name=n.value.trim();savePrefs();
+  if(!PREF.account&&!PREF.guest){AU.m='up';return drawAuth()}
+  enterApp();
 }
+let AU={m:'up',err:''};
+function drawAuth(){
+  const up=AU.m==='up',el=introEl();
+  el.innerHTML=`<div class="auth-art">${['pasta','biryani','shakshuka'].map(id=>`<i class="pc"${photoStyle(id)}></i>`).join('')}</div>
+  <div class="auth-card"><div class="auth-seg" role="tablist"><button data-au="in" class="${up?'':'on'}" role="tab">Log In</button><button data-au="up" class="${up?'on':''}" role="tab">Sign Up</button></div>
+  <h2>${up?'Sign Up with Smart Kitchen':'Log In to Smart Kitchen'}</h2><p class="note2">${up?'Save your recipes, preferences and cooking history.':'Welcome back. Your recipes are waiting.'}</p>
+  ${up?`<div class="auth-row"><div><label for="auf">First name</label><input id="auf" class="field" autocomplete="given-name" value="${esc(PREF.name)}"></div><div><label for="aul">Last name</label><input id="aul" class="field" autocomplete="family-name"></div></div>`:''}
+  <label for="aue">Email or phone number</label><input id="aue" class="field" autocomplete="username" placeholder="Enter your email or phone number">
+  <label for="aup">Password</label><input id="aup" class="field" type="password" autocomplete="${up?'new-password':'current-password'}" placeholder="Enter your password">
+  <p class="auth-err" role="alert">${esc(AU.err)}</p>
+  <button class="btn p press" data-au="submit">${up?'Sign Up':'Log In'}</button>
+  <div class="auth-or"><span>Or</span></div>
+  <div class="auth-soc"><button class="btn s press" data-au="social">Apple</button><button class="btn s press" data-au="social">Google</button></div>
+  <button class="auth-guest" data-au="guest">Continue as guest</button></div>`;
+}
+function enterApp(){PREF.onboarded=true;savePrefs();hideIntro();render();if(SR&&PREF.wake){startRec(true);caption('Voice is on. Say “Hey Chef” any time.','CHEF AI')}}
 document.addEventListener('click',e=>{
+  const b=e.target.closest('#intro [data-au]');if(!b)return;e.stopPropagation();const a=b.dataset.au,v=id=>(($(id)||{}).value||'').trim();
+  if(a==='in'||a==='up'){AU.m=a;AU.err='';return drawAuth()}
+  if(a==='guest'){PREF.guest=true;savePrefs();return enterApp()}
+  if(a==='social'){PREF.guest=true;savePrefs();enterApp();caption('Apple and Google sign-in need a server, so you’re in as a guest for now.','CHEF AI');return}
+  const em=v('#aue'),pw=v('#aup');
+  if(!em){AU.err='Enter your email or phone number.';return drawAuth()}
+  if(pw.length<6){AU.err='Password needs at least 6 characters.';return drawAuth()}
+  if(AU.m==='up'){const f=v('#auf');if(f)PREF.name=f}
+  PREF.account={id:em};savePrefs();enterApp();
+},true);
+  document.addEventListener('click',e=>{
   const b=e.target.closest('#intro [data-ob]');if(!b)return;e.stopPropagation();
   const a=b.dataset.ob;
   if(a==='skip')return finishOB();
@@ -1682,7 +1839,33 @@ async function loadDishPhotos(){
   const a=document.activeElement;
   if(['home','recipes','detail'].includes(S.screen)&&!(a&&/INPUT|TEXTAREA/.test(a.tagName)))render();
 }
-setTimeout(loadDishPhotos,300);
+/* Pexels: best match per dish, cached on device */
+async function pexelsPhoto(r){
+  const words=r.title.toLowerCase().split(/\W+/).filter(w=>w.length>3);
+  const res=await fetch('https://api.unsplash.com/search/photos?per_page=8&orientation=landscape&content_filter=high&query='+encodeURIComponent(r.title+' food')+'&client_id='+encodeURIComponent(PXKEY));
+  if(res.status===401)throw new Error('key');
+  if(res.status===403)throw new Error('limit');
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  const j=await res.json();const L=j.results||[];
+  const ph=L.find(x=>words.some(w=>((x.alt_description||'')+' '+(x.description||'')).toLowerCase().includes(w)))||L[0];
+  return ph?ph.urls.regular:'';
+}
+let pxBusy=false,PXERR='';
+async function loadPexelsPhotos(){
+  if(!PXKEY||pxBusy||navigator.onLine===false)return 0;
+  pxBusy=true;const got={};let bad=false;
+  for(const r of RECIPES.filter(r=>!PXP[r.id])){
+    try{const u=await pexelsPhoto(r);if(u&&await imgOk(u))got[r.id]=u}catch(e){PXERR=e.message;if(e.message==='key'){bad=true;break}if(e.message==='limit')break}
+  }
+  pxBusy=false;
+  if(bad){PXKEY='';try{localStorage.removeItem('ska-px')}catch(e){}return 0}
+  const n=Object.keys(got).length;if(!n){if(PXERR)caption('Photos: '+(PXERR==='limit'?'Unsplash hourly limit reached, try later':PXERR==='key'?'Unsplash key was rejected':'could not reach Unsplash ('+PXERR+')'),'CHEF AI');return 0}
+  Object.assign(PXP,got);try{localStorage.setItem('ska-pxphotos',JSON.stringify(PXP))}catch(e){}
+  const a=document.activeElement;
+  if(['home','results','detail','plan','ai','journal'].includes(S.screen)&&!(a&&/INPUT|TEXTAREA/.test(a.tagName)))render();
+  return n;
+}
+setTimeout(()=>{loadDishPhotos();loadPexelsPhotos()},300);
 </script>
 </body>
 </html>
