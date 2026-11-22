@@ -677,6 +677,137 @@ h1,h2,h3{text-wrap:balance}p,.note2{text-wrap:pretty}
 
 .ing li .ingrow{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left}
 .ing li .ingrow span{flex:1;min-width:0}.ing li .ingrow em{font-style:normal;flex:none}
+
+/* ===== v19: illustrations, splash, welcome, account, profile setup ===== */
+svg.ill{display:block;width:100%;height:100%;overflow:visible}
+.i-eye,.i-eyeoff{width:20px;height:20px}
+/* shell: scrolling content + a footer that is always on screen */
+#intro{padding:0;overflow:hidden}
+#intro.on{display:flex;flex-direction:column}
+#intro>*{flex-shrink:1}
+#intro .in-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;display:flex;flex-direction:column;padding:max(8px,env(safe-area-inset-top)) 24px 8px}
+#intro .in-scroll::-webkit-scrollbar{display:none}
+#intro .in-foot{flex:none;display:flex;flex-direction:column;gap:12px;padding:8px 24px max(20px,env(safe-area-inset-bottom))}
+#intro .in-foot .btn{width:100%}
+#intro h1:focus,#intro h2:focus{outline:none}
+.in-scroll>*{flex-shrink:0}
+/* splash */
+.splash{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px;overflow:hidden}
+.splash .logo{width:124px;height:124px;border-radius:38px;padding:28px;margin-bottom:14px}
+.splash .logo svg{width:100%;height:100%}
+.splash h1{font-size:34px;letter-spacing:-.035em}
+.sp-bit{position:absolute;width:58px;height:58px;border-radius:50%;background:#fff;box-shadow:0 0 0 .5px rgba(21,21,26,.06),0 10px 26px rgba(21,21,26,.1);display:flex;align-items:center;justify-content:center;animation:floaty 5.5s ease-in-out infinite,pop .7s var(--spring) backwards}
+.sp-bit svg{width:62%;height:62%}
+@keyframes floaty{50%{transform:translateY(-12px)}}
+.sp-load{display:flex;gap:7px;margin-top:26px}
+.sp-load i{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:ld 1.1s ease-in-out infinite}
+.sp-load i:nth-child(2){animation-delay:.15s}.sp-load i:nth-child(3){animation-delay:.3s}
+@keyframes ld{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+/* top row + illustration card */
+#intro .ob-top{height:52px;flex:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+#intro .ob-top button{min-height:44px;min-width:44px;padding:0 4px;font-weight:700;font-size:16px;color:var(--ink-2)}
+#intro .ob-top .icon-btn{padding:0;color:var(--ink)}
+.ob-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.02em}
+.ob-brand i{display:block;width:30px;height:30px;border-radius:10px;background:var(--dark);padding:5px}
+#intro .ob-art{flex:1 1 260px;min-height:148px;max-height:440px;margin:4px 0 0;padding:14px;border-radius:36px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+#intro .ob-art::before,#intro .ob-art::after{content:none}
+.ob-art.lav{background:var(--lav)}.ob-art.mint{background:var(--mint)}.ob-art.sun{background:var(--sun)}
+.ob-art svg{width:100%;height:100%;animation:pop .6s var(--spring) backwards}
+#intro .ob-body{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:22px;animation:rise .5s var(--ease) backwards}
+#intro .ob-body h1{font-size:32px;line-height:1.08}
+#intro .ob-body p{font-size:17px;line-height:1.45}
+.say-chip{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:2px}
+.say-chip svg{color:var(--accent);font-size:16px}
+#intro .dots{padding:2px 0 2px}
+/* sign-in */
+#intro .auth-art{flex:none;height:176px;margin:0;border-radius:0 0 40px 40px;background:linear-gradient(180deg,#c9b8fb,#e4dcfd);padding:max(10px,env(safe-area-inset-top)) 16px 30px;display:block;position:relative}
+#intro .auth-art svg{width:100%;height:100%}
+@media(max-height:740px){#intro .auth-art{height:136px;padding-bottom:26px}}
+#intro .auth-card{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;margin:-24px 0 0;padding:18px 24px max(24px,env(safe-area-inset-bottom));border-radius:32px 32px 0 0;background:#fff;box-shadow:0 -10px 36px rgba(109,74,232,.12),0 0 0 .5px rgba(21,21,26,.05);-webkit-backdrop-filter:none;backdrop-filter:none;position:relative;animation:rise .5s var(--ease) backwards}
+#intro .auth-card::-webkit-scrollbar{display:none}
+#intro .auth-card>*{flex-shrink:0}
+.auth-seg{display:flex;gap:4px;padding:4px;border-radius:999px;background:#f0f0f6;margin-bottom:18px}
+.auth-seg button{flex:1;height:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;text-align:center;font:600 15px var(--display);color:var(--ink-2);transition:background .3s var(--ios),color .3s}
+.auth-seg button.on{background:#000;color:#fff}
+#intro .auth-card h2{font-size:24px;font-weight:700;line-height:1.15;margin:0 0 4px}
+#intro .auth-card .note2{margin:0}
+.fg{display:flex;flex-direction:column;margin-top:16px}
+.fg>label,.fg>.lbl{font:600 14px var(--display);margin:0 0 8px;color:var(--ink)}
+.auth-row{display:flex;gap:12px}.auth-row>.fg{flex:1;min-width:0}
+#intro .field,.ob-form .field{height:52px;padding:0 16px;font:500 16px var(--display);border-radius:18px;background:#fff;border:1.5px solid #dcdce8;color:var(--ink)}
+#intro .field::placeholder{color:#7b7b8c;opacity:1}
+#intro .field:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 4px rgba(109,74,232,.16)}
+#intro .field.bad{border-color:#b3261e;box-shadow:0 0 0 4px rgba(179,38,30,.1)}
+.pw{position:relative}.pw .field{padding-right:54px}
+.pw-t{position:absolute;right:4px;top:4px;width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--ink-2)}
+.f-err{display:none;margin:6px 2px 0;font-size:13px;font-weight:600;line-height:1.3;color:#b3261e}
+.f-err.on{display:block}
+.auth-go{margin-top:22px;width:100%}
+#intro .auth-card .btn.p{width:100%}
+.auth-or{margin:18px 0}
+.auth-soc{display:flex;gap:12px}
+.auth-soc .btn{flex:1;height:52px;gap:10px;padding:0 12px;font-size:16px;font-weight:600}
+.auth-soc svg{width:20px;height:20px;flex:none}
+.auth-guest{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-top:6px}
+/* profile setup */
+.ob-form{width:100%;display:flex;flex-direction:column}
+.ob-form .fg:first-child{margin-top:4px}
+.ob-form .seg button{font-size:14px}
+
+
+/* ===== v19: voice — listening sheet, pill, bar ===== */
+#vs{position:absolute;inset:0;z-index:44;display:none;align-items:flex-end;background:rgba(21,21,26,.4);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#vs.on{display:flex;animation:fade .2s ease-out}
+.vs-card{position:relative;width:100%;background:#fff;border-radius:32px 32px 0 0;padding:12px 24px max(18px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 -16px 48px rgba(21,21,26,.22);animation:sheetUp .4s var(--ios)}
+.vs-card>*{flex-shrink:0}
+.vs-grab{width:40px;height:5px;border-radius:3px;background:#d8d8e2}
+.vs-x{position:absolute;right:14px;top:14px;width:44px;height:44px;border-radius:22px;background:#f0f0f6;display:flex;align-items:center;justify-content:center;font-size:18px}
+.vs-orb{position:relative;width:104px;height:104px;margin-top:2px;border-radius:50%;display:block}
+.vs-orb i{position:absolute;inset:0;border-radius:50%;background:var(--lav);opacity:.6;transform:scale(.8)}
+.vs-orb b{position:absolute;inset:16px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;transition:background .25s}
+.vs.listening .vs-orb i,.vs.hearing .vs-orb i{animation:vsr 1.8s ease-out infinite}
+.vs.listening .vs-orb i+i,.vs.hearing .vs-orb i+i{animation-delay:.6s}
+.vs.hearing .vs-orb i{animation-duration:1s}
+.vs.hearing .vs-orb b,.vs.listening .vs-orb b{background:var(--accent)}
+.vs.speaking .vs-orb i,.vs.thinking .vs-orb i{animation:breathe 1.4s ease-in-out infinite;transform:scale(1)}
+.vs.done .vs-orb b{background:var(--success)}
+.vs.blocked .vs-orb b,.vs.nosr .vs-orb b{background:#8a8a9a}
+@keyframes vsr{0%{transform:scale(.8);opacity:.6}100%{transform:scale(1.55);opacity:0}}
+.vs-state{font:800 19px var(--display);letter-spacing:-.02em}
+.vs-heard{min-height:52px;max-width:100%;font:600 21px/1.28 var(--display);text-align:center;letter-spacing:-.015em;text-wrap:balance;overflow-wrap:anywhere}
+.vs-heard.ph{font-weight:500;font-size:17px;color:var(--ink-2)}
+.vs-retry{display:none;height:48px;min-height:48px;padding:0 28px}
+.vs.blocked .vs-retry{display:flex}
+.vs-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.vs.blocked .vs-chips{display:none}
+.vs-type{display:flex;gap:8px;width:100%;margin-top:2px}
+.vs-type .field{flex:1;min-width:0;height:48px;border-radius:999px;padding:0 18px;font:500 16px var(--display);background:#f6f6fa;border:0}
+.vs-send{width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+.vs-wake{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:48px;padding:0 4px;font-weight:600;font-size:14px;color:var(--ink-2)}
+.vs-wake .sw{transform:scale(.82);transform-origin:right center}
+/* top pill reads as the global mic button */
+.wake{min-height:32px;cursor:pointer}
+.wake.off{color:var(--ink)}
+.wake.off i{background:var(--accent)}
+.wake.awake i{animation:wakep .9s ease-in-out infinite}
+.bar{cursor:pointer}
+.bar p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+button.orb-wrap{display:flex;width:100%;border-radius:0}
+
+
+/* ===== v19: app-wide spacing + illustrated empty states ===== */
+.body{padding-bottom:24px}
+label.eyebrow{display:block}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:22px 24px 24px}
+.empty.card{border-radius:28px}
+.eill{width:156px;height:117px;margin-bottom:6px}
+.empty b{font:800 18px var(--display);letter-spacing:-.02em}
+.empty p{font-size:15px;line-height:1.4;font-weight:500;color:var(--ink-2);max-width:260px}
+.done-ill{width:236px;height:167px;margin:8px auto 0;flex:none;animation:pop .7s var(--spring) .1s backwards}
+.nocam .btn.p{background:#fff;color:var(--ink);box-shadow:none;min-width:140px}
+.nocam b{font:800 18px var(--display);color:#fff}
+.nocam .btn.s{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8)}
+
 </style>
 </head>
 <body>
@@ -685,6 +816,7 @@ h1,h2,h3{text-wrap:balance}p,.note2{text-wrap:pretty}
   <main id="app"></main>
   <div id="intro" role="dialog" aria-modal="true" aria-label="Welcome"></div>
   <div id="cap" role="status" aria-live="polite"></div>
+  <div id="vs" role="dialog" aria-label="Voice assistant"></div>
   <div id="sheet" role="dialog" aria-modal="true" aria-label="Dialog"></div>
   <input type="file" id="photoin" accept="image/*" hidden><input type="file" id="scanin" accept="image/*" hidden>
 </div>
@@ -717,7 +849,7 @@ const FILLED=new Set(['mic','camera','book','hand','bell','sparkle','star','home
 const ic=(n,c='')=>`<svg class="i ${FILLED.has(n)?'f':''} ${c}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
 const fmt=s=>{s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const DEF={name:'',diet:'any',spice:'medium',skill:'Easy',serv:2,cuis:[],allergy:'',speak:true,rate:1,lang:'en-IN',haptics:true,autoVoice:true,awake:true,wake:true,onboarded:false};
+const DEF={name:'',diet:'any',spice:'medium',skill:'Easy',serv:2,cuis:[],allergy:'',speak:true,rate:1,lang:'en-IN',haptics:true,autoVoice:true,awake:true,wake:true,onboarded:false,setup:false};
 let PREF=Object.assign({},DEF),HIST=[],FAVS=[];
 try{Object.assign(PREF,JSON.parse(localStorage.getItem('ska-prefs')||'{}'));HIST=JSON.parse(localStorage.getItem('ska-hist')||'[]');FAVS=JSON.parse(localStorage.getItem('ska-favs')||'[]')}catch(e){}
 const saveLS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
@@ -783,20 +915,122 @@ mk('greek','Greek Salad','Greek','veg',10,'Easy','Cucumber:1 pc:cucumber;Tomatoe
 mk('teriyaki','Teriyaki Chicken Bowl','Japanese','nonveg',30,'Easy','Rice:2 cups:rice;Chicken:300 g:chicken;Soy sauce:3 tbsp:soy;Ginger:1 tsp:ginger;Carrot:1 pc:carrot',[['Cook the rice.','Rinse and simmer covered.','Tender, steam holes on top.',900,'Cook rice','LOW HEAT'],['Sear the chicken.','Cook skin-side down.','Deep golden brown.',360,'Sear chicken','MEDIUM-HIGH HEAT'],['Glaze with teriyaki.','Add soy, ginger and honey.','Sticky glaze coats each piece.',120,'Glaze','LOW HEAT'],['Build the bowl.','Rice, chicken, carrot ribbons.','Glossy and steaming.']]);
 try{JSON.parse(localStorage.getItem('ska-ai-recipes')||'[]').forEach(r=>RECIPES.push(r))}catch(e){}
 
+/* ---------- illustration kit: original flat vector art, one shared palette ---------- */
+const IC={ink:'#15151a',dark:'#17171c',lav:'#cdbdfa',lav2:'#e4dafc',acc:'#6d4ae8',acc2:'#4a2fc0',acc3:'#8a6cf0',mint:'#c6f0b0',mint2:'#8fd36b',sun:'#fdf0a2',gold:'#f2b01e',peach:'#fbd9bb',tom:'#e5503a',tom2:'#c93b28',leaf:'#3a9a5b',leaf2:'#2e7d47',skin:'#ffd9b8',org:'#f2873a'};
+const svgw=(vb,inner,cls='ill')=>`<svg class="${cls}" viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">${inner}</svg>`;
+const spark=(x,y,r,f='#fff',o=1)=>`<path d="M${x} ${y-r}Q${x+r*.16} ${y-r*.16} ${x+r} ${y}Q${x+r*.16} ${y+r*.16} ${x} ${y+r}Q${x-r*.16} ${y+r*.16} ${x-r} ${y}Q${x-r*.16} ${y-r*.16} ${x} ${y-r}z" fill="${f}" opacity="${o}"/>`;
+const dotc=(x,y,r,f,o=1)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${f}" opacity="${o}"/>`;
+const leafS=(x,y,s,rot=0,f=IC.leaf)=>`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})"><path d="M0-14C12-10 14 6 0 14C-14 6-12-10 0-14z" fill="${f}"/><path d="M0-8V10" stroke="#fff" stroke-opacity=".5" stroke-width="1.6" stroke-linecap="round"/></g>`;
+const tomatoS=(x,y,r)=>`<g transform="translate(${x} ${y})"><circle r="${r}" fill="${IC.tom}"/><path d="M${-r*.62} ${-r*.05}a${r*.7} ${r*.7} 0 0 1 ${r*.42} ${-r*.52}" stroke="#fff" stroke-opacity=".45" stroke-width="${r*.15}" fill="none" stroke-linecap="round"/><ellipse cx="${-r*.3}" cy="${-r*.86}" rx="${r*.36}" ry="${r*.15}" fill="${IC.leaf}" transform="rotate(-24 ${-r*.3} ${-r*.86})"/><ellipse cx="${r*.3}" cy="${-r*.86}" rx="${r*.36}" ry="${r*.15}" fill="${IC.leaf}" transform="rotate(24 ${r*.3} ${-r*.86})"/><rect x="${-r*.07}" y="${-r*1.14}" width="${r*.14}" height="${r*.3}" rx="${r*.07}" fill="${IC.leaf2}"/></g>`;
+const onionS=(x,y,r)=>`<g transform="translate(${x} ${y})"><path d="M0 ${-r*1.2}C${r*.2} ${-r*.85} ${r*.3} ${-r*.72} ${r*.5} ${-r*.62}C${r*1.1} ${-r*.4} ${r*1.1} ${r*.85} 0 ${r}C${-r*1.1} ${r*.85} ${-r*1.1} ${-r*.4} ${-r*.5} ${-r*.62}C${-r*.3} ${-r*.72} ${-r*.2} ${-r*.85} 0 ${-r*1.2}z" fill="#c77dba"/><path d="M0 ${-r*.7}C${r*.38} ${-r*.2} ${r*.38} ${r*.5} 0 ${r*.95}M0 ${-r*.7}C${-r*.38} ${-r*.2} ${-r*.38} ${r*.5} 0 ${r*.95}" stroke="#fff" stroke-opacity=".5" stroke-width="${r*.09}" fill="none"/></g>`;
+const eggS=(x,y,r)=>`<g transform="translate(${x} ${y})"><path d="M0 ${-r}C${r*.75} ${-r} ${r*.95} ${r*.5} ${r*.6} ${r*.85}C${r*.25} ${r*1.1} ${-r*.25} ${r*1.1} ${-r*.6} ${r*.85}C${-r*.95} ${r*.5} ${-r*.75} ${-r} 0 ${-r}z" fill="#fff" stroke="#e7e5f1" stroke-width="2"/><circle cx="0" cy="${r*.12}" r="${r*.34}" fill="${IC.gold}"/></g>`;
+const carrotS=(x,y,s,rot=0)=>`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})"><path d="M-8-14h16c0 18-6 30-8 36-2-6-8-18-8-36z" fill="${IC.org}"/><path d="M-4-4h5M-3 6h4" stroke="#fff" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/><path d="M0-14c-6-6-10-8-12-8 2 6 6 8 12 8zM0-14c0-8 0-12 0-14 4 3 5 8 0 14zM0-14c6-6 10-8 12-8-2 6-6 8-12 8z" fill="${IC.leaf}"/></g>`;
+const micS=(x,y,s,f='#fff')=>`<g transform="translate(${x} ${y}) scale(${s})"><rect x="-6" y="-17" width="12" height="22" rx="6" fill="${f}"/><path d="M-12-3a12 12 0 0 0 24 0" fill="none" stroke="${f}" stroke-width="3" stroke-linecap="round"/><rect x="-1.5" y="9" width="3" height="7" rx="1.5" fill="${f}"/><rect x="-7" y="15" width="14" height="3" rx="1.5" fill="${f}"/></g>`;
+const checkS=(x,y,s,f='#fff')=>`<path transform="translate(${x} ${y}) scale(${s})" d="M-7 0l5 5 9-10" fill="none" stroke="${f}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+const chefPal=(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="64" rx="38" ry="5" fill="#15151a" opacity=".1"/><path d="M-27 64C-27 46-15 36 0 36S27 46 27 64z" fill="#fff"/><circle cx="0" cy="49" r="2.3" fill="${IC.lav}"/><circle cx="0" cy="57" r="2.3" fill="${IC.lav}"/><path d="M-8 35l8 9 8-9z" fill="${IC.tom}"/><circle cx="0" cy="8" r="30" fill="${IC.skin}"/><circle cx="-11" cy="9" r="3.5" fill="${IC.ink}"/><circle cx="11" cy="9" r="3.5" fill="${IC.ink}"/><circle cx="-10" cy="8" r="1.1" fill="#fff"/><circle cx="12" cy="8" r="1.1" fill="#fff"/><circle cx="-20" cy="18" r="4.6" fill="#ff8f7e" opacity=".5"/><circle cx="20" cy="18" r="4.6" fill="#ff8f7e" opacity=".5"/><path d="M-8 17q8 8 16 0" stroke="${IC.ink}" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="-18" cy="-30" r="14" fill="#fff"/><circle cx="0" cy="-37" r="17" fill="#fff"/><circle cx="18" cy="-30" r="14" fill="#fff"/><rect x="-27" y="-28" width="54" height="20" rx="7" fill="#fff"/><rect x="-27" y="-15" width="54" height="7" rx="3.5" fill="${IC.lav}"/></g>`;
+const bubbleBars=(x,y)=>[12,26,38,22,12].map((h,i)=>`<rect x="${x+i*11}" y="${y-h/2}" width="6" height="${h}" rx="3" fill="${IC.acc}"/>`).join('');
+
+/* plates are shared by recipe fallback art and the sign-in header */
+function foodFor(t){
+  const lf=(x,y,a)=>`<ellipse cx="${x}" cy="${y}" rx="9" ry="4.5" fill="#3a9a5b" transform="rotate(${a} ${x} ${y})"/>`;
+  const dots=(p,c,rad)=>p.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="${rad}" fill="${c}"/>`).join('');
+  if(/pasta|spaghetti|carbonara|noodle/.test(t))return `<circle cx="100" cy="102" r="44" fill="#f2c14e"/>`+[0,1,2,3,4].map(i=>`<path d="M${64+i*3} ${92+i*7}q36-20 72 0" stroke="#e0a526" stroke-width="3.5" fill="none" stroke-linecap="round"/>`).join('')+dots([[92,92],[112,106]],'#d9482b',9)+`<rect x="104" y="82" width="10" height="10" rx="2" fill="#fff6dd"/><rect x="84" y="108" width="9" height="9" rx="2" fill="#fff6dd"/>`+lf(98,114,-30)+lf(122,90,30);
+  if(/soup|dal|shakshuka|curry/.test(t))return `<circle cx="100" cy="102" r="46" fill="${/dal/.test(t)?'#f0b429':'#d9482b'}"/><circle cx="100" cy="102" r="46" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="5"/><path d="M80 104c4-16 26-20 36-8s2 24-12 22" stroke="#fff6e8" stroke-width="5" fill="none" stroke-linecap="round"/>`+lf(112,84,22)+(/shakshuka/.test(t)?dots([[86,96],[116,108]],'#fff',11)+dots([[86,96],[116,108]],'#f5a623',5):'');
+  if(/rice|biryani|bowl/.test(t))return `<path d="M56 106a44 40 0 0 1 88 0z" fill="#fffaf0"/>`+dots([[76,96],[94,86],[112,90],[126,98],[86,102],[106,100]],'#f0b429',4)+`<rect x="88" y="84" width="17" height="12" rx="5" fill="#b9652b"/><rect x="112" y="92" width="16" height="12" rx="5" fill="#b9652b"/><rect x="72" y="100" width="9" height="9" rx="2" fill="#f08a24"/>`+lf(102,80,-20);
+  if(/salad/.test(t))return dots([[80,94],[100,84],[120,94],[90,112],[112,112]],'#5cb85c',17)+dots([[84,92],[116,104],[98,112]],'#d9482b',7)+`<rect x="96" y="90" width="13" height="13" rx="3" fill="#fffaf0"/><rect x="74" y="108" width="12" height="12" rx="3" fill="#fffaf0"/>`+dots([[110,86],[88,104]],'#3b2f4a',4);
+  if(/taco/.test(t))return `<path d="M58 118a42 42 0 0 1 84 0z" fill="#f3d38a"/><path d="M68 114a32 32 0 0 1 64 0z" fill="#5cb85c"/>`+dots([[84,104],[100,98],[116,104]],'#d9482b',6)+dots([[92,108],[110,110]],'#b9d36b',5);
+  return Array.from({length:16},(_,i)=>`<rect x="${70+(i*37)%62}" y="${72+(i*23)%52}" width="12" height="9" rx="4" fill="${i%5?'#f6d86b':'#fff3c4'}" transform="rotate(${i*40} 100 100)"/>`).join('')+dots([[88,96],[112,104],[100,116]],'#d9482b',7)+lf(104,84,25)+lf(86,112,-30);
+}
+/* top-down plate centred on (100,100), radius 68 */
+function plateGroup(t){return `<ellipse cx="100" cy="162" rx="62" ry="8" fill="#15151a" opacity=".12"/><circle cx="100" cy="100" r="68" fill="#fff"/><circle cx="100" cy="100" r="56" fill="#f6f5fb" stroke="#e7e5f1" stroke-width="2"/>${foodFor(t)}`}
+const plateAt=(t,x,y,k)=>`<g transform="translate(${x} ${y}) scale(${k}) translate(-100 -100)">${plateGroup(t)}</g>`;
+
+const ILL={
+/* app mark: a pot with a steam sparkle */
+logo(){return svgw('0 0 64 64',`<path d="M13 31h38v9a15 15 0 0 1-15 15H28A15 15 0 0 1 13 40z" fill="#fff"/><rect x="10" y="25" width="44" height="8" rx="4" fill="#fff"/><rect x="27" y="17" width="10" height="9" rx="4.5" fill="#fff"/><rect x="5" y="35" width="9" height="5" rx="2.5" fill="#fff"/><rect x="50" y="35" width="9" height="5" rx="2.5" fill="#fff"/>${spark(49,12,8,IC.lav)}${spark(17,13,4.5,IC.lav,.8)}`,'ill logo-ill')},
+
+/* slide 1: cook hands-free */
+voice(){return svgw('0 0 320 240',
+ dotc(70,62,46,'#fff',.32)+dotc(272,190,54,'#fff',.28)+dotc(268,70,20,'#fff',.35)+
+ `<rect x="72" y="206" width="176" height="14" rx="7" fill="${IC.dark}"/>`+
+ `<path d="M136 98c-9-10 9-15 0-27M160 92c-9-10 9-15 0-31M184 98c-9-10 9-15 0-27" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity=".95"/>`+
+ `<rect x="86" y="148" width="22" height="11" rx="5.5" fill="${IC.acc2}"/><rect x="212" y="148" width="22" height="11" rx="5.5" fill="${IC.acc2}"/>`+
+ `<path d="M102 134h116v38a32 32 0 0 1-32 32h-52a32 32 0 0 1-32-32z" fill="${IC.acc}"/>`+
+ `<path d="M118 150v22" stroke="#fff" stroke-opacity=".35" stroke-width="7" stroke-linecap="round"/>`+
+ `<rect x="150" y="108" width="20" height="13" rx="6.5" fill="${IC.acc2}"/><rect x="94" y="120" width="132" height="18" rx="9" fill="${IC.acc3}"/>`+
+ `<rect x="198" y="30" width="108" height="58" rx="29" fill="#fff"/><path d="M216 82l-9 22 26-15z" fill="#fff"/>`+bubbleBars(226,59)+
+ `<circle cx="62" cy="96" r="32" fill="${IC.dark}"/><circle cx="62" cy="96" r="42" fill="none" stroke="${IC.acc}" stroke-opacity=".35" stroke-width="3"/>`+micS(62,96,1.25)+
+ tomatoS(46,178,21)+leafS(270,150,1.1,28)+leafS(284,128,.8,-20,IC.leaf2)+spark(30,40,8,'#fff')+spark(250,118,6,IC.gold)+spark(112,40,5,IC.gold,.9))},
+
+/* slide 2: scan what you have */
+scan(){return svgw('0 0 320 240',
+ dotc(60,50,44,'#fff',.3)+dotc(270,200,50,'#fff',.28)+
+ `<clipPath id="ilc1"><rect x="112" y="30" width="96" height="180" rx="16"/></clipPath>`+
+ `<rect x="104" y="18" width="112" height="204" rx="24" fill="${IC.dark}"/><rect x="112" y="30" width="96" height="180" rx="16" fill="#eaf8e2"/>`+
+ `<g clip-path="url(#ilc1)"><rect x="112" y="152" width="96" height="60" fill="#d3eec2"/>${tomatoS(138,158,19)}${onionS(178,160,17)}${leafS(160,138,.9,-30)}<rect x="112" y="30" width="96" height="22" fill="#fff" opacity=".55"/></g>`+
+ `<rect x="146" y="22" width="28" height="6" rx="3" fill="#2b2b33"/>`+
+ `<g stroke="${IC.acc}" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M122 92v-12h12M198 92v-12h-12M122 178v12h12M198 178v12h-12"/></g>`+
+ `<rect x="126" y="138" width="68" height="3.5" rx="1.75" fill="${IC.acc}" opacity=".55"/>`+
+ `<rect x="118" y="100" width="54" height="20" rx="10" fill="#fff"/><circle cx="130" cy="110" r="4.5" fill="${IC.leaf}"/><text x="138" y="114" font-family="Outfit,system-ui,sans-serif" font-size="10.5" font-weight="700" fill="${IC.ink}">Tomato</text>`+
+ `<circle cx="228" cy="62" r="17" fill="${IC.leaf}"/>${checkS(228,61,1.05)}`+
+ tomatoS(58,176,30)+onionS(262,168,24)+carrotS(48,118,1.1,-38)+leafS(272,112,1,30)+spark(32,52,8,'#fff')+spark(254,36,6,IC.gold)+spark(84,214,5,IC.gold,.9))},
+
+/* slide 3: make it yours (diet badge follows the choice) */
+profile(diet='any'){
+  const B=[['any',56,62,IC.lav,`<circle r="9" fill="none" stroke="${IC.acc}" stroke-width="3.2"/><circle r="3.4" fill="${IC.acc}"/>`],
+           ['veg',264,62,IC.mint,`<path d="M0-13C13-9 15 6 0 14C-15 6-13-9 0-13z" fill="${IC.leaf}"/><path d="M0-6V10" stroke="#fff" stroke-opacity=".6" stroke-width="2" stroke-linecap="round"/>`],
+           ['egg',68,170,'#fff',`<path d="M0-13C9-13 12 6 7 11C3 14-3 14-7 11C-12 6-9-13 0-13z" fill="${IC.sun}" stroke="${IC.gold}" stroke-width="2.4"/><circle cy="2" r="4.2" fill="${IC.gold}"/>`],
+           ['vegan',252,170,IC.peach,carrotS(0,4,.62,0)]];
+  const badges=B.map(([k,x,y,bg,ic])=>{const on=k===diet,r=on?31:25;return `<g transform="translate(${x} ${y})"><circle r="${r+7}" fill="${on?IC.acc:'#fff'}" opacity="${on?.18:.0}"/><circle r="${r}" fill="${bg}" ${on?`stroke="${IC.acc}" stroke-width="3"`:''}/><g transform="scale(${on?1.12:1})">${ic}</g>${on?`<circle cx="${r*.72}" cy="${-r*.72}" r="9.5" fill="${IC.acc}" stroke="#fff" stroke-width="2.5"/>${checkS(r*.72,-r*.72+.5,.62)}`:''}</g>`}).join('');
+  return svgw('0 0 320 230',
+   dotc(160,112,92,'#fff',.4)+dotc(160,112,70,'#fff',.55)+badges+
+   `<circle cx="160" cy="108" r="58" fill="#fff"/>`+chefPal(160,92,1.02)+
+   spark(112,26,7,IC.gold)+spark(212,200,6,IC.acc,.5)+spark(300,116,5,'#fff')+spark(22,116,5,'#fff')+dotc(205,30,4,IC.acc,.3))},
+
+/* sign-in header: three dishes from above */
+auth(){return svgw('0 0 360 176',
+  dotc(44,40,34,'#fff',.25)+dotc(326,150,40,'#fff',.22)+
+  `<g>${plateAt('pasta penne',72,96,.74)}${plateAt('soup tomato',288,96,.74)}${plateAt('rice biryani bowl',180,84,.98)}</g>`+
+  leafS(130,150,1.1,40)+leafS(236,152,1,-36,IC.leaf2)+tomatoS(318,50,13)+tomatoS(36,130,12)+spark(124,22,7,'#fff')+spark(244,20,5,IC.gold)+spark(340,96,5,'#fff',.9))},
+
+/* tiny empty-state scenes (160 x 120) */
+timer(){return svgw('0 0 160 120',
+  dotc(80,64,50,IC.lav2)+`<rect x="68" y="14" width="24" height="9" rx="4.5" fill="${IC.dark}"/><rect x="76" y="20" width="8" height="10" fill="${IC.dark}"/><circle cx="80" cy="68" r="38" fill="${IC.acc}"/><circle cx="80" cy="68" r="30" fill="#fff"/>`+
+  `<path d="M80 68V48M80 68l14 8" stroke="${IC.dark}" stroke-width="4.5" stroke-linecap="round"/><circle cx="80" cy="68" r="4.5" fill="${IC.dark}"/>`+
+  [0,90,180,270].map(a=>`<rect x="78.5" y="41" width="3" height="5" rx="1.5" fill="${IC.acc}" transform="rotate(${a} 80 68)"/>`).join('')+
+  `<path d="M116 34l6-6M44 34l-6-6" stroke="${IC.dark}" stroke-width="4" stroke-linecap="round"/>`+spark(128,78,7,IC.gold)+spark(30,86,5,IC.acc,.5))},
+saved(){return svgw('0 0 160 120',
+  dotc(80,62,50,'#fde3ea')+`<rect x="44" y="24" width="72" height="86" rx="14" fill="#fff" transform="rotate(-7 80 67)"/><rect x="50" y="20" width="72" height="86" rx="14" fill="#fff" stroke="#ece9f6" stroke-width="2"/>`+
+  `<rect x="60" y="30" width="52" height="30" rx="9" fill="${IC.sun}"/>${leafS(86,45,.9,25)}${dotc(100,42,6,IC.tom)}<rect x="60" y="68" width="40" height="6" rx="3" fill="${IC.lav}"/><rect x="60" y="80" width="28" height="6" rx="3" fill="#ece9f6"/>`+
+  `<path d="M112 84c-9-8-16-13-16-20a9 9 0 0 1 16-5 9 9 0 0 1 16 5c0 7-7 12-16 20z" fill="#ef5b7b" stroke="#fff" stroke-width="3"/>`+spark(30,40,6,IC.gold)+spark(136,28,5,IC.acc,.5))},
+journal(){return svgw('0 0 160 120',
+  dotc(80,62,50,IC.mint)+`<path d="M80 34C68 26 52 26 38 30v62c14-4 30-4 42 4z" fill="#fff"/><path d="M80 34c12-8 28-8 42-4v62c-14-4-30-4-42 4z" fill="#f6f5fb"/><path d="M80 34v62" stroke="#e1defa" stroke-width="2"/>`+
+  `<path d="M48 44h24M48 54h24M48 64h16M90 44h24M90 54h20" stroke="${IC.lav}" stroke-width="4" stroke-linecap="round"/>`+
+  `<g transform="translate(116 82) rotate(38)"><rect x="-4" y="-26" width="8" height="40" rx="2" fill="${IC.gold}"/><path d="M-4 14h8l-4 9z" fill="${IC.peach}"/><rect x="-4" y="-26" width="8" height="8" rx="2" fill="${IC.tom}"/></g>`+spark(34,30,6,IC.gold)+starS(120,30,9))},
+plan(){return svgw('0 0 160 120',
+  dotc(80,62,50,IC.sun)+`<rect x="36" y="28" width="88" height="76" rx="16" fill="#fff"/><path d="M36 44a16 16 0 0 1 16-16h56a16 16 0 0 1 16 16v6H36z" fill="${IC.acc}"/><rect x="54" y="20" width="7" height="16" rx="3.5" fill="${IC.dark}"/><rect x="99" y="20" width="7" height="16" rx="3.5" fill="${IC.dark}"/>`+
+  `<g fill="${IC.lav}">${[0,1,2].map(r=>[0,1,2,3].map(c=>`<rect x="${46+c*18}" y="${58+r*14}" width="11" height="8" rx="3" ${r===1&&c===2?`fill="${IC.tom}"`:''}/>`).join('')).join('')}</g>`+spark(132,36,6,IC.acc,.6)+spark(28,92,5,IC.gold))},
+ai(){return svgw('0 0 160 120',
+  dotc(80,62,50,IC.lav2)+chefPal(80,52,.9)+spark(34,34,9,IC.acc)+spark(130,40,7,IC.gold)+spark(126,96,5,IC.acc,.6)+spark(30,92,5,IC.gold))},
+search(){return svgw('0 0 160 120',
+  dotc(80,62,50,IC.peach)+plateAt('pasta',72,60,.42)+`<circle cx="76" cy="58" r="32" fill="none" stroke="${IC.dark}" stroke-width="7"/><path d="M99 82l20 20" stroke="${IC.dark}" stroke-width="9" stroke-linecap="round"/>`+spark(124,34,6,IC.acc,.6)+spark(30,98,5,IC.gold))},
+camera(){return svgw('0 0 160 120',
+  dotc(80,62,50,'rgba(255,255,255,.14)')+`<rect x="36" y="38" width="88" height="62" rx="16" fill="${IC.lav}"/><path d="M62 38l5-10h26l5 10z" fill="${IC.lav}"/><circle cx="80" cy="69" r="21" fill="${IC.dark}"/><circle cx="80" cy="69" r="13" fill="${IC.acc}"/><circle cx="74" cy="63" r="4" fill="#fff" opacity=".7"/><circle cx="112" cy="50" r="4" fill="#fff"/>`+spark(30,36,6,'#fff')+spark(132,92,5,IC.gold))},
+/* finished dish */
+done(){return svgw('0 0 240 170',
+  dotc(120,92,74,'#fff',.55)+`<rect x="30" y="20" width="9" height="9" rx="2.5" fill="${IC.acc}" transform="rotate(20 34 24)"/><rect x="196" y="30" width="10" height="10" rx="2.5" fill="${IC.gold}" transform="rotate(-18 200 34)"/><rect x="48" y="104" width="8" height="8" rx="2" fill="${IC.tom}" transform="rotate(30 52 108)"/><rect x="186" y="110" width="9" height="9" rx="2.5" fill="${IC.leaf}" transform="rotate(14 190 114)"/><circle cx="58" cy="52" r="5" fill="${IC.gold}"/><circle cx="188" cy="76" r="4.5" fill="${IC.acc}"/><circle cx="132" cy="14" r="4" fill="${IC.tom}"/>`+
+  `<path d="M104 62c-8-9 8-13 0-23M122 58c-8-9 8-13 0-25M140 62c-8-9 8-13 0-23" stroke="${IC.acc}" stroke-opacity=".4" stroke-width="5" stroke-linecap="round" fill="none"/>`+
+  `<ellipse cx="120" cy="136" rx="68" ry="9" fill="#15151a" opacity=".1"/><g transform="translate(120 100) scale(.68) translate(-100 -100)">${plateGroup('pasta')}</g>`+
+  `<circle cx="168" cy="64" r="21" fill="${IC.leaf}" stroke="#fff" stroke-width="4"/>${checkS(168,63,1.15)}`+spark(70,30,8,IC.gold)+spark(206,120,6,'#fff')+spark(40,80,6,IC.acc,.6))}
+};
+function starS(x,y,r){const p=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r*.45:r;p.push((x+Math.cos(a)*q).toFixed(1)+' '+(y+Math.sin(a)*q).toFixed(1))}return `<polygon points="${p.join(' ')}" fill="${IC.gold}" stroke="${IC.gold}" stroke-width="2" stroke-linejoin="round"/>`}
+const emptyState=(k,t,p,cls='')=>`<div class="empty ${cls}"><div class="eill">${ILL[k]()}</div><b>${t}</b><p>${p}</p></div>`;
+
 /* ---------- dish illustrations: original vector art, one per recipe; your own photo always wins ---------- */
 const BGS=['#e4dafc','#fbd9bb','#c6f0b0','#fdf0a2','#cdbdfa'];
 function dishArt(r){
   const t=(r.title+' '+(r.cuisine||'')).toLowerCase(),h=[...r.id].reduce((a,c)=>a+c.charCodeAt(0),0),bg=BGS[h%5];
-  const lf=(x,y,a)=>`<ellipse cx="${x}" cy="${y}" rx="9" ry="4.5" fill="#3a9a5b" transform="rotate(${a} ${x} ${y})"/>`;
-  const dots=(p,c,rad)=>p.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="${rad}" fill="${c}"/>`).join('');
-  let f;
-  if(/pasta|spaghetti|carbonara|noodle/.test(t))f=`<circle cx="100" cy="102" r="44" fill="#f2c14e"/>`+[0,1,2,3,4].map(i=>`<path d="M${64+i*3} ${92+i*7}q36-20 72 0" stroke="#e0a526" stroke-width="3.5" fill="none" stroke-linecap="round"/>`).join('')+dots([[92,92],[112,106]],'#d9482b',9)+`<rect x="104" y="82" width="10" height="10" rx="2" fill="#fff6dd"/><rect x="84" y="108" width="9" height="9" rx="2" fill="#fff6dd"/>`+lf(98,114,-30)+lf(122,90,30);
-  else if(/soup|dal|shakshuka|curry/.test(t))f=`<circle cx="100" cy="102" r="46" fill="${/dal/.test(t)?'#f0b429':'#d9482b'}"/><circle cx="100" cy="102" r="46" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="5"/><path d="M78 98q22 14 44-6" stroke="#fff6e8" stroke-width="5" fill="none" stroke-linecap="round"/>`+lf(106,84,20)+lf(88,114,-25)+(/shakshuka/.test(t)?dots([[86,96],[116,108]],'#fff',11)+dots([[86,96],[116,108]],'#f5a623',5):'');
-  else if(/rice|biryani|bowl/.test(t))f=`<path d="M56 106a44 40 0 0 1 88 0z" fill="#fffaf0"/>`+dots([[76,96],[94,86],[112,90],[126,98],[86,102],[106,100]],'#f0b429',4)+`<rect x="88" y="84" width="17" height="12" rx="5" fill="#b9652b"/><rect x="112" y="92" width="16" height="12" rx="5" fill="#b9652b"/><rect x="72" y="100" width="9" height="9" rx="2" fill="#f08a24"/>`+lf(102,80,-20);
-  else if(/salad/.test(t))f=dots([[80,94],[100,84],[120,94],[90,112],[112,112]],'#5cb85c',17)+dots([[84,92],[116,104],[98,112]],'#d9482b',7)+`<rect x="96" y="90" width="13" height="13" rx="3" fill="#fffaf0"/><rect x="74" y="108" width="12" height="12" rx="3" fill="#fffaf0"/>`+dots([[110,86],[88,104]],'#3b2f4a',4);
-  else if(/taco/.test(t))f=`<path d="M58 118a42 42 0 0 1 84 0z" fill="#f3d38a"/><path d="M68 114a32 32 0 0 1 64 0z" fill="#5cb85c"/>`+dots([[84,104],[100,98],[116,104]],'#d9482b',6)+dots([[92,108],[110,110]],'#b9d36b',5);
-  else f=Array.from({length:16},(_,i)=>`<rect x="${70+(i*37)%62}" y="${72+(i*23)%52}" width="12" height="9" rx="4" fill="${i%5?'#f6d86b':'#fff3c4'}" transform="rotate(${i*40} 100 100)"/>`).join('')+dots([[88,96],[112,104],[100,116]],'#d9482b',7)+lf(104,84,25)+lf(86,112,-30);
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="${bg}"/><circle cx="60" cy="30" r="60" fill="#fff" opacity=".35"/><circle cx="350" cy="180" r="70" fill="#fff" opacity=".3"/><g transform="translate(100 0)"><ellipse cx="100" cy="162" rx="62" ry="8" fill="#15151a" opacity=".12"/><circle cx="100" cy="100" r="68" fill="#fff"/><circle cx="100" cy="100" r="56" fill="#f6f5fb" stroke="#e7e5f1" stroke-width="2"/>${f}</g></svg>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="${bg}"/><circle cx="60" cy="30" r="60" fill="#fff" opacity=".35"/><circle cx="350" cy="180" r="70" fill="#fff" opacity=".3"/><g transform="translate(100 0)">${plateGroup(t)}</g></svg>`;
   return 'data:image/svg+xml,'+encodeURIComponent(svg);
 }
 const _art={};const artOf=id=>{const r=RECIPES.find(x=>x.id===id);return r?(_art[id]=_art[id]||dishArt(r)):''};
@@ -831,7 +1065,7 @@ function say(text,opts={}){
     const u=new SpeechSynthesisUtterance(text);if(voice)u.voice=voice;u.rate=opts.rate||PREF.rate;u.pitch=1.02;
     V.spoken=norm(text);V.spokenAt=Date.now();speaking=true;pauseRec();paintWake();
     let fin=false;const t0=Date.now();
-    const done=()=>{if(fin)return;fin=true;clearInterval(iv);speaking=false;V.spokenAt=Date.now();V.quietUntil=Date.now()+250;if(V.awake)wakeUp(9000);resumeRec();paintWake();res()};
+    const done=()=>{if(fin)return;fin=true;clearInterval(iv);speaking=false;V.spokenAt=Date.now();V.quietUntil=Date.now()+450;if(V.awake&&!V.oneShot&&Date.now()<V.awakeUntil)wakeUp(9000);else syncRec();paintWake();res()};
     const iv=setInterval(()=>{if(Date.now()-t0>700&&!speechSynthesis.speaking&&!speechSynthesis.pending)done();if(Date.now()-t0>45000)done()},400);
     u.onend=done;u.onerror=done;setTimeout(()=>{try{speechSynthesis.speak(u)}catch(e){done()}},60)
   });
@@ -841,75 +1075,156 @@ document.addEventListener('click',e=>{if(e.target.closest('#cap')){clearTimeout(
 document.addEventListener('pointerdown',e=>{if(e.target.closest('.tab,.chip,.btn,.feat,.recipe,.quick>button')){try{navigator.vibrate&&navigator.vibrate(8)}catch(_){}}},{passive:true});
 function youSaid(t){caption(t,'YOU SAID')}
 
-/* ---------- speech in: always-on “Hey Chef” ---------- */
+/* ---------- voice in: tap-to-talk first, “Hey Chef” as a bonus, always listening while you cook ---------- */
+P.send='<path d="M4.5 12.2 19.5 5l-4.6 14-3.2-5.6z"/><path d="M11.7 13.4 19.5 5"/>';
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-let rec=null,recOn=false,recWanted=false;
-const V={sid:0,seen:new Set(),lastTxt:'',lastAt:0,awake:false,awakeUntil:0,awakeT:null,quietUntil:0,spoken:'',spokenAt:0,greetAt:0,fails:0,gestured:false,blocked:false,userOff:false};
-const WAKE_RE=/(?:^|\b)(?:hey|hi|hello|ok|okay|hay|hei)[\s,]*(?:chef|chief|shef|sheff|cheff|chaf|shaf)\b|(?:हे|हेलो|हाय|ओके)\s*(?:शेफ|चेफ)/i;
+let rec=null,recOn=false,recWanted=false,startT=null;
+const V={sid:0,seen:new Set(),lastTxt:'',lastAt:0,awake:false,awakeUntil:0,awakeT:null,oneShot:false,quietUntil:0,spoken:'',spokenAt:0,greetAt:0,fails:0,gestured:false,blocked:false,userOff:false,needGesture:false,ready:false,heard:'',sheet:false,gotAny:false,done:false,typing:false,tapAt:0,stableT:null,doneT:null};
+const WAKE_RE=/(?:^|\b)(?:hey|hi|hello|ok|okay|hay|hei)[\s,]*(?:chef|chief|shef|sheff|cheff|chaf|shaf|chev)\b|^chef\b|(?:हे|हेलो|हाय|ओके)\s*(?:शेफ|चेफ)/i;
 const WAKE_G=new RegExp(WAKE_RE.source,'gi');
 const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9\u0900-\u097f ]/g,' ').replace(/\s+/g,' ').trim();
-let startT=null;
-function scheduleStart(ms){clearTimeout(startT);startT=setTimeout(()=>{if(!recWanted||recOn||speaking||document.hidden||!rec)return;try{rec.start()}catch(e){}},ms)}
+
+/* the mic runs only when it has a reason to: a tap, “Hey Chef” mode, or hands-free cooking */
+function want(){return !!SR&&!V.blocked&&!V.needGesture&&(awakeNow()||(PREF.wake&&!V.userOff&&V.ready)||(S.inCook&&S.handsfree))}
+function scheduleStart(ms){clearTimeout(startT);startT=setTimeout(()=>startNow(true),ms)}
+function startNow(retry){
+  if(!want()||recOn||speaking||document.hidden||!rec)return;
+  try{rec.start()}catch(e){if(retry&&!recOn){clearTimeout(startT);startT=setTimeout(()=>startNow(false),350)}}
+}
 function initRec(){
   if(!SR||rec)return;
   rec=new SR();rec.lang=PREF.lang;rec.continuous=true;rec.interimResults=true;rec.maxAlternatives=3;
   rec.onstart=()=>{recOn=true;V.sid++;V.seen.clear();paintWake()};
   rec.onresult=onResult;
-  rec.onend=()=>{recOn=false;paintWake();if(recWanted&&!speaking)scheduleStart(V.fails>2?3000:100)};
+  rec.onend=()=>{recOn=false;clearTimeout(V.stableT);paintWake();if(want()&&!speaking)scheduleStart(V.fails>2?2500:60)};
   rec.onerror=e=>{
     const er=e&&e.error;
-    if(er==='not-allowed'||er==='service-not-allowed'){recWanted=false;recOn=false;S.handsfree=false;
-      if(V.gestured){V.blocked=true;caption('Microphone is blocked. Allow it in the browser address bar, then tap the pill at the top.','CHEF AI')}paintWake();return}
-    if(er==='audio-capture'){recWanted=false;caption('No microphone found.','CHEF AI');paintWake();return}
+    if(er==='not-allowed'||er==='service-not-allowed'){recOn=false;if(V.gestured){V.blocked=true;caption('Microphone is blocked. Allow it in the browser address bar, then tap the mic again.','CHEF AI')}else V.needGesture=true;syncRec();return}
+    if(er==='audio-capture'){recOn=false;V.blocked=true;caption('No microphone found.','CHEF AI');syncRec();return}
     if(er==='network'){V.fails++;if(V.fails===3)caption('Voice needs an internet connection.','CHEF AI')}
   };
 }
+function syncRec(){
+  recWanted=want();
+  if(SR){
+    if(recWanted){initRec();if(!recOn&&!speaking&&!document.hidden){Date.now()-V.tapAt<1500?startNow(true):scheduleStart(40)}}
+    else{clearTimeout(startT);if(rec&&recOn){try{rec.abort()}catch(e){}}}
+  }
+  paintWake();
+}
 function startRec(user){
-  if(!SR){caption('Voice input needs Chrome, Edge or Safari. You can still tap every button.','CHEF AI');paintWake();return false}
-  initRec();recWanted=true;if(user){V.userOff=false;V.blocked=false}
-  if(!recOn&&!speaking){try{rec.start()}catch(e){}}
-  paintWake();return true}
-function stopRec(user){recWanted=false;if(user)V.userOff=true;clearTimeout(startT);if(rec){try{rec.abort()}catch(e){}}recOn=false;paintWake()}
-function pauseRec(){if(rec&&recOn){try{rec.abort()}catch(e){}recOn=false}}
-function resumeRec(){if(recWanted&&rec&&!recOn)scheduleStart(120)}
+  if(!SR){caption('Voice input needs Chrome, Edge or Safari. You can still tap every button or type a command.','CHEF AI');paintWake();return false}
+  if(user){V.userOff=false;V.blocked=false;V.gestured=true}
+  syncRec();return true}
+function stopRec(user){if(user)V.userOff=true;syncRec()}
+function pauseRec(){clearTimeout(startT);if(rec&&recOn){try{rec.abort()}catch(e){}recOn=false}}
+function resumeRec(){syncRec()}
 
-/* awake window: “Hey Chef” opens ~10s of listening on ANY screen; cooking keeps it open */
+/* awake window: a tap or “Hey Chef” opens it; one command closes it again unless Chef asks a follow-up; cooking keeps it open */
 function alwaysAwake(){return S.handsfree&&S.inCook&&(S.screen==='cook'||S.screen==='tasks')}
 function awakeNow(){return (V.awake&&Date.now()<V.awakeUntil)||alwaysAwake()}
 const isLive=awakeNow;
-function wakeUp(ms=10000){V.awake=true;V.awakeUntil=Date.now()+ms;clearTimeout(V.awakeT);V.awakeT=setTimeout(sleepNow,ms+60);paintWake()}
-function sleepNow(){const left=V.awakeUntil-Date.now();if(left>80){V.awakeT=setTimeout(sleepNow,left+60);return}V.awake=false;S.listenOnce=false;paintWake()}
-function wake(ms=12000){const was=V.awake&&Date.now()<V.awakeUntil;wakeUp(ms);if(!was)chime()}
+function wakeUp(ms=10000){V.awake=true;V.oneShot=false;V.awakeUntil=Date.now()+ms;clearTimeout(V.awakeT);V.awakeT=setTimeout(sleepNow,ms+60);syncRec()}
+function sleepNow(){
+  const left=V.awakeUntil-Date.now();if(left>80){V.awakeT=setTimeout(sleepNow,left+60);return}
+  const quiet=V.awake&&!V.gotAny&&V.tapAt&&Date.now()-V.tapAt<20000&&!alwaysAwake();
+  V.awake=false;V.heard='';V.done=false;clearTimeout(V.stableT);syncRec();
+  if(quiet){V.tapAt=0;caption('I didn’t hear anything. Tap the mic and try again.','CHEF AI')}
+}
+function wake(ms=12000,quiet){const was=V.awake&&Date.now()<V.awakeUntil;V.done=false;if(!quiet)V.sheet=true;wakeUp(ms);if(!was&&!quiet)chime()}
 function chime(){try{const a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(660,a.currentTime);o.frequency.exponentialRampToValueAtTime(990,a.currentTime+.12);o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.001,a.currentTime);g.gain.exponentialRampToValueAtTime(.12,a.currentTime+.02);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.2);o.start();o.stop(a.currentTime+.22);setTimeout(()=>{try{a.close()}catch(e){}},500)}catch(e){}}
+/* every mic button in the app ends up here */
+function talk(){
+  V.gestured=true;V.userOff=false;V.needGesture=false;V.blocked=false;V.heard='';V.gotAny=false;V.done=false;V.tapAt=Date.now();V.sheet=true;
+  try{speechSynthesis.cancel()}catch(e){}              /* tapping the mic while Chef is talking cuts Chef off */
+  if(!SR){V.typing=true;paintWake();return}
+  chime();wakeUp(S.screen==='adapt'?15000:9000);
+  if(S.screen==='scan')caption('Listening… say “capture” when you’re ready.','CHEF AI');
+}
 function hintFor(){
   const sc=S.screen;
-  if(awakeNow())return sc==='cook'?'Listening… say “Next step”':'Listening… go ahead';
-  if(!recOn)return sc==='cook'?'Tap to turn on voice':'Tap to enable “Hey Chef”';
-  return {cook:'Say “Hey Chef” or “Next step”',tasks:'Say “Hey Chef, how much time is left?”',results:'Say “Hey Chef, show me the pasta”'}[sc]||'Say “Hey Chef” to start';
+  if(!SR)return 'Tap to type a command';
+  if(V.blocked)return 'Mic blocked · tap to retry';
+  if(awakeNow())return V.heard?'“'+V.heard.slice(-32)+'”':(sc==='cook'?'Listening… say “Next step”':'Listening… go ahead');
+  if(S.inCook&&(sc==='cook'||sc==='tasks'))return 'Hands-free is off · tap to turn on';
+  return recOn?'Say “Hey Chef” or tap':'Tap to talk';
 }
 /* patch the DOM in place so the mic state never re-renders (and never steals focus from inputs) */
 function paintWake(){
-  const w=$('#wake');
+  const live=awakeNow(),w=$('#wake');
   if(w){let txt,cls;
-    if(!SR){cls='off';txt='Voice not supported here'}
+    if(!SR){cls='off';txt='Tap to type a command'}
     else if(V.blocked){cls='warn';txt='Mic blocked · tap to retry'}
-    else if(!recWanted){cls='off';txt=PREF.wake&&!V.userOff?'Tap anywhere to enable “Hey Chef”':'“Hey Chef” is off · tap to turn on'}
     else if(speaking){cls='say';txt='Chef is speaking…'}
-    else if(awakeNow()){cls='awake';txt='Listening… go ahead'}
-    else if(recOn){cls='on';txt='Say “Hey Chef”'}
-    else{cls='on';txt='Starting mic…'}
+    else if(live){cls='awake';txt=V.heard?'“'+V.heard.slice(-30)+'”':(recOn?'Listening…':'Starting mic…')}
+    else if(recOn){cls='on';txt='Say “Hey Chef” or tap'}
+    else if(recWanted){cls='on';txt='Starting mic…'}
+    else{cls='off';txt='Tap to talk'}
     w.className='wake '+cls;$('.wt',w).textContent=txt}
-  const live=awakeNow(),bar=$('#hfbar');
+  const bar=$('#hfbar');
   if(bar){const wv=$('.wave',bar);if(wv)wv.classList.toggle('live',live);const h=$('#hint');if(h)h.textContent=hintFor()}
   const hr=$('#homering');if(hr)hr.classList.toggle('live',live);
   const ow=$('.orb-wrap');if(ow)ow.classList.toggle('live',live);
+  const as=$('#adst');if(as)as.textContent=live?'LISTENING…':'TAP THE MIC OR SAY “HEY CHEF”';
   const cb=$('.cbtn[data-act=talk]');if(cb)cb.classList.toggle('act',live);
+  paintVS();
 }
-function toggleWake(){
-  if(!SR){caption('Voice input needs Chrome, Edge or Safari.','CHEF AI');return}
-  if(V.blocked||!recWanted){PREF.wake=true;savePrefs();startRec(true);caption('Voice is on. Say “Hey Chef” on any screen.','CHEF AI');return}
-  PREF.wake=false;savePrefs();stopRec(true);caption('“Hey Chef” is off.','CHEF AI');
+function toggleWake(){talk()}
+
+/* ---- listening sheet: always shows what the mic is doing and what it heard ---- */
+const SUGG={home:['Show me a quick pasta','Open scan','Set a timer for 10 minutes'],results:['Show me paneer','Open scan','Go home'],detail:['I have everything','What am I missing?','Start cooking'],cook:['Next','Repeat','Start timer'],tasks:['How much time is left?','Go home'],done:['Rate it 5 stars','Go home']};
+const sugg=()=>SUGG[S.screen]||['Show me a quick pasta','Open scan','Go home'];
+let vsShown=false;
+const vsOpen=()=>V.typing||(V.sheet&&awakeNow()&&!alwaysAwake()&&S.screen!=='adapt'&&S.screen!=='scan');
+function drawVS(){
+  const el=$('#vs');if(!el)return;
+  el.innerHTML=`<div class="vs-card"><span class="vs-grab" aria-hidden="true"></span>
+   <button class="vs-x press" data-vs="close" aria-label="Close voice">${ic('x')}</button>
+   <button class="vs-orb press" data-vs="orb" aria-label="Stop listening"><i></i><i></i><b>${ic('mic')}</b></button>
+   <div class="vs-state" id="vs-state" role="status"></div>
+   <p class="vs-heard" id="vs-heard"></p>
+   <button class="btn p press vs-retry" data-vs="retry">Try again</button>
+   <div class="vs-chips">${sugg().map(s=>`<button class="chip press" data-vsay="${esc(s)}">${esc(s)}</button>`).join('')}</div>
+   <form class="vs-type" id="vs-form"><input id="vs-in" class="field" placeholder="Or type a command" autocomplete="off" autocapitalize="off" enterkeyhint="send" aria-label="Type a command"><button class="vs-send press" type="submit" aria-label="Send command">${ic('send','o')}</button></form>
+   <button class="vs-wake press" data-vs="wake" role="switch" aria-checked="${!!PREF.wake}"><span>“Hey Chef” on any screen</span><i class="sw ${PREF.wake?'on':''}"></i></button></div>`;
 }
+function paintVS(){
+  const el=$('#vs');if(!el)return;
+  const open=vsOpen();
+  if(!open){if(vsShown){vsShown=false;el.classList.remove('on');setTimeout(()=>{if(!vsShown)el.innerHTML=''},260)}return}
+  if(!vsShown){vsShown=true;drawVS()}
+  let st,cls;
+  if(!SR){cls='nosr';st='Voice isn’t available in this browser'}
+  else if(V.blocked){cls='blocked';st='Microphone is blocked'}
+  else if(speaking){cls='speaking';st='Chef is speaking…'}
+  else if(typeof LLM!=='undefined'&&LLM.busy&&Date.now()-(LLM.busyAt||0)<25000){cls='thinking';st='Thinking…'}
+  else if(V.done){cls='done';st='Got it'}
+  else if(V.heard){cls='hearing';st='Listening…'}
+  else if(recOn){cls='listening';st='Listening…'}
+  else{cls='starting';st='Starting mic…'}
+  el.className='on vs '+cls;
+  const s=$('#vs-state');if(s&&s.textContent!==st)s.textContent=st;
+  const h=$('#vs-heard');
+  if(h){const t=V.heard?'“'+V.heard+'”':(!SR?'Type what you’d like to do below.':V.blocked?'Allow the microphone in your browser’s address bar, then tap Try again.':'Try “'+sugg()[0]+'”');if(h.textContent!==t)h.textContent=t;h.classList.toggle('ph',!V.heard)}
+}
+function closeVS(user){
+  V.typing=false;V.awake=false;V.awakeUntil=0;V.heard='';V.done=false;clearTimeout(V.awakeT);clearTimeout(V.stableT);
+  if(user){try{speechSynthesis.cancel()}catch(e){}}
+  syncRec();
+}
+function typed(text){const t=String(text||'').trim();if(!t)return;V.typing=false;V.gotAny=true;handleHeard(t,[t],true)}
+document.addEventListener('click',e=>{
+  if(e.target.id==='vs'){closeVS(true);return}
+  const b=e.target.closest('#vs [data-vs],#vs [data-vsay]');if(!b)return;e.stopPropagation();
+  if(b.dataset.vsay){typed(b.dataset.vsay);return}
+  const a=b.dataset.vs;
+  if(a==='close'||a==='orb')return closeVS(true);
+  if(a==='retry'){V.sheet=true;V.blocked=false;V.userOff=false;V.needGesture=false;V.heard='';V.tapAt=Date.now();wakeUp(9000);return}
+  if(a==='wake'){PREF.wake=!PREF.wake;V.userOff=!PREF.wake;savePrefs();b.setAttribute('aria-checked',!!PREF.wake);$('.sw',b).classList.toggle('on',!!PREF.wake);caption(PREF.wake?'“Hey Chef” is on for every screen.':'“Hey Chef” is off. Tap the mic to talk.','CHEF AI');if(PREF.wake)syncRec()}
+},true);
+document.addEventListener('submit',e=>{if(e.target.id==='vs-form'){e.preventDefault();const i=$('#vs-in');const v=i.value;i.value='';typed(v)}});
+document.addEventListener('focusin',e=>{if(e.target.id==='vs-in'){V.typing=true}});
+
 function onResult(e){
   if(speaking||Date.now()<V.quietUntil)return;
   V.fails=0;
@@ -917,12 +1232,18 @@ function onResult(e){
   /* Android Chrome re-sends every earlier result on each event, so walk them all and skip the ones already handled */
   for(let i=0;i<n;i++){
     const r=e.results[i],txt=((r[0]&&r[0].transcript)||'').trim(),key=V.sid+':'+i;
-    if(!txt)continue;
+    if(!txt||V.seen.has(key))continue;
     if(!r.isFinal){
-      if(i===n-1){const el=$('#heard');if(el)el.textContent='“'+txt+'”';if(awakeNow()){const w=$('#wake .wt');if(w)w.textContent='“'+txt.slice(-38)+'”'}
-        if(!awakeNow()&&WAKE_RE.test(txt.toLowerCase())&&!V.seen.has(key))wake(12000)}
+      if(i!==n-1)continue;
+      if(awakeNow()){
+        if(txt!==V.heard){V.heard=txt;V.gotAny=true;V.done=false;paintWake()}
+        clearTimeout(V.stableT);
+        /* if nothing new arrives, treat it as final instead of waiting for the engine: quick for one-word commands, a touch longer for sentences */
+        const c=txt.toLowerCase().replace(/[.,!?]/g,'').trim();
+        V.stableT=setTimeout(()=>{if(V.seen.has(key)||!awakeNow()||speaking)return;V.seen.add(key);handleHeard(txt,[txt])},canonical(c)&&c.split(' ').length<=3?450:1100);
+      }else if(WAKE_RE.test(txt.toLowerCase())&&!V.seen.has(key+'w')){V.seen.add(key+'w');wake(12000)}
       continue}
-    if(V.seen.has(key))continue;
+    clearTimeout(V.stableT);
     V.seen.add(key);
     handleHeard(txt,Array.from(r,a=>a.transcript.trim()));
   }
@@ -933,12 +1254,13 @@ const NUMW={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:1
 const numOf=w=>/^\d+$/.test(w)?parseInt(w):(NUMW[w]||0);
 /* maps many ways of saying a command onto one canonical phrase the rest of the app understands */
 function canonical(t){
-  let m=t.match(/\b(?:set |start |lagao |chalu karo )?(?:a |the )?timer (?:for |of )?(\d+|[a-z]+) ?(minutes?|mins?|seconds?|secs?)\b/)||t.match(/\b(\d+|[a-z]+) ?(minutes?|mins?|seconds?|secs?) (?:ka )?timer\b/);
-  if(m){const n=numOf(m[1]);if(n)return `set timer for ${n} ${/^s/.test(m[2])?'second':'minute'}`}
+  let m=t.match(/\b(?:set |start |lagao |chalu karo )?(?:a |the )?timer (?:for |of )?(\d+|[a-z]+) ?(minutes?|mins?|seconds?|secs?)\b/)||t.match(/\b(\d+|[a-z]+)[ -]?(minutes?|mins?|seconds?|secs?)[ -](?:ka )?timer\b/)||t.match(/\b(?:set |start )?(?:a )?timer (\d+)\b()/);
+  if(m){const n=numOf(m[1]);if(n)return `set timer for ${n} ${/^s/.test(m[2]||'m')?'second':'minute'}`}
   const R=[
+   [/\b(stop listening|turn off (the )?(voice|mic|microphone)|voice off|mic off)\b/,'voice off'],
    [/\b(go |back |take me )?(to )?(the )?(home|main menu|home screen)\b/,'go home'],
    [/\b(i ?'?m done|im done|we'?re done|all done|finished cooking|finish cooking|finish|end cooking|khatam|ho gaya)\b/,'finish cooking'],
-   [/\b(next|next step|continue|go on|move on|go ahead|what'?s next|whats next|agla|aage|done with this|ready for the next)\b/,'next'],
+   [/\b(next|next step|continue|go on|move on|go ahead|what'?s next|whats next|agla|aage|done with this|ready for the next|i'?m ready)\b/,'next'],
    [/\b(previous|last step|go back|back|pichla|peeche|wapas)\b/,'previous'],
    [/\b(repeat|say that again|say again|again|one more time|what was that|what do i do|dobara|phir se|kya karna hai)\b/,'repeat'],
    [/\b(pause|wait|hold on|hold up|ruko|ek minute)\b/,'pause'],
@@ -950,29 +1272,35 @@ function canonical(t){
   for(const [re,c] of R)if(re.test(t))return c;
   return null;
 }
-function handleHeard(raw,alts){
+function handleHeard(raw,alts,typedIn){
   alts=alts&&alts.length?alts:[raw];
-  const clean=x=>x.toLowerCase().replace(/[.,!?।]/g,'').replace(/\s+/g,' ').trim();
+  const clean=x=>x.toLowerCase().replace(/[.,!?।“”"]/g,'').replace(/\s+/g,' ').trim();
   let t=clean(raw);if(!t)return;
   const now=Date.now();
-  if(t===V.lastTxt&&now-V.lastAt<1200)return;          /* same phrase twice in a row = a repeat, not a new command */
-  V.lastTxt=t;V.lastAt=now;
-  const nt=norm(t);
-  if(V.spoken&&now-V.spokenAt<8000&&nt.split(' ').length>=4&&V.spoken.includes(nt))return;   /* Chef hearing itself */
-  const wakeAlt=alts.find(x=>WAKE_RE.test(clean(x)));
-  const hasWake=!!wakeAlt||WAKE_RE.test(t);
-  if(!hasWake&&!awakeNow())return;                     /* asleep: ignore everything except “Hey Chef” */
+  if(!typedIn){
+    if(t===V.lastTxt&&now-V.lastAt<1200)return;          /* same phrase twice in a row = a repeat, not a new command */
+    V.lastTxt=t;V.lastAt=now;
+    const nt=norm(t);
+    if(V.spoken&&now-V.spokenAt<8000&&nt.split(' ').length>=4&&V.spoken.includes(nt))return;   /* Chef hearing itself */
+  }
+  const wakeAlt=typedIn?null:alts.find(x=>WAKE_RE.test(clean(x)));
+  const hasWake=!!wakeAlt||(!typedIn&&WAKE_RE.test(t));
+  if(!typedIn&&!hasWake&&!awakeNow())return;             /* asleep: ignore everything except “Hey Chef” */
   let pick=t;
   if(wakeAlt)pick=clean(wakeAlt);
   else for(const x of alts){const c=clean(x);if(canonical(c)){pick=c;break}}
-  t=pick.replace(WAKE_G,' ').replace(/\s+/g,' ').trim();
-  if(hasWake)wake(12000);else wakeUp(10000);
-  S.listenOnce=false;
-  if(!t){
+  t=pick.replace(WAKE_G,' ').replace(/\s+/g,' ').trim().replace(/^(?:(?:please|okay|ok|so|um|uh|can you|could you|would you|will you)\s+)+/,'').replace(/\s+please$/,'');
+  V.gotAny=true;
+  if(!t){                                                /* just “Hey Chef” */
+    wake(12000);V.heard='';
     if(now-V.greetAt>10000){V.greetAt=now;say(S.screen==='home'?'Yes? What are we cooking?':S.screen==='cook'?'Yes, go ahead.':'Yes, I’m listening.')}
     else caption('Listening…','CHEF AI');
     return}
-  S.cmds++;youSaid(raw);$('#heard')&&($('#heard').textContent='“'+raw+'”');
+  const sheet=vsOpen();
+  V.heard=raw;V.done=true;
+  if(!typedIn){if(hasWake)wake(1400,true);else if(!alwaysAwake())wakeUp(1400);V.oneShot=true}
+  clearTimeout(V.doneT);paintWake();setTimeout(()=>{V.sheet=false;paintWake()},typedIn?0:1100);
+  S.cmds++;if(!sheet)youSaid(raw);$('#heard')&&($('#heard').textContent='“'+raw+'”');
   command(canonical(t)||t);
 }
 
@@ -1006,7 +1334,7 @@ const aiErr=e=>(e&&(e.name==='TimeoutError'||e.name==='AbortError'))?'The AI too
 const prefCtx=()=>({diet:PREF.diet,spice:PREF.spice,allergies:PREF.allergy,likedCuisines:PREF.cuis,servings:PREF.serv,skill:PREF.skill});
 const CHAT=[];
 async function askLLM(text){
-  if(!LLM.key){caption('Add an AI key in Settings to answer open questions.','CHEF AI');return say(helpHere())}
+  if(!LLM.key){caption('Add an AI key in Settings to answer open questions.','CHEF AI');wakeUp(8000);return say(helpHere())}
   if(LLM.busy&&Date.now()-(LLM.busyAt||0)<25000)return;LLM.busy=true;LLM.busyAt=Date.now();wakeUp(20000);caption('Thinking…','CHEF AI');
   const r=R(),st=r.steps[S.step];
   const sys='You are Chef AI inside a hands-free kitchen app. The user spoke a command or question. Reply with ONE JSON object only: {"action":"next|previous|repeat|start_timer|set_timer|time_left|open_recipe|recipe|adapt|swap|scan|home|finish|go|search|add_ingredient|answer","arg":"string or empty","seconds":0,"reply":"one or two short spoken sentences"}. Use "answer" for cooking questions (substitutions, techniques, doneness) and put the answer in reply. Use "open_recipe" with arg = a recipe id from the list. Use "recipe" with arg = the dish or cuisine when the user wants a dish that is not in the list (any cuisine in the world). Use "adapt" with arg = the change requested. Use "swap" with arg = the missing ingredient. Use "set_timer" with seconds. Use \"go\" with arg = one of home, scan, results, tasks, profile, settings to change screen. Use \"search\" with arg = words to search in the recipe list. Use \"add_ingredient\" with arg = one ingredient the user says they have. The context field \"history\" holds the last few turns: use it to resolve words like \"it\" or \"that\". Never invent actions. Respect the cook preferences. Keep replies under 30 words, plain speech, no markdown.';
@@ -1105,6 +1433,7 @@ function command(t){
   if(LLM.key&&t.split(' ').length>=3&&!/^(set timer for \d+|rate |go home|finish cooking|how much time is left|start timer|go to |mute|unmute)/.test(t)){return askLLM(t)}
   /* rating */
   let m=t.match(/rate (it )?(\w+) star/);if(m){const n={one:1,two:2,three:3,four:4,five:5}[m[2]]||parseInt(m[2])||5;return rate(n)}
+  if(t==='voice off'){PREF.wake=false;S.handsfree=false;V.userOff=true;savePrefs();closeVS(true);return say('Okay, voice is off. Tap the mic whenever you need me.')}
   if(has(t,'mute','be quiet','stop talking')){S.muted=true;try{speechSynthesis.cancel()}catch(e){};caption('Voice replies muted. Say “unmute” to hear me again.','CHEF AI');return}
   if(has(t,'unmute','talk to me')){S.muted=false;return say('I’m back. I’ll talk you through each step.')}
   if(has(t,'go home','home screen','main menu','go back home'))return go('home');
@@ -1143,7 +1472,7 @@ function command(t){
   }
   const hit=RECIPES.find(r=>r.kw.some(k=>t.includes(k)))||(has(t,'quick','fast','easy','pasta','craving','hungry','dinner','cook','recipe','show')?RECIPES[0]:null);
   if(hit&&(S.screen==='home'||S.screen==='results'||S.screen==='detail'||S.screen==='scan')){
-    openRecipe(hit.id);return say(`How about ${hit.title}? It takes ${hit.time} minutes and ${ingCount(hit)}. Say start cooking when you’re ready, or tell me how to change it.`)
+    openRecipe(hit.id);return say(`How about ${hit.title}? It takes ${hit.time} minutes and ${ingCount(hit)}. Say start cooking when you’re ready, or tell me how to change it.`).then(()=>wakeUp(10000))
   }
   if(has(t,'browse','recipes'))return go('results');
   if(has(t,'help','what can i say','commands'))return say('You can say next, repeat, start timer, how much time is left, swap ingredient, scan ingredients, or rate it five stars.');
@@ -1188,7 +1517,7 @@ function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)
 function activeTimers(){return S.timers.filter(t=>!t.fired)}
 
 /* ---------- cooking actions ---------- */
-function startCooking(){S.inCook=true;S.step=0;S.startedAt=Date.now();S.cmds=0;S.timers=[];S.alert=null;if(PREF.autoVoice)startRec();S.handsfree=PREF.autoVoice;keepAwake(true);go('cook');setTimeout(readStep,350)}
+function startCooking(){S.inCook=true;S.step=0;S.startedAt=Date.now();S.cmds=0;S.timers=[];S.alert=null;S.handsfree=!!PREF.autoVoice;V.gestured=true;if(PREF.autoVoice)startRec(true);keepAwake(true);go('cook');setTimeout(readStep,350)}
 let wl=null;async function keepAwake(on){try{if(on&&PREF.awake&&navigator.wakeLock)wl=await navigator.wakeLock.request('screen');else if(wl){await wl.release();wl=null}}catch(e){}}
 function readStep(){const s=R().steps[S.step];return say(`Step ${S.step+1} of ${R().steps.length}. ${s.t} ${s.d}`)}
 function nextStep(){
@@ -1259,7 +1588,7 @@ function camFail(msg,pip){
   const st=$('#spill');if(st)st.textContent='Camera off';
   const box=pip?$('#gtxt'):$('#camwrap');
   if(pip){const t=$('#gtxt');if(t)t.textContent=msg;S.gestures=false;renderBars();return}
-  if(box&&!$('#nocam'))box.insertAdjacentHTML('beforeend',`<div class="nocam" id="nocam">${ic('camera').replace('class="i "','class="i" style="font-size:40px"')}<b>Camera unavailable</b><p>${esc(msg)}</p><button class="btn p press" data-act="retrycam" style="height:44px;font-size:15px">Retry</button><button class="btn s press" data-act="demo" style="height:44px;font-size:15px;color:#fff;border-color:#fff">Use sample ingredients</button></div>`);
+  if(box&&!$('#nocam'))box.insertAdjacentHTML('beforeend',`<div class="nocam" id="nocam"><div style="width:140px;height:104px">${ILL.camera()}</div><b>Camera unavailable</b><p>${esc(msg)}</p><button class="btn p press" data-act="retrycam" style="height:44px;font-size:15px">Retry</button><button class="btn s press" data-act="demo" style="height:44px;font-size:15px;color:#fff;border-color:#fff">Use sample ingredients</button></div>`);
 }
 function stopStream(keepGesture){
   clearInterval(loop);loop=null;cancelAnimationFrame(gl);gl=null;
@@ -1467,7 +1796,7 @@ function listHTML(){
   const base=RECIPES.filter(r=>(cf==='All'||r.cuisine===cf)&&(!q||(r.title+' '+r.cuisine+' '+r.ing.map(i=>i[0]).join(' ')).toLowerCase().includes(q)));
   const shown=S.showAll?base:base.filter(okDiet),hidden=base.length-shown.length,hv=r=>r.ing.filter(i=>isHave(i[2])).length/r.ing.length;
   const list=S.found.size?shown.slice().sort((a,b)=>hv(b)-hv(a)):shown;
-  return `<div class="label">${S.found.size?'Ready to cook now':'All recipes'} · ${list.length}</div>${list.map(recipeCard).join('')||'<div class="card" style="padding:20px;text-align:center;font-weight:600">No match. Try “Create any recipe with AI”.</div>'}
+  return `<div class="label">${S.found.size?'Ready to cook now':'All recipes'} · ${list.length}</div>${list.map(recipeCard).join('')||emptyState('search','No match','Try another word, or tap “Create any recipe with AI”.','card')}
    ${hidden?`<button class="chip press" data-act="showall">${hidden} hidden by your diet · Show</button>`:''}`;
 }
 const VIEWS={
@@ -1476,7 +1805,7 @@ home(){
   return `${status()}<div class="body">
    <div class="greet"><div><div class="eyebrow" style="color:var(--accent)">${PREF.name?'Hello, '+esc(PREF.name):'Hands-free kitchen'}</div><h1>What are we cooking?</h1></div><div class="actions"><button class="avatar press" data-go="profile" aria-label="Your profile">${esc((PREF.name||'C')[0].toUpperCase())}</button><button class="icon-btn gear press ${LLM.key?'on':''}" data-act="settings" aria-label="Settings">${ic('gear')}</button></div></div>
    ${a?`<button class="pill-timer press" data-go="tasks">${ic('timer')}<span style="flex:1" data-bind="homet">${esc(a.name)} · ${fmt((a.end-Date.now())/1000)} left</span>${ic('chev')}</button>`:''}
-   <button class="voice-card press" data-act="talk" aria-label="Tell me what you’re craving"><div style="flex:1;min-width:0"><div class="eyebrow">VOICE FIRST</div><h3>Tell me what you’re craving</h3><small>Say “Hey Chef” on any screen, then “Show me a quick pasta”</small></div><div class="mic-ring ${isLive()?'live':''}" id="homering"><div class="mic-orb">${ic('mic')}</div></div></button>
+   <button class="voice-card press" data-act="talk" aria-label="Tell me what you’re craving"><div style="flex:1;min-width:0"><div class="eyebrow">VOICE FIRST</div><h3>Tell me what you’re craving</h3><small>Tap here and say “Show me a quick pasta”</small></div><div class="mic-ring ${isLive()?'live':''}" id="homering"><div class="mic-orb">${ic('mic')}</div></div></button>
    <div class="quick"><button class="card press" data-go="scan"><div class="qi">${ic('camera')}</div><div><b>Scan ingredients</b><span>CAMERA</span></div></button><button class="card press" data-go="results"><div class="qi">${ic('book')}</div><div><b>Browse recipes</b><span>VOICE + TOUCH</span></div></button></div>
    <div class="label">Suggested tonight</div>${featCard(suggest())}
   </div><div class="bottom">${hfBar(hintFor(),isLive())}</div>`},
@@ -1510,8 +1839,8 @@ detail(){const r=R(),miss=r.ing.filter(i=>!isHave(i[2])).length;
   </div><div class="bottom"><button class="btn s press" data-act="adapt">Adapt with voice</button><button class="btn p press" data-act="cook">${miss&&miss<r.ing.length?`Start cooking · ${miss} missing`:'Start hands-free cooking'}</button></div>`},
 adapt(){const a=S.adapt||{said:'',ch:[]};
   return `${status()}<div class="body"><div class="top"><button class="icon-btn press" data-go="detail" aria-label="Close">${ic('x')}</button><h2 style="flex:1;font-size:22px">Voice assistant</h2></div>
-   <div class="orb-wrap ${isLive()?'live':''}"><i class="r3"></i><i class="r2"></i><i class="o">${ic('mic')}</i></div>
-   <div class="eyebrow center" style="color:var(--accent)">${isLive()?'LISTENING…':'SAY “HEY CHEF” OR TAP MIC'}</div>
+   <button class="orb-wrap press ${isLive()?'live':''}" data-act="talk" aria-label="Tap to talk"><i class="r3"></i><i class="r2"></i><i class="o">${ic('mic')}</i></button>
+   <div class="eyebrow center" id="adst" style="color:var(--accent)">${isLive()?'LISTENING…':'TAP THE MIC OR SAY “HEY CHEF”'}</div>
    <div class="card said"><div class="eyebrow" style="color:var(--ink-soft)">YOU SAID</div><p id="heard">${a.said?'“'+esc(a.said)+'”':'Try “Make it vegetarian and less spicy”'}</p></div>
    ${a.ch.length?`<div class="resp"><div class="head">${ic('sparkle')}<span class="eyebrow">CHEF AI · RECIPE ADAPTED</span></div>${a.ch.map(c=>`<div class="chg">${ic('check')}<span>${esc(c)}</span></div>`).join('')}</div>`:''}
   </div><div class="bottom"><button class="btn p press" data-act="apply" ${a.ch.length?'':'disabled'}>Apply &amp; start cooking</button><button class="btn s press" data-go="detail">Back to recipe</button></div>`},
@@ -1530,7 +1859,7 @@ tasks(){const all=S.timers.slice().sort((a,b)=>(a.fired-b.fired)||(a.end-b.end))
   return `${status()}<div class="body"><div class="hdr">${S.inCook?backBtn('cook'):''}<h2>Active timers</h2></div>
    ${S.alert?`<div class="alert" role="alert"><div class="bell">${ic('bell')}</div><div><div class="eyebrow">ALERT · NOW</div><p>${esc(S.alert)}</p></div></div>`:''}
    <div class="label">Running · ${activeTimers().length} timer${activeTimers().length===1?'':'s'}</div>
-   ${all.map(t=>{const left=(t.end-Date.now())/1000,p=t.fired?100:100-(left/t.total*100);return `<div class="card task ${t.fired?'done':''}" data-tid="${t.id}"><div class="st">${t.fired?ic('check'):ic('timer')}</div><div class="tx"><b>${esc(t.name)}</b><div class="tr"><div style="width:${p}%"></div></div><small>${t.step?'STEP '+t.step+' · ':''}${t.fired?'COMPLETED':esc(t.sub||'RUNNING')}</small></div><div class="tm" data-bind="tm">${t.fired?'DONE':fmt(left)}</div>${t.fired?'':`<button class="x press" data-canceltid="${t.id}" aria-label="Cancel ${esc(t.name)}">${ic('x')}</button>`}</div>`}).join('')||`<div class="card" style="padding:24px;text-align:center;font-weight:600;color:var(--ink-soft)">No timers yet. Say “Start timer” while cooking.</div>`}
+   ${all.map(t=>{const left=(t.end-Date.now())/1000,p=t.fired?100:100-(left/t.total*100);return `<div class="card task ${t.fired?'done':''}" data-tid="${t.id}"><div class="st">${t.fired?ic('check'):ic('timer')}</div><div class="tx"><b>${esc(t.name)}</b><div class="tr"><div style="width:${p}%"></div></div><small>${t.step?'STEP '+t.step+' · ':''}${t.fired?'COMPLETED':esc(t.sub||'RUNNING')}</small></div><div class="tm" data-bind="tm">${t.fired?'DONE':fmt(left)}</div>${t.fired?'':`<button class="x press" data-canceltid="${t.id}" aria-label="Cancel ${esc(t.name)}">${ic('x')}</button>`}</div>`}).join('')||`${emptyState('timer','No timers yet','Say “Set a timer for 10 minutes”, or start one while you cook.','card')}`}
   </div><div class="bottom">${hfBar(hintFor(),isLive())}${S.inCook?`<div class="row"><button class="btn s press" data-go="cook" style="width:110px;flex:none;padding:0">Back</button><button class="btn p press" data-act="finish" style="flex:1">Finish cooking</button></div>`:''}</div>`},
 profile(){
   const rated=HIST.filter(h=>h.rating),avg=rated.length?(rated.reduce((x,h)=>x+h.rating,0)/rated.length).toFixed(1):'–',favs=FAVS.map(id=>RECIPES.find(r=>r.id===id)).filter(Boolean);
@@ -1543,7 +1872,7 @@ profile(){
    <div class="card pcard"><h3>Diet</h3>${opt('diet',[['any','Anything'],['veg','Veg'],['egg','Egg'],['vegan','Vegan']])}<h3>Spice level</h3>${opt('spice',[['mild','Mild'],['medium','Medium'],['hot','Hot']])}<h3>Cooking level</h3>${opt('skill',[['Easy','Beginner'],['Medium','Home cook'],['Hard','Confident']])}<h3>Usual servings</h3>${opt('serv',[[1,'1'],[2,'2'],[4,'4'],[6,'6']])}</div>
    <div class="card pcard"><h3>Cuisines you love</h3><div class="chips">${CU.map(c=>`<button class="chip press ${PREF.cuis.includes(c)?'on':''}" data-cuis="${c}" aria-pressed="${PREF.cuis.includes(c)}">${c}</button>`).join('')}</div>
     <label for="allergyin" class="eyebrow" style="color:var(--ink-soft)">ALLERGIES OR FOODS TO AVOID</label><input id="allergyin" class="field" placeholder="e.g. peanut, shellfish" value="${esc(PREF.allergy)}" autocomplete="off"></div>
-   <div class="label">Saved recipes</div>${favs.map(recipeCard).join('')||'<div class="card" style="padding:18px;text-align:center;font-weight:600;color:var(--ink-soft)">Tap the heart on any recipe to save it here.</div>'}
+   <div class="label">Saved recipes</div>${favs.map(recipeCard).join('')||emptyState('saved','Nothing saved yet','Tap the heart on any recipe to keep it here.','card')}
    ${HIST.length?`<div class="label">Recently cooked</div><div class="card">${HIST.slice(0,5).map(h=>`<div class="hrow"><b>${esc(h.title)}</b><small>${h.mins} MIN${h.rating?' · '+h.rating+'★':''}</small></div>`).join('')}</div>`:''}
   </div>`},
 settings(){
@@ -1568,13 +1897,13 @@ settings(){
     <div class="state ${PXKEY?'ok':''}" role="status"><i></i><span>${PXKEY?'Photos on · '+Object.keys(PXP).length+' loaded':'Add a free key for real photos of every dish'}</span></div>
     <button class="btn p press" data-act="savepx">Save &amp; load photos</button><button class="btn s press" data-act="removepx" style="height:48px">Remove key</button>
     <p class="note2" style="font-size:12px">Get a free key at unsplash.com/developers (New Application, then copy the Access Key). Stored only in this browser. Photos from Unsplash.</p></div>
-   <div class="label">Voice</div>${tog('speak','Spoken replies','Chef AI talks you through each step')}${tog('wake','Hey Chef anywhere','Say “Hey Chef” on any screen to start voice control')}
+   <div class="label">Voice</div>${tog('speak','Spoken replies','Chef AI talks you through each step')}${tog('wake','Hey Chef anywhere','Say “Hey Chef” on any screen. Tapping the mic always works too')}
    <div class="card pcard"><h3>Speaking speed</h3>${opt('rate',[[0.9,'Slow'],[1,'Normal'],[1.15,'Fast']])}<h3>Language</h3>${opt('lang',[['en-IN','English (IN)'],['en-US','English (US)'],['hi-IN','हिन्दी']])}</div>
    <div class="label">Cooking</div>${tog('autoVoice','Hands-free on start','Turn the microphone on when cooking begins')}${tog('awake','Keep screen awake','Stops the screen sleeping while you cook')}${tog('haptics','Vibration','Small buzz for steps and timers')}
    <div class="label">Data</div><div class="card pcard"><button class="btn s press" data-clear="intro" style="height:48px">Show welcome tour again</button><button class="btn s press" data-clear="hist" style="height:48px">Clear cooking history</button><button class="btn s press" data-clear="airec" style="height:48px">Remove AI-created recipes</button><button class="btn s press" data-clear="all" style="height:48px;color:#8a2a14;border-color:#8a2a14">Reset everything</button></div>
   </div>`},
 done(){return `${status()}<div class="body" style="align-items:stretch">
-   <div class="okmark">${ic('check')}</div><h1 class="center" style="font-size:34px;margin-top:8px">Dinner is ready!</h1>
+   <div class="done-ill">${ILL.done()}</div><h1 class="center" style="font-size:34px;margin-top:4px">Dinner is ready!</h1>
    <p class="center" style="font-weight:600;font-size:17px;line-height:23px;color:var(--ink-soft);padding:0 20px">${esc(R().title)} · cooked hands-free in ${S.took||28} min</p>
    <div class="stats"><div class="card"><b>${S.took||28} min</b><small>TIME</small></div><div class="card"><b>${R().steps.length} / ${R().steps.length}</b><small>STEPS</small></div><div class="card"><b>${S.cmds}</b><small>VOICE CMDS</small></div></div>
    <div class="card" style="padding:12px 16px"><div class="row" style="justify-content:center;gap:8px;font-weight:600;font-size:16px;padding:4px 0 6px">${ic('mic','')}<span>Say “Rate it 5 stars” to save feedback</span></div><div class="stars">${[1,2,3,4,5].map(n=>`<button class="${n<=S.rating?'on':''}" data-rate="${n}" aria-label="${n} star${n>1?'s':''}">${ic('star')}</button>`).join('')}</div></div>
@@ -1603,7 +1932,7 @@ VIEWS.plan=()=>{const id=PLAN[S.pd],r=id&&RECIPES.find(x=>x.id===id);
  return `${status()}<div class="body">${tabHead('This week','Meal plan')}
  <div class="daystrip" role="tablist">${DAYS.map((d,i)=>`<button class="dchip press ${i===S.pd?'on':''}" data-pl="d:${i}" role="tab" aria-selected="${i===S.pd}">${d}${PLAN[i]?'<i></i>':''}</button>`).join('')}</div>
  <div class="label">${DAYS[S.pd]}</div>
- ${r?`${recipeCard(r)}<button class="btn s press" data-pl="rm" style="height:48px;margin-top:10px">Remove from plan</button>`:`<p class="note2">Nothing planned yet. Pick a meal:</p>`}
+ ${r?`${recipeCard(r)}<button class="btn s press" data-pl="rm" style="height:48px;margin-top:10px">Remove from plan</button>`:emptyState('plan','Nothing planned for '+DAYS[S.pd],'Pick a meal below to add it.','card')}
  ${r?'<div class="label">Swap for</div>':''}
  ${RECIPES.slice(0,12).filter(x=>x.id!==id).map(x=>`<button class="card pick press" data-pl="set:${x.id}"><b>${esc(x.title)}</b><small>${x.time} min</small></button>`).join('')}</div>`};
 VIEWS.ai=()=>`${status()}<div class="body">${tabHead('Any dish, any cuisine','AI Recipe')}
@@ -1613,12 +1942,12 @@ VIEWS.ai=()=>`${status()}<div class="body">${tabHead('Any dish, any cuisine','AI
   <button class="btn p press" data-pl="gen">Create recipe</button>
   ${LLM.key?'':'<p class="note2" style="font-size:12px">Needs an AI key. <a href="#" data-go="settings">Add one in Settings</a>.</p>'}</div>
  <div class="label">Your AI recipes</div>
- ${RECIPES.filter(r=>r.ai).map(recipeCard).join('')||'<p class="note2">Recipes you create appear here.</p>'}</div>`;
+ ${RECIPES.filter(r=>r.ai).map(recipeCard).join('')||emptyState('ai','No AI recipes yet','Describe any dish above and I’ll write the recipe.','card')}</div>`;
 VIEWS.journal=()=>{const rated=HIST.filter(h=>h.rating),avg=rated.length?(rated.reduce((x,h)=>x+h.rating,0)/rated.length).toFixed(1):'–',mins=HIST.reduce((x,h)=>x+(h.mins||0),0);
  return `${status()}<div class="body">${tabHead('Your cooking','Journal')}
  <div class="stats"><div class="card"><b>${HIST.length}</b><small>COOKED</small></div><div class="card"><b>${avg}</b><small>AVG STARS</small></div><div class="card"><b>${mins}</b><small>MINUTES</small></div></div>
  <div class="label">Recent</div>
- ${HIST.slice(0,20).map(h=>`<button class="card pick press" ${RECIPES.some(r=>r.id===h.id)?`data-recipe="${h.id}"`:''}><div style="text-align:left"><b>${esc(h.title)}</b><br><small>${new Date(h.at).toLocaleDateString(undefined,{day:'numeric',month:'short'})} · ${h.mins||'?'} min</small></div><small>${h.rating?'★'.repeat(h.rating):''}</small></button>`).join('')||'<p class="note2">Finish a recipe and it shows up here, with your rating.</p>'}</div>`};
+ ${HIST.slice(0,20).map(h=>`<button class="card pick press" ${RECIPES.some(r=>r.id===h.id)?`data-recipe="${h.id}"`:''}><div style="text-align:left"><b>${esc(h.title)}</b><br><small>${new Date(h.at).toLocaleDateString(undefined,{day:'numeric',month:'short'})} · ${h.mins||'?'} min</small></div><small>${h.rating?'★'.repeat(h.rating):''}</small></button>`).join('')||emptyState('journal','Your journal is empty','Finish a recipe and it shows up here, with your rating.','card')}</div>`};
 VIEWS.learn=()=>`${status()}<div class="body">${tabHead('Tips from Chef AI','Learn')}
  ${LEARN.map((l,i)=>`<div class="card pcard"><h3>${l.t}</h3><p class="note2">${l.p}</p><button class="btn s press" data-tip="${i}" style="height:44px">${ic('vol')} Listen</button></div>`).join('')}</div>`;
 document.addEventListener('click',e=>{
@@ -1660,13 +1989,13 @@ function renderTimerBits(force){
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
-  if(e.target.closest('#wake')){toggleWake();return}
+  if(e.target.closest('#wake')){talk();return}
   if(e.target.id==='sheet'){closeSettings();return}
   const t=e.target.closest('[data-go],[data-act],[data-recipe],[data-say],[data-add],[data-rm],[data-rate],[data-canceltid],[data-fav],[data-prov],[data-tog],[data-pref],[data-cuis],[data-cf],[data-scanmode],[data-clear]');if(!t)return;
   if(t.dataset.go){go(t.dataset.go);return}
   if(t.dataset.fav){const i=FAVS.indexOf(t.dataset.fav);i<0?FAVS.unshift(t.dataset.fav):FAVS.splice(i,1);saveLS('ska-favs',FAVS);render();return}
   if(t.dataset.prov){AI.p=t.dataset.prov;keyState={t:'',cls:''};saveAI();render();return}
-  if(t.dataset.tog){const k=t.dataset.tog;PREF[k]=!PREF[k];if(k==='speak'){S.muted=!PREF.speak;if(S.muted)try{speechSynthesis.cancel()}catch(e){}}if(k==='wake'){if(PREF.wake)startRec(true);else stopRec(true)}savePrefs();render();return}
+  if(t.dataset.tog){const k=t.dataset.tog;PREF[k]=!PREF[k];if(k==='speak'){S.muted=!PREF.speak;if(S.muted)try{speechSynthesis.cancel()}catch(e){}}if(k==='wake'){if(PREF.wake){V.userOff=false;startRec(true)}else stopRec(true)}savePrefs();render();return}
   if(t.dataset.pref){const k=t.dataset.pref,v=t.dataset.v;PREF[k]=(v!==''&&!isNaN(+v))?+v:v;if(k==='lang'){if(rec){rec.lang=PREF.lang;if(recOn){pauseRec();resumeRec()}}pickVoice()}savePrefs();render();return}
   if(t.dataset.cuis){const c=t.dataset.cuis,i=PREF.cuis.indexOf(c);i<0?PREF.cuis.push(c):PREF.cuis.splice(i,1);savePrefs();render();return}
   if(t.dataset.cf){S.cf=t.dataset.cf;render();return}
@@ -1685,10 +2014,11 @@ document.addEventListener('click',e=>{
   if(t.dataset.canceltid){S.timers=S.timers.filter(x=>String(x.id)!==t.dataset.canceltid);render();return}
   const a=t.dataset.act;
   if(a==='talk'||a==='hf'){
-    if(a==='hf'&&S.inCook&&(S.screen==='cook'||S.screen==='tasks')){if(recWanted){stopRec(true);caption('Voice is off. Tap the bar to turn it back on.','CHEF AI')}else{startRec(true);wakeUp(12000)}return}
-    if(!startRec(true))return;S.listenOnce=true;wakeUp(12000);
-    if(S.screen==='adapt')render();
-    say(S.screen==='adapt'?'I’m listening. How should I change the recipe?':S.screen==='scan'?'Listening. Say capture when you’re ready.':'I’m listening. What are you craving?');return}
+    if(a==='hf'&&S.inCook&&(S.screen==='cook'||S.screen==='tasks')){
+      if(S.handsfree){S.handsfree=false;syncRec();caption('Hands-free is off. Tap the bar to turn it back on.','CHEF AI')}
+      else{S.handsfree=true;V.gestured=true;V.userOff=false;V.blocked=false;V.tapAt=Date.now();syncRec();caption('Hands-free is on. Just say what you need.','CHEF AI')}
+      paintWake();return}
+    return talk()}
   if(a==='settings')return openSettings();
   if(a==='aigen'){const q=(($('#qin')||{}).value||'').trim();if(!q){$('#qin').focus();caption('Type a dish or cuisine in the search box, then tap again.','CHEF AI');return}S.q=q;return aiGenerate(q)}
   if(a==='showall'){S.showAll=true;render();return}
@@ -1703,7 +2033,7 @@ document.addEventListener('click',e=>{
   if(a==='scangesture')return scanGesture();
   if(a==='retrycam')return startCamera('environment');
   if(a==='demo')return demoScan();
-  if(a==='adapt'){S.adapt=null;go('adapt');startRec(true);S.listenOnce=true;wakeUp(15000);say('Tell me how you’d like to change this recipe. For example, make it vegetarian and less spicy.');return}
+  if(a==='adapt'){S.adapt=null;go('adapt');V.gestured=true;V.userOff=false;V.blocked=false;V.tapAt=Date.now();wakeUp(15000);say('Tell me how you’d like to change this recipe. For example, make it vegetarian and less spicy.');return}
   if(a==='apply')return applyAdapt();
   if(a==='cook')return startCooking();
   if(a==='next')return nextStep();
@@ -1711,19 +2041,17 @@ document.addEventListener('click',e=>{
   if(a==='gest')return toggleGestures();
   if(a==='steptimer'){const st=R().steps[S.step];if(st.timer&&!S.timers.find(x=>x.name===st.timer[0]&&!x.fired))startStepTimer(false);return go('tasks')}
   if(a==='finish')return finish();
-  if(a==='exitcook'){S.inCook=false;keepAwake(false);stopStream();S.gestures=false;go('detail');return}
+  if(a==='exitcook'){S.inCook=false;S.handsfree=false;syncRec();keepAwake(false);stopStream();S.gestures=false;go('detail');return}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSettings();if(vsOpen())closeVS(true)}
   if(e.key==='Tab'&&$('#sheet').classList.contains('on')){const f=$$('#sheet button,#sheet input'),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}if(e.key==='Enter'&&e.target.id==='keyin'){saveKey();return}if((e.key==='Enter'||e.key===' ')&&e.target.matches('#hfbar')){e.preventDefault();e.target.click()}});
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden){if(S.stream)stopStream();if(rec&&recOn){try{rec.abort()}catch(e){}}}
-  else if(recWanted)scheduleStart(400)});
-/* the browser only allows the mic after a tap: the first touch anywhere switches “Hey Chef” on for every screen */
+  else syncRec()});
+/* the browser only allows the first mic prompt after a tap */
 ['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev,e=>{
   V.gestured=true;
-  if(!SR||!PREF.wake||recWanted||V.userOff||V.blocked)return;
-  if(e.target&&e.target.closest&&e.target.closest('#wake,#hfbar'))return;
-  startRec();
+  if(V.needGesture&&V.ready){V.needGesture=false;syncRec()}
 },true));
 
 let _qt=null;
@@ -1738,71 +2066,129 @@ document.addEventListener('change',e=>{
     im.onerror=()=>{URL.revokeObjectURL(u);caption('That file couldn’t be read as a photo.','CHEF AI')};im.src=u}if(e.target.id==='photoin'&&e.target.files[0])savePhoto(S.photoFor||S.rid,e.target.files[0])});
 /* ---------- boot ---------- */
 
-/* ---------- splash + first-run onboarding ---------- */
+/* ---------- first run: splash → welcome → account → “Make it yours” → app ---------- */
+P.eye='<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>';
+P.eyeoff='<path d="M3.5 3.5l17 17M10.6 6a9 9 0 0 1 1.4-.1C18 5.9 21.5 12 21.5 12a16 16 0 0 1-3 3.8M6.5 7.6A16 16 0 0 0 2.5 12S6 18.5 12 18.5c1.4 0 2.6-.3 3.7-.8M9.9 9.9a3 3 0 0 0 4.2 4.2"/>';
 const OB={i:0,slides:[
- {bg:'var(--lav)',icon:'mic',t:'Cook hands-free',p:'Say “Hey Chef” on any screen. I’ll read each step and set timers while your hands stay messy.',say:'“Hey Chef, next step”'},
- {bg:'var(--mint)',icon:'camera',t:'Scan what you have',p:'Point the camera at your ingredients and I’ll show what you can cook right now.',say:'“Hey Chef, open scan”'},
- {bg:'var(--sun)',icon:'user',t:'Make it yours',p:'Tell me your name and diet so every recipe fits you. You can change this any time in Profile.',form:true}]};
-function introEl(){return $('#intro')}
+ {art:'voice',bg:'lav',t:'Cook hands-free',p:'Tap the mic or say “Hey Chef”. I’ll read each step aloud and set timers while your hands stay messy.',say:'“Hey Chef, next step”'},
+ {art:'scan',bg:'mint',t:'Scan what you have',p:'Point the camera at your ingredients and I’ll show what you can cook right now.',say:'“Hey Chef, open scan”'}]};
+let AU={m:'up',v:{f:'',l:'',e:'',p:''},pw:false,tour:false,note:''};
+const hasAccount=()=>!!(PREF.account||PREF.guest);
+if(PREF.onboarded&&(PREF.account||PREF.guest)&&!PREF.setup){PREF.setup=true;savePrefs()}   /* people already past v18 onboarding skip the new step */
+const setupDone=()=>!!PREF.setup;
+const introEl=()=>$('#intro');
 function hideIntro(){const el=introEl();el.classList.add('out');setTimeout(()=>{el.classList.remove('on','out');el.innerHTML=''},380)}
+const focusHead=()=>{const h=$('#intro h1,#intro h2');if(h){h.tabIndex=-1;try{h.focus({preventScroll:true})}catch(e){}}};
+const bit=(cls,svg,pos)=>`<span class="sp-bit" style="${pos}">${svg}</span>`;
 function showIntro(force){
-  const el=introEl(),first=force||!PREF.onboarded;
+  const el=introEl(),first=force||!PREF.onboarded;AU.tour=!!force&&hasAccount();
   el.className='on';
-  el.innerHTML=`<div class="splash"><div class="logo">${ic('chef')}</div><h1>Smart Kitchen</h1><p>Your hands-free cooking sidekick</p></div>`;
-  setTimeout(()=>{first?(OB.i=0,drawOB()):(PREF.account||PREF.guest?hideIntro():(AU.m='in',drawAuth()))},first?1500:1000);
+  el.innerHTML=`<div class="splash">
+    ${bit('',svgw('-24 -24 48 48',tomatoS(0,2,17)),'left:10%;top:13%;animation-delay:0s,.1s')}
+    ${bit('',svgw('-24 -24 48 48',leafS(0,0,1.35,24)),'right:12%;top:9%;animation-delay:.8s,.2s')}
+    ${bit('',svgw('-24 -24 48 48',eggS(0,0,16)),'left:7%;bottom:22%;animation-delay:1.6s,.3s')}
+    ${bit('',svgw('-24 -24 48 48',onionS(0,2,15)),'right:9%;bottom:26%;animation-delay:.4s,.4s')}
+    ${bit('',svgw('-24 -24 48 48',carrotS(0,0,.8,-30)),'left:30%;bottom:8%;animation-delay:1.2s,.5s')}
+    <div class="logo">${ILL.logo()}</div><h1>Smart Kitchen</h1><p>Your hands-free cooking sidekick</p><div class="sp-load" aria-hidden="true"><i></i><i></i><i></i></div></div>`;
+  setTimeout(()=>{first?(OB.i=0,drawOB()):route()},first?1800:1100);
+}
+function route(){
+  if(!hasAccount()){AU.m='in';return drawAuth()}
+  if(!setupDone())return drawSetup();
+  V.ready=true;hideIntro();syncRec();
 }
 function drawOB(){
-  const el=introEl(),sl=OB.slides[OB.i],last=OB.i===OB.slides.length-1;
-  el.innerHTML=`<div class="ob-top"><span></span>${last?'':'<button data-ob="skip">Skip</button>'}</div>
-   <div class="ob-art" style="background:${sl.bg}"><div class="big">${ic(sl.icon)}</div></div>
-   <div class="ob-body"><h1>${sl.t}</h1><p>${sl.p}</p>${sl.say?`<span class="say-chip">${sl.say}</span>`:''}
-   ${sl.form?`<div class="ob-form"><label for="obname">Your name</label><input id="obname" class="field" placeholder="e.g. Yash" maxlength="24" autocomplete="given-name" value="${esc(PREF.name)}"><label>Diet</label><div class="seg" role="group">${[['any','Anything'],['veg','Veg'],['egg','Egg'],['vegan','Vegan']].map(([v,l])=>`<button class="press ${PREF.diet===v?'on':''}" data-ob="diet" data-v="${v}">${l}</button>`).join('')}</div></div>`:''}</div>
-   <div class="dots" aria-hidden="true">${OB.slides.map((_,i)=>`<i class="${i===OB.i?'on':''}"></i>`).join('')}</div>
-   <div class="ob-actions"><button class="btn p press" data-ob="next">${last?'Start cooking':'Continue'}</button>${OB.i>0?'<button class="btn s press" data-ob="back" style="height:48px">Back</button>':''}</div>`;
+  const sl=OB.slides[OB.i],last=OB.i===OB.slides.length-1;
+  introEl().innerHTML=`<div class="in-scroll">
+    <div class="ob-top">${OB.i>0?`<button class="icon-btn press" data-ob="back" aria-label="Back">${ic('back')}</button>`:`<div class="ob-brand"><i>${ILL.logo()}</i>Smart Kitchen</div>`}<button data-ob="skip">Skip</button></div>
+    <div class="ob-art ${sl.bg}">${ILL[sl.art]()}</div>
+    <div class="ob-body"><h1>${sl.t}</h1><p>${sl.p}</p><span class="say-chip">${ic('mic')}${sl.say}</span></div></div>
+   <div class="in-foot"><div class="dots" aria-hidden="true">${OB.slides.map((_,i)=>`<i class="${i===OB.i?'on':''}"></i>`).join('')}</div>
+    <button class="btn p press" data-ob="next">${last?'Get started':'Continue'}</button></div>`;
+  focusHead();
 }
-function finishOB(){
-  const n=$('#obname');if(n)PREF.name=n.value.trim();savePrefs();
-  if(!PREF.account&&!PREF.guest){AU.m='up';return drawAuth()}
-  enterApp();
+function afterTour(){
+  if(AU.tour||hasAccount()){AU.tour=false;return enterApp()}
+  AU.m='up';drawAuth();
 }
-let AU={m:'up',err:''};
+/* sign in / sign up */
+const GLOGO='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.46a5.52 5.52 0 0 1-2.4 3.62v3h3.88c2.27-2.09 3.58-5.17 3.58-8.81z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.94-2.91l-3.88-3c-1.08.72-2.45 1.15-4.06 1.15-3.13 0-5.78-2.11-6.73-4.96H1.27v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.27 14.28A7.2 7.2 0 0 1 4.9 12c0-.79.14-1.56.37-2.28v-3.1H1.27A12 12 0 0 0 0 12c0 1.94.46 3.77 1.27 5.38l4-3.1z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0A12 12 0 0 0 1.27 6.62l4 3.1C6.22 6.86 8.87 4.75 12 4.75z"/></svg>';
+const ALOGO='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>';
+function keepAuth(){const g=id=>(($(id)||{}).value||'');if($('#aue')){AU.v={f:g('#auf')||AU.v.f,l:g('#aul')||AU.v.l,e:g('#aue'),p:g('#aup')}}}
 function drawAuth(){
-  const up=AU.m==='up',el=introEl();
-  el.innerHTML=`<div class="auth-art">${['pasta','biryani','shakshuka'].map(id=>`<i class="pc"${photoStyle(id)}></i>`).join('')}</div>
-  <div class="auth-card"><div class="auth-seg" role="tablist"><button data-au="in" class="${up?'':'on'}" role="tab">Log In</button><button data-au="up" class="${up?'on':''}" role="tab">Sign Up</button></div>
+  keepAuth();
+  const up=AU.m==='up',v=AU.v;
+  introEl().innerHTML=`<div class="auth-art">${ILL.auth()}</div>
+  <div class="auth-card"><div class="auth-seg" role="tablist" aria-label="Account"><button type="button" data-au="in" class="${up?'':'on'}" role="tab" aria-selected="${!up}">Log In</button><button type="button" data-au="up" class="${up?'on':''}" role="tab" aria-selected="${up}">Sign Up</button></div>
   <h2>${up?'Sign Up with Smart Kitchen':'Log In to Smart Kitchen'}</h2><p class="note2">${up?'Save your recipes, preferences and cooking history.':'Welcome back. Your recipes are waiting.'}</p>
-  ${up?`<div class="auth-row"><div><label for="auf">First name</label><input id="auf" class="field" autocomplete="given-name" value="${esc(PREF.name)}"></div><div><label for="aul">Last name</label><input id="aul" class="field" autocomplete="family-name"></div></div>`:''}
-  <label for="aue">Email or phone number</label><input id="aue" class="field" autocomplete="username" placeholder="Enter your email or phone number">
-  <label for="aup">Password</label><input id="aup" class="field" type="password" autocomplete="${up?'new-password':'current-password'}" placeholder="Enter your password">
-  <p class="auth-err" role="alert">${esc(AU.err)}</p>
-  <button class="btn p press" data-au="submit">${up?'Sign Up':'Log In'}</button>
+  <form id="auform" novalidate>
+  ${up?`<div class="auth-row"><div class="fg"><label for="auf">First name</label><input id="auf" class="field" autocomplete="given-name" autocapitalize="words" placeholder="Aarav" value="${esc(v.f||PREF.name)}"></div><div class="fg"><label for="aul">Last name</label><input id="aul" class="field" autocomplete="family-name" autocapitalize="words" placeholder="Sharma" value="${esc(v.l)}"></div></div>`:''}
+  <div class="fg"><label for="aue">Email or phone number</label><input id="aue" class="field" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="you@example.com" value="${esc(v.e)}" aria-describedby="e-aue"><p class="f-err" id="e-aue" role="alert"></p></div>
+  <div class="fg"><label for="aup">Password</label><div class="pw"><input id="aup" class="field" type="${AU.pw?'text':'password'}" autocomplete="${up?'new-password':'current-password'}" placeholder="At least 6 characters" value="${esc(v.p)}" aria-describedby="e-aup"><button type="button" class="pw-t" data-au="pw" aria-label="${AU.pw?'Hide':'Show'} password" aria-pressed="${AU.pw}">${ic(AU.pw?'eyeoff':'eye','o')}</button></div><p class="f-err" id="e-aup" role="alert"></p></div>
+  <button type="submit" class="btn p press auth-go">${up?'Sign Up':'Log In'}</button></form>
   <div class="auth-or"><span>Or</span></div>
-  <div class="auth-soc"><button class="btn s press" data-au="social">Apple</button><button class="btn s press" data-au="social">Google</button></div>
-  <button class="auth-guest" data-au="guest">Continue as guest</button></div>`;
+  <div class="auth-soc"><button type="button" class="btn s press" data-au="social">${ALOGO}Apple</button><button type="button" class="btn s press" data-au="social">${GLOGO}Google</button></div>
+  <button type="button" class="auth-guest" data-au="guest">Continue as guest</button></div>`;
+  focusHead();
 }
-function enterApp(){PREF.onboarded=true;savePrefs();hideIntro();render();if(SR&&PREF.wake){startRec(true);caption('Voice is on. Say “Hey Chef” any time.','CHEF AI')}}
-document.addEventListener('click',e=>{
-  const b=e.target.closest('#intro [data-au]');if(!b)return;e.stopPropagation();const a=b.dataset.au,v=id=>(($(id)||{}).value||'').trim();
-  if(a==='in'||a==='up'){AU.m=a;AU.err='';return drawAuth()}
-  if(a==='guest'){PREF.guest=true;savePrefs();return enterApp()}
-  if(a==='social'){PREF.guest=true;savePrefs();enterApp();caption('Apple and Google sign-in need a server, so you’re in as a guest for now.','CHEF AI');return}
-  const em=v('#aue'),pw=v('#aup');
-  if(!em){AU.err='Enter your email or phone number.';return drawAuth()}
-  if(pw.length<6){AU.err='Password needs at least 6 characters.';return drawAuth()}
+function authErr(id,msg){const e=$('#e-'+id),f=$('#'+id);if(e){e.textContent=msg;e.classList.toggle('on',!!msg)}if(f){f.classList.toggle('bad',!!msg);if(msg)f.setAttribute('aria-invalid','true');else f.removeAttribute('aria-invalid')}}
+function submitAuth(){
+  const v=id=>(($(id)||{}).value||'').trim(),em=v('#aue'),pw=($('#aup')||{}).value||'';
+  const okMail=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em),okTel=/^\+?[\d\s()-]{8,}$/.test(em);
+  authErr('aue','');authErr('aup','');
+  if(!em){authErr('aue','Enter your email or phone number.');$('#aue').focus();return}
+  if(!okMail&&!okTel){authErr('aue','That doesn’t look like an email or phone number.');$('#aue').focus();return}
+  if(pw.length<6){authErr('aup','Password needs at least 6 characters.');$('#aup').focus();return}
   if(AU.m==='up'){const f=v('#auf');if(f)PREF.name=f}
-  PREF.account={id:em};savePrefs();enterApp();
+  PREF.account={id:em};savePrefs();AU.v={f:'',l:'',e:'',p:''};
+  setupDone()?enterApp():drawSetup();
+}
+/* “Make it yours”: now comes right after sign-in */
+function drawSetup(){
+  const d=PREF.diet||'any';
+  introEl().innerHTML=`<div class="in-scroll">
+    <div class="ob-top"><div class="ob-brand"><i>${ILL.logo()}</i>Almost there</div><button data-su="skip">Skip</button></div>
+    <div class="ob-art sun" id="suart">${ILL.profile(d)}</div>
+    <div class="ob-body"><h1>Make it yours</h1><p>Tell me your name and diet so every recipe fits you. You can change this any time in Profile.</p>
+     <div class="ob-form"><div class="fg"><label for="obname">Your name</label><input id="obname" class="field" placeholder="e.g. Yash" maxlength="24" autocomplete="given-name" autocapitalize="words" enterkeyhint="done" value="${esc(PREF.name)}"></div>
+      <div class="fg"><span class="lbl" id="dietlbl">Diet</span><div class="seg" role="radiogroup" aria-labelledby="dietlbl">${[['any','Anything'],['veg','Veg'],['egg','Egg'],['vegan','Vegan']].map(([k,l])=>`<button type="button" class="press ${d===k?'on':''}" role="radio" aria-checked="${d===k}" data-su="diet" data-v="${k}">${l}</button>`).join('')}</div></div></div></div></div>
+   <div class="in-foot"><button class="btn p press" data-su="done">Start cooking</button></div>`;
+  focusHead();
+}
+function finishSetup(){const n=$('#obname');if(n)PREF.name=n.value.trim();PREF.setup=true;savePrefs();enterApp()}
+function enterApp(){
+  PREF.onboarded=true;PREF.setup=true;savePrefs();hideIntro();V.ready=true;render();
+  if(SR&&PREF.wake){startRec(true)}
+  if(AU.note){const n=AU.note;AU.note='';setTimeout(()=>caption(n,'CHEF AI'),500)}
+  else if(SR&&PREF.wake)caption('Tap the mic or say “Hey Chef” any time.','CHEF AI');
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('#intro [data-au],#intro [data-ob],#intro [data-su]');if(!b)return;e.stopPropagation();
+  const d=b.dataset;
+  if(d.au){
+    if(d.au==='in'||d.au==='up'){if(AU.m!==d.au){keepAuth();AU.m=d.au;drawAuth()}return}
+    if(d.au==='pw'){const p=$('#aup'),pos=p.selectionStart;AU.pw=!AU.pw;p.type=AU.pw?'text':'password';b.setAttribute('aria-pressed',AU.pw);b.setAttribute('aria-label',(AU.pw?'Hide':'Show')+' password');b.innerHTML=ic(AU.pw?'eyeoff':'eye','o');p.focus();try{p.setSelectionRange(pos,pos)}catch(_){}return}
+    if(d.au==='guest'){PREF.guest=true;savePrefs();return setupDone()?enterApp():drawSetup()}
+    if(d.au==='social'){PREF.guest=true;savePrefs();AU.note='Apple and Google sign-in need a server, so you’re in as a guest for now.';return setupDone()?enterApp():drawSetup()}
+  }
+  if(d.ob){
+    if(d.ob==='skip')return afterTour();
+    if(d.ob==='next')return OB.i>=OB.slides.length-1?afterTour():(OB.i++,drawOB());
+    if(d.ob==='back'){OB.i=Math.max(0,OB.i-1);return drawOB()}
+  }
+  if(d.su){
+    if(d.su==='skip'){PREF.setup=true;savePrefs();return enterApp()}
+    if(d.su==='done')return finishSetup();
+    if(d.su==='diet'){PREF.diet=d.v;savePrefs();$$('#intro [data-su=diet]').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-checked',on)});const a=$('#suart');if(a)a.innerHTML=ILL.profile(d.v)}
+  }
 },true);
-  document.addEventListener('click',e=>{
-  const b=e.target.closest('#intro [data-ob]');if(!b)return;e.stopPropagation();
-  const a=b.dataset.ob;
-  if(a==='skip')return finishOB();
-  if(a==='next')return OB.i>=OB.slides.length-1?finishOB():(OB.i++,drawOB());
-  if(a==='back'){OB.i=Math.max(0,OB.i-1);return drawOB()}
-  if(a==='diet'){const n=$('#obname');if(n)PREF.name=n.value.trim();PREF.diet=b.dataset.v;savePrefs();drawOB()}
-},true);
+document.addEventListener('submit',e=>{if(e.target.id==='auform'){e.preventDefault();submitAuth()}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='obname'){e.preventDefault();finishSetup()}});
+document.addEventListener('input',e=>{if(e.target.id==='aue')authErr('aue','');if(e.target.id==='aup')authErr('aup','')});
+
 render();
 showIntro();
-setTimeout(()=>{if(S.screen==='home')caption(SR?'Tap anywhere once, then say “Hey Chef”.':'Voice needs Chrome, Edge or Safari. Every button still works.','CHEF AI')},600);
+setTimeout(()=>{if(S.screen==='home')caption(SR?'Tap the mic to talk, or say “Hey Chef”.':'Voice needs Chrome, Edge or Safari. Every button still works, and you can type commands.','CHEF AI')},600);
 window.__S=S;
 
 /* ---------- real dish photos: free-licence images from Wikipedia / Wikimedia Commons ----------
